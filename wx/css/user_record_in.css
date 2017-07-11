@@ -1,0 +1,110 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+/*98D0F1*/
+.content_container {
+	width: 200px;
+	margin: 30px auto;
+	font-size: 13px;
+	color: #666;
+}
+
+.content_container .logo {
+	width: 100px;
+	height: 100px;
+	margin-left: 50px;
+	margin-bottom: 20px;
+}
+
+.content_container .logo_text {
+	text-align : center;
+	width : 200px;
+	font-size : 25px;
+	font-weight: bold;
+	float : left;
+	font-family : KaiTi;
+}
+
+.content_container .logo_subtitle {
+	float : left;
+	width : 200px;
+	text-align : center;
+	margin-bottom : 10px;
+}
+
+.content_container input {
+	padding: 0px;
+}
+
+.content_container .input_style {
+	border: 1px solid #98D0F1;
+	border-radius: 2px;
+	height: 19px;
+	margin-bottom: 4px;
+	width: 186px;
+	padding: 5px 6px 6px;
+}
+
+.content_container span {
+	float: left;
+}
+
+.content_container .sex_container {
+	height: 25px;
+	line-height: 25px;
+	width: 200px;
+	margin-bottom: 4px;
+}
+
+.content_container .select_style {
+	border: 1px solid #98D0F1;
+	border-radius: 2px;
+	margin-bottom: 4px;
+	width: 90px;
+	padding: 5px 6px 6px;
+	height: 32px;
+	float: left;
+}
+
+.content_container .year_style {
+	width: 65px;
+}
+
+.content_container .month_style {
+	width: 45px;
+}
+
+.content_container .date_style {
+	border: 1px solid #98D0F1;
+	border-radius: 2px;
+	margin-bottom: 4px;
+	padding: 5px 6px 6px;
+	height: 32px;
+	float: left;
+}
+
+.content_container .date_span {
+	width: 15px;
+	text-align: center;
+	line-height: 32px;
+}
+
+.content_container .submit {
+	border-radius: 2px;
+	color : white;
+	height: 32px;
+	line-height: 32px;
+	text-align : center;
+	font-weight: bold;
+	width: 200px;
+	margin-top : 20px;
+	margin-bottom : 40px;
+	float : left;
+	background-color : #98D0F1; 
+	cursor : pointer;
+}
+
+.content_container .major_old_style {
+	width: 200px;
+	}
