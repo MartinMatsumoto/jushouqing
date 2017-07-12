@@ -6,7 +6,7 @@
     <title>绵职院校友会-留言板</title>
     <link href="./css/message_board.css" rel="stylesheet" type="text/css"/>
     <link href="./css/mask.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="/libs/jquery.js"></script>
+    <script type="text/javascript" src="/libs/jquery.min.js"></script>
 </head>
 <body>
 <?php
