@@ -2,3 +2,5 @@
 *.bak
 .idea/
 error_log
+
+/core/db/connection_mysql.php

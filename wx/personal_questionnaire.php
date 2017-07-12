@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <form method="post" action="/wx/personal_questionnaire_save.php" class="form-horizontal">
+                    <form method="post" action="personal_questionnaire_save.php" class="form-horizontal">
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             姓名<font color="red">*</font></div>
                         <div class="form-group">

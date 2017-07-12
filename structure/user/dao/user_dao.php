@@ -14,7 +14,7 @@ class user_dao
     private $modifyUser = "UPDATE USER SET `name` = :name,`sex` = :sex,`contact` = :contact,`area` = :area,`department` = :department,`major` = :major,`career` = :career,`career_type` = :career_type,`company` = :company,`descript` = :descript WHERE openid = :openid
 ";
     private $getOne = "SELECT * FROM `user` WHERE openid = :openid";
-    private $listUsers = "SELECT u.*,m.`name` AS major_name,d.`name` AS department_name,a.`name` AS area_name FROM `user` u LEFT JOIN major m ON u.major_id = m.id LEFT JOIN department d ON u.department_id = d.id LEFT JOIN area a ON u.area_id = a.id LIMIT :be ,:en ";
+    private $listUsers = "SELECT * FROM USER LIMIT :be ,:en ";
     private $count = "SELECT COUNT(*) AS COUNT from `user`";
     private $delete = "DELETE FROM `user` WHERE id = :id";
 

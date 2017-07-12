@@ -14,6 +14,8 @@ require_once dirname(__FILE__) . '/structure/maptree/domain/department.php';
 require_once dirname(__FILE__) . '/structure/maptree/dao/department_dao.php';
 require_once dirname(__FILE__) . '/structure/user/domain/user.php';
 require_once dirname(__FILE__) . '/structure/user/dao/user_dao.php';
+require_once dirname(__FILE__) . '/structure/company/domain/company.php';
+require_once dirname(__FILE__) . '/structure/company/dao/company_dao.php';
 require_once dirname(__FILE__) . '/structure/message/dao/message_dao.php';
 require_once dirname(__FILE__) . '/structure/message/domain/message.php';
 require_once dirname(__FILE__) . '/structure/operator/dao/operator_dao.php';

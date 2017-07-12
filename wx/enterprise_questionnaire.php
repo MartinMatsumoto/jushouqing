@@ -22,6 +22,18 @@
     </style>
 </head>
 <body class="gray-bg">
+<?php
+require_once '../entrance.php';
+$openid = $_GET["openid"];
+$update = 0;
+$dao = new company_dao();
+$stmt = $dao->getOne($openid);
+$row = $stmt->fetch();
+if(!empty($row)){
+    $company = new Company($row);
+    $update = 1;
+}
+?>
 <div class="wrapper wrapper-content animated fadeInRight" align="center">
     <div class="row" style="max-width: 600px">
         <div class="col-sm-12">
@@ -36,55 +48,89 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <form method="post" action="" class="form-horizontal">
+                    <form method="post" action="enterprise_questionnaire_save.php" class="form-horizontal">
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             企业全称<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name1" class="form-control" required="">
+                            <div class="col-sm-12"><input type="text" name="name" class="form-control" required="" value="<?php
+                                if($update){
+                                    echo $company->name;
+                                }
+                                ?>"/>
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             行业类别<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name3" class="form-control" required="">
+                            <div class="col-sm-12"><input type="text" name="career_type" class="form-control" required="" value="<?php
+                                if($update){
+                                    echo $company->career_type;
+                                }
+                                ?>"/>
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             企业性质<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name3" class="form-control" required="">
+                            <div class="col-sm-12"><input type="text" name="company_nature" class="form-control" required="" value="<?php
+                                if($update){
+                                    echo $company->company_nature;
+                                }
+                                ?>"/>
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             办公地址<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name6" class="form-control" required="">
+                            <div class="col-sm-12"><input type="text" name="location" class="form-control" required="" value="<?php
+                                if($update){
+                                    echo $company->location;
+                                }
+                                ?>"/>
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             联系人<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name7" class="form-control" required="">
+                            <div class="col-sm-12"><input type="text" name="contactor" class="form-control" required="" value="<?php
+                                if($update){
+                                    echo $company->contactor;
+                                }
+                                ?>"/>
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             联系电话<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name8" class="form-control" required="">
+                            <div class="col-sm-12"><input type="text" name="tel" class="form-control" required="" value="<?php
+                                if($update){
+                                    echo $company->tel;
+                                }
+                                ?>"/>
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             邮箱<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name8" class="form-control" required="">
+                            <div class="col-sm-12"><input type="text" name="email" class="form-control" required="" value="<?php
+                                if($update){
+                                    echo $company->email;
+                                }
+                                ?>"/>
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             您认为校友会能为贵单位做些什么：</div>
                         <div class="form-group">
-                            <div class="col-sm-12"><textarea name="name18" class="form-control"></textarea>
+                            <div class="col-sm-12"><textarea name="descript" class="form-control"><?php
+                                    if($update){
+                                        echo $company->descript;
+                                    }
+                                    ?></textarea>
                             </div>
                         </div>
+                        <input value="<?php echo $openid?>" name="openid" type="hidden" />
+                        <input value="<?php echo $update?>" name="update" type="hidden" />
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <div style="text-align: center">
