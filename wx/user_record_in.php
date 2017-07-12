@@ -40,7 +40,7 @@
                 </div>
                 <div class="ibox-content">
                     <div class="alert alert-info">
-                        <a class="alert-link" href="enterprise_questionnaire.php?openid=<?php echo "oC00gxAxQ8KdPWbyEoOCOEGmbQiw" ?>">企业调查问卷</a>
+                        <a class="alert-link" href="enterprise_questionnaire.php?openid=<?php echo $openid ?>">企业调查问卷</a>
                     </div>
                     <div class="alert alert-info">
                         <a class="alert-link font_small" href="personal_questionnaire.php?openid=<?php echo $openid ?>">校友调查问卷</a>
