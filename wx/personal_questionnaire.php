@@ -36,17 +36,17 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <form method="post" action="" class="form-horizontal">
+                    <form method="post" action="/structure/user/controller/personal_questionnaire_save.php" class="form-horizontal">
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             姓名<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name1" class="form-control" required="">
+                            <div class="col-sm-12"><input type="text" name="name" class="form-control" required="" />
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             性别<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><select class="form-control m-b" name="name2">
+                            <div class="col-sm-12"><select class="form-control m-b" name="sex">
                                     <option value="男">男</option>
                                     <option value="女">女</option>
                                 </select></div>
@@ -54,49 +54,49 @@
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             联系电话<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name3" class="form-control" required="">
+                            <div class="col-sm-12"><input type="text" name="tel" class="form-control" required="" />
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             所在城市<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name3" class="form-control" required="">
+                            <div class="col-sm-12"><input type="text" name="city" class="form-control" required="" />
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
-                            院系<font color="red">*</font></div>
+                            院系</div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name6" class="form-control" required="">
+                            <div class="col-sm-12"><input type="text" name="department" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             专业和班级<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name7" class="form-control" required="">
+                            <div class="col-sm-12"><input type="text" name="major" class="form-control" required="" />
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             职业/职位<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name8" class="form-control" required="">
+                            <div class="col-sm-12"><input type="text" name="career" class="form-control" required="" />
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             行业类别</div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name10" class="form-control" required="">
+                            <div class="col-sm-12"><input type="text" name="career_type" class="form-control">
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             公司名称</div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name10" class="form-control" required="">
+                            <div class="col-sm-12"><input type="text" name="company" class="form-control">
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             您认为校友会能为您做些什么：</div>
                         <div class="form-group">
-                            <div class="col-sm-12"><textarea name="name18" class="form-control" required=""></textarea>
+                            <div class="col-sm-12"><textarea name="descript" class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>

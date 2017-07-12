@@ -82,7 +82,7 @@
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             您认为校友会能为贵单位做些什么：</div>
                         <div class="form-group">
-                            <div class="col-sm-12"><textarea name="name18" class="form-control" required=""></textarea>
+                            <div class="col-sm-12"><textarea name="name18" class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
