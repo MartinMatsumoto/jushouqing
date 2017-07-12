@@ -44,7 +44,7 @@
                         <a class="alert-link" href="enterprise_questionnaire.php">企业调查问卷</a>
                     </div>
                     <div class="alert alert-info">
-                        <a class="alert-link font_small" href="personal_questionnaire.php?openid=<?php echo "oC00gxAxQ8KdPWbyEoOCOEGmbQiw"?>">校友调查问卷</a>
+                        <a class="alert-link font_small" href="personal_questionnaire.php?openid=<?php echo $openid ?>">校友调查问卷</a>
                     </div>
 
                     <div class="font_footer">成都涪诚汇科技有限公司<br />Power By Zengguoqiang<br /></div>
