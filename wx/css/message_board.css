@@ -1,217 +1,112 @@
 body {
-    /*background: url(../images/message_board_bg.jpg) fixed;*/
-    padding: 0px;
-    margin: 0px;
-}
-
-table {
-    border: 0;
-}
-
-.clear {
-    clear: both;
-}
-
-.bg {
-    width: 100%;
-    height: 100%;
-    background: url(../images/message_board_bg.jpg);
-    position: fixed;
+    padding: 0;
+    margin: 0;
 }
 
 .header {
+    background-color: white;
     width: 100%;
-    height: 80px;
     position: fixed;
-    background: url(../images/message_header.png);
-    z-index: 95;
-}
-
-.header .content {
-    margin-left: 20px;
-    line-height: 60px;
-    font-size: 15px;
-    font-weight: bold;
-    color: white;
-    font-family: 'Microsoft YaHei'
-}
-
-.header .content strong {
-    font-size: 30px;
-}
-
-.say_sth {
-    right: 20px;
-    top: 60px;
-    z-index: 80;
-    position: fixed;
-    cursor: pointer;
-}
-
-.message {
-    position: absolute;
-    width: 280px;
-    left: 50%;
-    margin-left: -140px;
-}
-
-.message_tip {
-    margin-top: 20px;
-    transform: rotate(7deg);
-}
-
-.message_answer_container {
-    width: 280px;
-    margin-top: -170px;
-    padding-top: 170px;
-    background: url(../images/answer_bg.png)
-}
-
-.message_answer_container .message_answer {
-    margin-top: 10px;
-}
-
-.message_answer_container .message_answer_reply_btn {
-    width: 100px;
-    height: 30px;
-    background-color: #EBD496;
-    float: right;
-    margin: 10px 33px;
-    border-radius: 2px;
-    color: white;
-    text-align: center;
+    height: 40px;
+    line-height: 40px;
     font-size: 14px;
-    cursor: pointer;
-    line-height: 30px
+    margin-left: 10px;
+    border-bottom: solid 1px #E1E1E1;
+    font-family: Tahoma;
+    font-weight: bold;
+    color: #545454;
+    z-index: 99;
 }
 
-.message_answer_container .message_answer_input {
-    line-height: 10px;
-    margin-left: 25px;
-    width: 220px;
-    padding: 0px;
-    min-height: 45px;
-    margin-top: 15px;
-    border: 1px solid #EBD496;
-    border-radius: 2px;
+.white_content {
+    height: 50px;
+    width: 100%;
 }
 
-.message_answer_container .message_answer .message_answer_content_container {
-    height: 20px;
-    padding-left: 30px;
+.content {
+    margin: 37px 37px 50px 37px;
+    padding: 20px 10px;
+    overflow: hidden;
+    box-shadow: 5px 5px 5px #ccc;
+    -moz-box-shadow: 5px 5px 5px #ccc;
+    -ms-box-shadow: 5px 5px 5px #ccc;
+    -o-box-shadow: 5px 5px 5px #ccc;
+    -webkit-box-shadow: 5px 5px 5px #ccc;
+    border: dashed 2px #b5b5b5;
+}
+
+.content .wx_header {
+    width: 50px;
+    height: 50px;
+    padding-right: 20px;
+}
+
+.content .wx_header img {
+    width: 50px;
+    height: 50px;
+}
+
+.content .wx_header_small{
+    width: 35px;
+    height: 35px;
+    padding-right: 10px;
+}
+
+.content .wx_header_small img{
+    width: 35px;
+    height: 35px;
+}
+
+.content .nickname {
+    color: #498B31;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.content .reply {
+    font-size: 12px;
+}
+
+.content .nickname_small {
+    color: #498B31;
+    font-weight: normal;
+}
+
+.content .message {
+    color: #545454;
+    display: block;
+    min-height: 90px;
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+.content .date {
+    color: #9B9B9B;
+    font-size: 12px;
     margin-top: 5px;
 }
 
-.message_answer_container .message_answer .message_answer_content_container img {
-    height: 20px;
-    float: left;
+.content .line {
+    height: 1px;
+    margin-top: 15px;
+    background-color: #E1E1E1;
+    width: 100%;
 }
 
-.message_answer_container .message_answer .message_answer_content_container span {
-    line-height: 20px;
-    color: #6E6E6E;
-    font-size: 15px;
-    float: left;
-    font-family: 'Microsoft YaHei';
-    margin-left: 10px;
-    width: 190px;
+.content .date .reply {
+    color: #498B31;
+    font-size: 12px;
+    margin-left: 24px;
 }
 
-.message_answer_pic {
-    width: 280px;
-}
-
-.message_tip_container {
-    background: url(../images/message_bg1.png);
-    background-size: 280px 358px;
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px gray;
-    padding: 0 20px 0 25px;
-    width: 280px;
-    height: 358px;
-}
-
-.message_answer_btn {
+.content .footer {
+    display: block;
     position: absolute;
     width: 100px;
-    height: 100px;
-    right: 0px;
-    bottom: 0px;
-}
-
-.message_tip_container .message_content {
-    color: #6E6E6E;
-    font-size: 15px;
-}
-
-.mask {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    z-index: 100;
-    display: none;
-}
-
-.mask .background {
-    background-color: black;
-    width: 100%;
-    height: 100%;
-    filter: alpha(opacity=60);
-    -moz-opacity: 0.6;
-    -khtml-opacity: 0.6;
-    opacity: 0.6;
-}
-
-.mask .mask_content_container {
-    position: absolute;
-    width: 280px;
-    background: url("../images/message_bg3.png");
-    height: 358px;
-    background-size: 280px 358px;
-    left: 50%;
-    margin-left: -140px;
-    top: 50%;
-    margin-top: -179px;
-    border-radius: 5px;
-}
-
-.mask .mask_content_container .close_btn {
-    width: 75px;
-    height: 50px;
-    position: absolute;
+    margin: -15px 10px 0 0;
     right: 0px;
 }
 
-.mask .mask_content_container .input_style {
-    width: 200px;
-    height: 238px;
-    margin: 40px 40px 25px 40px;
-    border: 0px;
-    background: transparent;
-    color: #EBD496;
-    font-size: 15px;
-}
-
-.mask .mask_content_container .input_style {
-    width: 200px;
-    height: 238px;
-    margin: 40px 40px 25px 40px;
-    border: 0px;
-    background: transparent;
-    color: #EBD496;
-    font-size: 15px;
-}
-
-.mask .mask_content_container .submit_btn {
-    width: 100px;
-    height: 30px;
-    float: right;
-    margin-right: 14px;
-    background-color: #EBD496;
-    border-radius: 2px;
-    color: white;
-    text-align: center;
-    font-size: 14px;
-    cursor: pointer;
-    line-height: 30px
+.footer_input_margin_top {
+    padding: 8px 20px 0 20px;
 }
