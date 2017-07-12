@@ -22,10 +22,6 @@
             z-index:-2;
         }
 
-        .font_footer{
-            text-align: center;
-            font-size: 11px;
-        }
     </style>
 </head>
 
@@ -43,13 +39,13 @@
                 </div>
                 <div class="ibox-content">
                     <div class="alert alert-info">
-                        <a class="alert-link">企业调查问卷</a>
+                        <a class="alert-link" href="enterprise_questionnaire.php">企业调查问卷</a>
                     </div>
                     <div class="alert alert-info">
                         <a class="alert-link font_small" href="personal_questionnaire.php">校友调查问卷</a>
                     </div>
 
-                    <div class="font_footer"> 成都涪诚汇科技有限公司<br />Power By Zengguoqiang<br /></div>
+                    <div class="font_footer">成都涪诚汇科技有限公司<br />Power By Zengguoqiang<br /></div>
                 </div>
             </div>
         </div>

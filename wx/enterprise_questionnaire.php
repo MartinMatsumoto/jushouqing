@@ -3,9 +3,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>绵阳职业技术学院校友调查问卷</title>
-    <meta name="keywords" content="绵阳职业技术学院校友调查问卷">
-    <meta name="description" content="绵阳职业技术学院校友调查问卷">
+    <title>绵阳职业技术学院企业调查问卷</title>
+    <meta name="keywords" content="绵阳职业技术学院企业调查问卷">
+    <meta name="description" content="绵阳职业技术学院企业调查问卷">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/custom.css" rel="stylesheet">
     <link href="./css/animate.min.css" rel="stylesheet">
@@ -28,73 +28,59 @@
             <img src="./images/header.png" width="100%" style="max-width: 600px">
 
             <div class="ibox float-e-margins">
-                <div class="ibox-title"><h3 align="center">成都校友会校友调查问卷</h3>
+                <div class="ibox-title"><h3 align="center">成都校友会企业调查问卷</h3>
 
                     <div style="text-align: left">
-                        亲爱的校友:<br>
-                        　&nbsp;&nbsp;&nbsp; 您好！为了校友会公众号能更好的服务于大家，特邀请您参与校友信息调查问卷。我们保证将对您的个人信息严格保密，并对您的积极参与表示衷心的感谢！
+                        尊敬的校友企业:<br>
+                        　&nbsp;&nbsp;&nbsp; 您好！为了校友会公众号能更好的服务于大家，特邀请您参与企业调查问卷。我们保证将对贵单位的信息严格保密，并对您的积极参与表示衷心的感谢！
                     </div>
                 </div>
                 <div class="ibox-content">
                     <form method="post" action="" class="form-horizontal">
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
-                            姓名<font color="red">*</font></div>
+                            企业全称<font color="red">*</font></div>
                         <div class="form-group">
                             <div class="col-sm-12"><input type="text" name="name1" class="form-control" required="">
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
-                            性别<font color="red">*</font></div>
-                        <div class="form-group">
-                            <div class="col-sm-12"><select class="form-control m-b" name="name2">
-                                    <option value="男">男</option>
-                                    <option value="女">女</option>
-                                </select></div>
-                        </div>
-                        <div class="form-group" style="text-align: left;margin-left: 0.5em">
-                            联系电话<font color="red">*</font></div>
+                            行业类别<font color="red">*</font></div>
                         <div class="form-group">
                             <div class="col-sm-12"><input type="text" name="name3" class="form-control" required="">
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
-                            所在城市<font color="red">*</font></div>
+                            企业性质<font color="red">*</font></div>
                         <div class="form-group">
                             <div class="col-sm-12"><input type="text" name="name3" class="form-control" required="">
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
-                            院系<font color="red">*</font></div>
+                            办公地址<font color="red">*</font></div>
                         <div class="form-group">
                             <div class="col-sm-12"><input type="text" name="name6" class="form-control" required="">
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
-                            专业和班级<font color="red">*</font></div>
+                            联系人<font color="red">*</font></div>
                         <div class="form-group">
                             <div class="col-sm-12"><input type="text" name="name7" class="form-control" required="">
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
-                            职业/职位<font color="red">*</font></div>
+                            联系电话<font color="red">*</font></div>
                         <div class="form-group">
                             <div class="col-sm-12"><input type="text" name="name8" class="form-control" required="">
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
-                            行业类别</div>
+                            邮箱<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name10" class="form-control" required="">
+                            <div class="col-sm-12"><input type="text" name="name8" class="form-control" required="">
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
-                            公司名称</div>
-                        <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name10" class="form-control" required="">
-                            </div>
-                        </div>
-                        <div class="form-group" style="text-align: left;margin-left: 0.5em">
-                            您认为校友会能为您做些什么：</div>
+                            您认为校友会能为贵单位做些什么：</div>
                         <div class="form-group">
                             <div class="col-sm-12"><textarea name="name18" class="form-control" required=""></textarea>
                             </div>

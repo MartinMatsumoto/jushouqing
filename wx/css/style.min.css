@@ -6947,3 +6947,8 @@ body.skin-3 {
         font-size: 12px
     }
 }
+
+.font_footer{
+    text-align: center;
+    font-size: 11px;
+}
