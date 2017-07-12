@@ -16,26 +16,24 @@ class user
     public $sex;
     // 联系方式
     public $contact;
-    // 地区Id
-    public $area_id;
-    // 系别
-    public $department_id;
     // 入学时间
     public $school_date;
-    // 专业Id
-    public $major_id;
-    // 自定义专业
-    public $custom_major;
-    // 自定义系别
-    public $custom_department;
     // openId
     public $open_id;
-    // 专业名称
-    public $major_name;
-    // 系别名称
-    public $department_name;
-    // 地区名称
-    public $area_name;
+    // 地区Id
+    public $area;
+    // 系别
+    public $department;
+    // 专业Id
+    public $major;
+    // 工作
+    public $career;
+    // 工作类型
+    public $career_type;
+    // 公司
+    public $company;
+    // 补充
+    public $descript;
 
     //构造函数
     function __construct($row)
@@ -56,49 +54,42 @@ class user
             $this->contact = $row["contact"];
         }
 
-        if (array_key_exists("area_id", $row)) {
-            $this->area_id = $row["area_id"];
-        }
-
-        if (array_key_exists("department_id", $row)) {
-            $this->department_id = $row["department_id"];
-        }
-
         if (array_key_exists("school_date", $row)) {
             $this->school_date = $row["school_date"];
-        }
-
-        if (array_key_exists("department_id", $row)) {
-            $this->department_id = $row["department_id"];
-        }
-
-        if (array_key_exists("major_id", $row)) {
-            $this->major_id = $row["major_id"];
-        }
-
-        if (array_key_exists("custom_department", $row)) {
-            $this->custom_department = $row["custom_department"];
-        }
-
-        if (array_key_exists("custom_major", $row)) {
-            $this->custom_major = $row["custom_major"];
         }
 
         if (array_key_exists("openid", $row)) {
             $this->open_id = $row["openid"];
         }
 
-        if (array_key_exists("major_name", $row)) {
-            $this->major_name = $row["major_name"];
+        if (array_key_exists("area", $row)) {
+            $this->area = $row["area"];
         }
 
-        if (array_key_exists("department_name", $row)) {
-            $this->department_name = $row["department_name"];
+        if (array_key_exists("department", $row)) {
+            $this->department = $row["department"];
         }
 
-        if (array_key_exists("area_name", $row)) {
-            $this->area_name = $row["area_name"];
+        if (array_key_exists("major", $row)) {
+            $this->major = $row["major"];
         }
+
+        if (array_key_exists("career", $row)) {
+            $this->career = $row["career"];
+        }
+
+        if (array_key_exists("career_type", $row)) {
+            $this->career_type = $row["career_type"];
+        }
+
+        if (array_key_exists("company", $row)) {
+            $this->company = $row["company"];
+        }
+
+        if (array_key_exists("descript", $row)) {
+            $this->descript = $row["descript"];
+        }
+
     }
 
 }

@@ -10,8 +10,8 @@ class user_dao
 {
     private $conn;
 
-    private $saveUser = "INSERT INTO USER(NAME,sex,contact,openid,AREA,department,major,career,career_type,company,descript) VALUES (:NAME,:sex,:contact,:openid,:AREA,:department,:major,:career,:career_type,:company,:descript)";
-    private $modifyUser = "UPDATE USER SET `name` = :NAME,`sex` = :sex,`contact` = :contact,`area` = :AREA,`department` = :department,`major` = :major,`career` = :career,`career_type` = :career_type,`company` = :company,`descript` = :descript WHERE openid = :openid
+    private $saveUser = "INSERT INTO USER(name,sex,contact,openid,area,department,major,career,career_type,company,descript) VALUES (:name,:sex,:contact,:openid,:area,:department,:major,:career,:career_type,:company,:descript)";
+    private $modifyUser = "UPDATE USER SET `name` = :name,`sex` = :sex,`contact` = :contact,`area` = :area,`department` = :department,`major` = :major,`career` = :career,`career_type` = :career_type,`company` = :company,`descript` = :descript WHERE openid = :openid
 ";
     private $getOne = "SELECT * FROM `user` WHERE openid = :openid";
     private $listUsers = "SELECT u.*,m.`name` AS major_name,d.`name` AS department_name,a.`name` AS area_name FROM `user` u LEFT JOIN major m ON u.major_id = m.id LEFT JOIN department d ON u.department_id = d.id LEFT JOIN area a ON u.area_id = a.id LIMIT :be ,:en ";
@@ -26,6 +26,7 @@ class user_dao
 
     function autOpenIdExist($openid)
     {
+        $exist = false;
         $stmt = $this->getOne($openid);
         while ($row = $stmt->fetch()) {
             $exist = true;

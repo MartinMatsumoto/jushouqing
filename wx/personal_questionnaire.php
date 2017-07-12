@@ -23,6 +23,18 @@
     </style>
 </head>
 <body class="gray-bg">
+<?php
+    require_once '../entrance.php';
+    $openid = $_GET["openid"];
+    $update = 0;
+    $dao = new user_dao();
+    $stmt = $dao->getOne($openid);
+    $row = $stmt->fetch();
+    if(!empty($row)){
+        $user = new User($row);
+        $update = 1;
+    }
+?>
 <div class="wrapper wrapper-content animated fadeInRight" align="center">
     <div class="row" style="max-width: 600px">
         <div class="col-sm-12">
@@ -41,65 +53,113 @@
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             姓名<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="name" class="form-control" required="" />
+                            <div class="col-sm-12"><input type="text" name="name" class="form-control" required="" value="<?php
+                                    if($update){
+                                        echo $user->name;
+                                    }
+                                ?>"/>
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             性别<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><select class="form-control m-b" name="sex">
-                                    <option value="1">男</option>
-                                    <option value="2">女</option>
-                                </select></div>
+                            <div class="col-sm-12">
+                                <select class="form-control m-b" name="sex">
+                                    <option value="1" <?php
+                                        if($update && $user->sex == 1){
+                                            echo "selected";
+                                        }
+                                    ?>>男</option>
+                                    <option value="2" <?php
+                                    if($update && $user->sex == 2){
+                                        echo "selected";
+                                    }
+                                    ?>>女</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             联系电话<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="contact" class="form-control" required="" />
+                            <div class="col-sm-12"><input type="text" name="contact" class="form-control" required="" value="<?php
+                                if($update){
+                                    echo $user->contact;
+                                }
+                                ?>" />
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             所在城市<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="city" class="form-control" required="" />
+                            <div class="col-sm-12"><input type="text" name="city" class="form-control" required="" value="<?php
+                                if($update){
+                                    echo $user->area;
+                                }
+                                ?>" />
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             院系</div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="department" class="form-control" />
+                            <div class="col-sm-12"><input type="text" name="department" class="form-control" value="<?php
+                                if($update){
+                                    echo $user->department;
+                                }
+                                ?>"/>
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             专业和班级<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="major" class="form-control" required="" />
+                            <div class="col-sm-12"><input type="text" name="major" class="form-control" required="" value="<?php
+                                if($update){
+                                    echo $user->major;
+                                }
+                                ?>"/>
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             职业/职位<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="career" class="form-control" required="" />
+                            <div class="col-sm-12"><input type="text" name="career" class="form-control" required="" value="<?php
+                                if($update){
+                                    echo $user->career;
+                                }
+                                ?>"/>
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             行业类别</div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="career_type" class="form-control">
+                            <div class="col-sm-12"><input type="text" name="career_type" class="form-control" value="<?php
+                                if($update){
+                                    echo $user->career_type;
+                                }
+                                ?>"/>
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             公司名称</div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="company" class="form-control">
+                            <div class="col-sm-12"><input type="text" name="company" class="form-control" value="<?php
+                                if($update){
+                                    echo $user->company;
+                                }
+                                ?>"/>
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             您认为校友会能为您做些什么：</div>
                         <div class="form-group">
-                            <div class="col-sm-12"><textarea name="descript" class="form-control"></textarea>
+                            <div class="col-sm-12"><textarea name="descript" class="form-control"><?php
+                                    if($update){
+                                        echo $user->descript;
+                                    }
+                                    ?></textarea>
                             </div>
                         </div>
+                        <input value="<?php echo $openid?>" name="openid" type="hidden" />
+                        <input value="<?php echo $update?>" name="update" type="hidden" />
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <div style="text-align: center">
