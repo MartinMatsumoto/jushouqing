@@ -11,7 +11,8 @@
     <link href="./css/animate.min.css" rel="stylesheet">
     <link href="./css/style.min.css" rel="stylesheet">
     <link href="css/datepicker.css" rel="stylesheet">
-    <style type="text/css">.bg_img {
+    <style type="text/css">
+        .bg_img {
             position: fixed;
             width: 100%;
             height: 100%;
@@ -36,7 +37,7 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <form method="post" action="/structure/user/controller/personal_questionnaire_save.php" class="form-horizontal">
+                    <form method="post" action="/wx/personal_questionnaire_save.php" class="form-horizontal">
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             姓名<font color="red">*</font></div>
                         <div class="form-group">
@@ -47,14 +48,14 @@
                             性别<font color="red">*</font></div>
                         <div class="form-group">
                             <div class="col-sm-12"><select class="form-control m-b" name="sex">
-                                    <option value="男">男</option>
-                                    <option value="女">女</option>
+                                    <option value="1">男</option>
+                                    <option value="2">女</option>
                                 </select></div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
                             联系电话<font color="red">*</font></div>
                         <div class="form-group">
-                            <div class="col-sm-12"><input type="text" name="tel" class="form-control" required="" />
+                            <div class="col-sm-12"><input type="text" name="contact" class="form-control" required="" />
                             </div>
                         </div>
                         <div class="form-group" style="text-align: left;margin-left: 0.5em">
@@ -128,6 +129,5 @@
         });
     });
 </script>
-<!-- Mirrored from www.zi-han.net/theme/hplus/form_basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:15 GMT -->
 </body>
 </html>

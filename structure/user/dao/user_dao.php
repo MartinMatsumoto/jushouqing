@@ -10,8 +10,9 @@ class user_dao
 {
     private $conn;
 
-    private $saveUser = "INSERT INTO user(name,sex,contact,area_id,department_id,school_date,major_id,openid,custom_department,custom_major) VALUES (:name,:sex,:contact,:area_id,:department_id,:school_date,:major_id,:openid,:custom_department,:custom_major)";
-    private $modifyUser = "UPDATE user SET `name` = :name,`sex` = :sex,`contact` = :contact,`area_id` = :area_id,`department_id` = :department_id,`custom_department` = :custom_department,`school_date` = :school_date,`major_id` = :major_id,`custom_major` = :custom_major WHERE openid = :openid";
+    private $saveUser = "INSERT INTO USER(NAME,sex,contact,openid,AREA,department,major,career,career_type,company,descript) VALUES (:NAME,:sex,:contact,:openid,:AREA,:department,:major,:career,:career_type,:company,:descript)";
+    private $modifyUser = "UPDATE USER SET `name` = :NAME,`sex` = :sex,`contact` = :contact,`area` = :AREA,`department` = :department,`major` = :major,`career` = :career,`career_type` = :career_type,`company` = :company,`descript` = :descript WHERE openid = :openid
+";
     private $getOne = "SELECT * FROM `user` WHERE openid = :openid";
     private $listUsers = "SELECT u.*,m.`name` AS major_name,d.`name` AS department_name,a.`name` AS area_name FROM `user` u LEFT JOIN major m ON u.major_id = m.id LEFT JOIN department d ON u.department_id = d.id LEFT JOIN area a ON u.area_id = a.id LIMIT :be ,:en ";
     private $count = "SELECT COUNT(*) AS COUNT from `user`";
@@ -41,7 +42,7 @@ class user_dao
         return $stmt;
     }
 
-    function save($name, $sex, $contact, $area_id, $department_id, $customDepartment, $school_date, $major_id, $customMajor, $openid)
+    function save($name, $sex, $contact, $city, $department, $major, $career, $career_type, $company, $descript, $openid)
     {
 
         if ($this->autOpenIdExist($openid)) {
@@ -53,12 +54,13 @@ class user_dao
             $stmt->bindParam(':name', $name);
             $stmt->bindParam(':sex', $sex);
             $stmt->bindParam(':contact', $contact);
-            $stmt->bindParam(':area_id', $area_id);
-            $stmt->bindParam(':department_id', $department_id);
-            $stmt->bindParam(':custom_department', $customDepartment);
-            $stmt->bindParam(':school_date', $school_date);
-            $stmt->bindParam(':major_id', $major_id);
-            $stmt->bindParam(':custom_major', $customMajor);
+            $stmt->bindParam(':city', $city);
+            $stmt->bindParam(':department', $department);
+            $stmt->bindParam(':major', $major);
+            $stmt->bindParam(':career', $career);
+            $stmt->bindParam(':career_type', $career_type);
+            $stmt->bindParam(':company', $company);
+            $stmt->bindParam(':descript', $descript);
             $stmt->bindParam(':openid', $openid);
             $stmt->execute();
         } catch (Exception  $e) {
@@ -67,7 +69,7 @@ class user_dao
         return true;
     }
 
-    function modify($name, $sex, $contact, $area_id, $department_id, $customDepartment, $school_date, $major_id, $customMajor, $openid)
+    function modify($name, $sex, $contact, $city, $department, $major, $career, $career_type, $company, $descript, $openid)
     {
 
         if (!$this->autOpenIdExist($openid)) {
@@ -79,12 +81,13 @@ class user_dao
             $stmt->bindParam(':name', $name);
             $stmt->bindParam(':sex', $sex);
             $stmt->bindParam(':contact', $contact);
-            $stmt->bindParam(':area_id', $area_id);
-            $stmt->bindParam(':department_id', $department_id);
-            $stmt->bindParam(':custom_department', $customDepartment);
-            $stmt->bindParam(':school_date', $school_date);
-            $stmt->bindParam(':major_id', $major_id);
-            $stmt->bindParam(':custom_major', $customMajor);
+            $stmt->bindParam(':area', $city);
+            $stmt->bindParam(':department', $department);
+            $stmt->bindParam(':major', $major);
+            $stmt->bindParam(':career', $career);
+            $stmt->bindParam(':career_type', $career_type);
+            $stmt->bindParam(':company', $company);
+            $stmt->bindParam(':descript', $descript);
             $stmt->bindParam(':openid', $openid);
             $stmt->execute();
         } catch (Exception  $e) {
