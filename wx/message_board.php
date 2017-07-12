@@ -74,8 +74,7 @@ while ($row = $result->fetch()) {
 
 
         </div>
-        <img class="footer"
-             src="http://image2.135editor.com/cache/remote/aHR0cHM6Ly9tbWJpei5xbG9nby5jbi9tbWJpel9wbmcvZmdua3hmR25ua1FYWVM1aWFkdGliWnhkVktESEZWTVQ4VWlidlVTQ0FhMXoybzJJMEhQc2htb2Z4Qkh4NjZZVUFWTEFjazRwQWJUMTcwTFhJVXpiQXllUVEvMD93eF9mbXQ9cG5n"/>
+        <img class="footer" src="./images/message_content_bottom.png"/>
     </div>
 <?php } ?>
 
