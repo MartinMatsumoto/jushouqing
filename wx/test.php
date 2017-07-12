@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<!-- saved from url=(0018)http://xyb.mnu.cn/ -->
-<html><!-- Mirrored from www.zi-han.net/theme/hplus/form_basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:15 GMT --><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
     <title>绵阳职业技术学院校友调查问卷</title>
     <meta name="keywords" content="绵阳职业技术学院校友用人单位调查问卷">
     <meta name="description" content="绵阳职业技术学院校友用人单位调查问卷">
