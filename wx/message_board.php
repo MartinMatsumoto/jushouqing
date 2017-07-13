@@ -28,7 +28,7 @@ $message_reply_dao = new message_reply_dao();
 
 <div class="white_content"></div>
 <?php
-$result = $message_dao->listAll(5, 1);
+$result = $message_dao->listAll(10, 1);
 while ($row = $result->fetch()) {
     $message = new message($row);
     $replyResult = $message_reply_dao->listByMessage($message->id);
@@ -36,11 +36,23 @@ while ($row = $result->fetch()) {
     <div class="media content">
         <input id="message_id" value="<?php echo $message->id ?>" type="hidden"/>
         <a class="media-left wx_header">
-            <img class="media-object" src="./images/default_header.png" alt="用户头像">
+            <img class="media-object" src="<?php
+                if(!empty($message->user_wx_headimgurl)){
+                    echo $message->user_wx_headimgurl;
+                }else if(!empty($message->wx_headimgurl)){
+                    echo $message->wx_headimgurl;
+                }
+            ?>" alt="用户头像">
         </a>
 
         <div class="media-body">
-            <h4 class="media-heading nickname">用户昵称</h4>
+            <h4 class="media-heading nickname"><?php
+                    if(!empty($message->name)){
+                        echo $message->name;
+                    }else if (!empty($message->wx_nickname)){
+                        echo $message->wx_nickname;
+                    }
+                ?></h4>
 
             <div class="message">
                 <?php echo $message->message ?>
@@ -60,6 +72,8 @@ while ($row = $result->fetch()) {
                     </a>
 
                     <div class="media-body">
+                        <span class="nickname_small">用户昵称</span>
+                        <span>回复</span>
                         <span class="nickname_small">用户昵称</span>
                         <?php echo $message_reply->reply; ?>
                         <div class="date">2017-01-05 11:39<span class="reply">回复</span></div>

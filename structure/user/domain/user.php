@@ -34,6 +34,18 @@ class user
     public $company;
     // 补充
     public $descript;
+    //微信昵称
+    public $wx_nickname;
+    //微信性别
+    public $wx_sex;
+    //微信市
+    public $wx_city;
+    //微信省
+    public $wx_province;
+    //微信国家
+    public $wx_country;
+    //微信头像路径
+    public $wx_headimgurl;
 
     //构造函数
     function __construct($row)
@@ -88,6 +100,14 @@ class user
 
         if (array_key_exists("descript", $row)) {
             $this->descript = $row["descript"];
+        }
+
+        if (array_key_exists("wx_nickname", $row)) {
+            $this->wx_nickname = $row["wx_nickname"];
+        }
+
+        if (array_key_exists("wx_headimgurl", $row)) {
+            $this->wx_headimgurl = $row["wx_headimgurl"];
         }
 
     }

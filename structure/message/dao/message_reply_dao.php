@@ -10,7 +10,8 @@ class message_reply_dao
 {
     private $conn;
     private $getOne = "select * from message_reply where id = :id";
-    private $listByMessage = "select * from message_reply where message_id = :messageId";
+    private $listByMessage = "select * from message_reply where message_id = :messageId AND delete_ = 0 AND reply_type = 0";
+    private $listByReply = "select * from message_reply where message_id = :replyId AND delete_ = 0 AND reply_type = 1";
     private $replyMessage = "INSERT INTO message_reply(reply,openid,message_id) VALUES (:reply,:openId,:messageId)";
 
     //构造函数
@@ -31,6 +32,14 @@ class message_reply_dao
     {
         $stmt = $this->conn->pdo->prepare($this->listByMessage);
         $stmt->bindParam(':messageId', $messageId);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    function listByReply($replyId)
+    {
+        $stmt = $this->conn->pdo->prepare($this->listByReply);
+        $stmt->bindParam(':messageId', $replyId);
         $stmt->execute();
         return $stmt;
     }
