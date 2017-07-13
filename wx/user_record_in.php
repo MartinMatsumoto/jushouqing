@@ -27,7 +27,10 @@
 
 <body class="gray-bg">
 <?php
-    require_once 'get_open_id.php';
+    require_once '../entrance.php';
+    require_once './include/get_open_id.php';
+    require_once './include/get_user_info.php';
+    require_once './include/user_secret_save.php';
 ?>
 <div class="wrapper wrapper-content animated fadeInRight" align="center">
 

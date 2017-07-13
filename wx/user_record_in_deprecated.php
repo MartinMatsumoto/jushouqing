@@ -12,7 +12,8 @@
 <body>
 <?php
 require_once '../entrance.php';
-require_once 'get_open_id.php';
+require_once './include/get_open_id.php';
+require_once './include/get_user_info.php';
 $area_dao = new area_dao();
 $major_dao = new major_dao();
 $department_dao = new department_dao();
