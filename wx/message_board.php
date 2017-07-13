@@ -75,6 +75,7 @@ while ($row = $result->fetch()) {
                         <span class="nickname_small">用户昵称</span>
                         <span>回复</span>
                         <span class="nickname_small">用户昵称</span>
+                        <br />
                         <?php echo $message_reply->reply; ?>
                         <div class="date">2017-01-05 11:39<span class="reply">回复</span></div>
                     </div>
@@ -101,7 +102,7 @@ while ($row = $result->fetch()) {
                     <div class="input-group">
                         <input type="text" class="form-control">
                         <span class="input-group-btn">
-                            <button class="btn btn-default btn-success" type="button">
+                            <button class="btn btn-default btn-success" type="button" id="send">
                                 发送
                             </button>
                         </span>
@@ -111,8 +112,27 @@ while ($row = $result->fetch()) {
         </div>
     </div>
 </nav>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                加载中请稍等
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
 <img class="bg_img" src="./images/bg.jpg">
 <script src="/libs/jquery.min.js"></script>
 <script src="/libs/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#send").click(function () {
+            $('#loadingModal').modal('show');
+        });
+    });
+</script>
 </body>
 </html>
