@@ -13,8 +13,6 @@ require_once '../entrance.php';
 require_once 'get_open_id.php';
 $message_dao = new message_dao();
 $message_reply_dao = new message_reply_dao();
-
-//$openid = "oC00gxAxQ8KdPWbyEoOCOEGmbQiw";
 ?>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -27,7 +25,6 @@ $message_reply_dao = new message_reply_dao();
 </nav>
 
 <div class="white_content"></div>
-
 <?php
 $result = $message_dao->listAll(5, 1);
 while ($row = $result->fetch()) {
@@ -78,6 +75,8 @@ while ($row = $result->fetch()) {
     </div>
 <?php } ?>
 
+<div class="white_content"></div>
+
 <nav class="navbar navbar-default navbar-fixed-bottom footer_input_margin_top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header footer_input_width">
@@ -92,11 +91,11 @@ while ($row = $result->fetch()) {
                         </span>
                     </div>
                 </div>
-                <!-- /.row -->
             </form>
         </div>
     </div>
 </nav>
+<img class="bg_img" src="./images/bg.jpg">
 <script src="/libs/jquery.min.js"></script>
 <script src="/libs/bootstrap.min.js"></script>
 </body>

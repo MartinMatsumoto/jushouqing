@@ -34,9 +34,7 @@ Ext.define('MyDesktop.UsersWindow', {
     },
 
     store: Ext.create('Ext.data.Store', {
-        fields: ['id', 'name', 'sex', 'contact',
-            'area_id', 'area_name', 'department_id', 'department_name', 'school_date', 'major_id', 'major_name',
-            'custom_major', 'custom_department', 'open_id'],
+        fields: ['id', 'name', 'sex', 'contact', 'school_date', 'open_id', 'area', 'department', 'major', 'career', 'career_type', 'company', 'descript'],
         autoLoad: false,
         pageSize: 20,
         proxy: {
@@ -92,7 +90,7 @@ Ext.define('MyDesktop.UsersWindow', {
                             },
                             {
                                 text: "性別",
-                                width: 35,
+                                width: 45,
                                 sortable: true,
                                 dataIndex: 'sex',
                                 renderer: sexRender
@@ -104,40 +102,52 @@ Ext.define('MyDesktop.UsersWindow', {
                                 dataIndex: 'contact'
                             },
                             {
-                                text: "地区",
+                                text: "所在城市",
                                 width: 70,
                                 sortable: true,
-                                dataIndex: 'area_name'
+                                dataIndex: 'area'
                             },
                             {
-                                text: "系别",
+                                text: "院系",
                                 width: 70,
                                 sortable: true,
-                                dataIndex: 'department_name'
+                                dataIndex: 'department'
                             },
                             {
-                                text: "专业",
+                                text: "专业和班级",
                                 width: 70,
                                 sortable: true,
-                                dataIndex: 'major_name'
+                                dataIndex: 'major'
                             },
                             {
-                                text: "自定义系别",
-                                width: 100,
+                                text: "职业/职位",
+                                width: 70,
                                 sortable: true,
-                                dataIndex: 'custom_department'
+                                dataIndex: 'career'
                             },
                             {
-                                text: "自定义专业",
-                                width: 100,
+                                text: "行业类别",
+                                width: 70,
                                 sortable: true,
-                                dataIndex: 'custom_major'
+                                dataIndex: 'career_type'
+                            },
+                            {
+                                text: "公司名称",
+                                width: 70,
+                                sortable: true,
+                                dataIndex: 'company'
                             },
                             {
                                 text: "openid",
                                 width: 70,
                                 sortable: true,
                                 dataIndex: 'open_id'
+                            },
+                            {
+                                text: "您认为校友会能为您做些什么",
+                                width: 120,
+                                sortable: true,
+                                dataIndex: 'descript'
                             }
                         ]
                     }
@@ -146,7 +156,7 @@ Ext.define('MyDesktop.UsersWindow', {
                     id: 'user_modify_button',
                     text: '修改信息',
                     disabled: true,
-                    hidden : true,
+                    hidden: true,
                     tooltip: '修改某个校友填报的信息',
                     handler: function () {
                         Ext.getCmp('userModifyForm').form.loadRecord(currentSel);
@@ -234,30 +244,30 @@ Ext.define('MyDesktop.UsersWindow', {
                 name: 'name',
                 allowBlank: false
             }, {
-                fieldLabel : '性别',
-                name : 'sex',
-                size : 5,
-                allowBlank : false,
-                xtype : 'combo',
-                mode : 'local',
-                value : '0',
-                forceSelection : true,
-                editable : false,
-                typeAhead : true,
-                displayField : 'name',
-                valueField : 'value',
-                queryMode : 'local',
-                store : Ext.create('Ext.data.Store', {
-                    fields : ['name', 'value'],
-                    data : [{
-                        name : '未知',
-                        value : '0'
+                fieldLabel: '性别',
+                name: 'sex',
+                size: 5,
+                allowBlank: false,
+                xtype: 'combo',
+                mode: 'local',
+                value: '0',
+                forceSelection: true,
+                editable: false,
+                typeAhead: true,
+                displayField: 'name',
+                valueField: 'value',
+                queryMode: 'local',
+                store: Ext.create('Ext.data.Store', {
+                    fields: ['name', 'value'],
+                    data: [{
+                        name: '未知',
+                        value: '0'
                     }, {
-                        name : '男',
-                        value : '1'
+                        name: '男',
+                        value: '1'
                     }, {
-                        name : '女',
-                        value : '2'
+                        name: '女',
+                        value: '2'
                     }]
                 })
             }, {
@@ -265,29 +275,29 @@ Ext.define('MyDesktop.UsersWindow', {
                 name: 'contact',
                 allowBlank: false
             }, {
-                fieldLabel : '选择省',
-                name : 'area',
-                allowBlank : false,
-                xtype : 'combo',
-                mode : 'local',
-                value : '0',
-                forceSelection : true,
-                editable : false,
-                typeAhead : true,
-                displayField : 'name',
-                valueField : 'value',
-                queryMode : 'local',
-                store : Ext.create('Ext.data.Store', {
-                    fields : ['name', 'value'],
-                    data : [{
-                        name : '未知',
-                        value : '0'
+                fieldLabel: '选择省',
+                name: 'area',
+                allowBlank: false,
+                xtype: 'combo',
+                mode: 'local',
+                value: '0',
+                forceSelection: true,
+                editable: false,
+                typeAhead: true,
+                displayField: 'name',
+                valueField: 'value',
+                queryMode: 'local',
+                store: Ext.create('Ext.data.Store', {
+                    fields: ['name', 'value'],
+                    data: [{
+                        name: '未知',
+                        value: '0'
                     }, {
-                        name : '男',
-                        value : '1'
+                        name: '男',
+                        value: '1'
                     }, {
-                        name : '女',
-                        value : '2'
+                        name: '女',
+                        value: '2'
                     }]
                 })
             }],
