@@ -12,7 +12,7 @@ class user_dao
 
     private $saveUser = "INSERT INTO USER(name,sex,contact,openid,area,department,major,career,career_type,company,descript) VALUES (:name,:sex,:contact,:openid,:area,:department,:major,:career,:career_type,:company,:descript)";
     private $modifyUser = "UPDATE USER SET `name` = :name,`sex` = :sex,`contact` = :contact,`area` = :area,`department` = :department,`major` = :major,`career` = :career,`career_type` = :career_type,`company` = :company,`descript` = :descript WHERE openid = :openid";
-    private $modifyWxUserInfo = " UPDATE USER SET `wx_nickname` = :wx_nickname,`wx_sex` = :wx_sex,`wx_city` = :wx_city,`wx_province` = :wx_province,`wx_contry` = :wx_contry,`wx_headimgurl` = :wx_headimgurl WHERE openid = :openid";
+    private $modifyWxUserInfo = " UPDATE USER SET `wx_nickname` = :wx_nickname,`wx_sex` = :wx_sex,`wx_city` = :wx_city,`wx_province` = :wx_province,`wx_country` = :wx_country,`wx_headimgurl` = :wx_headimgurl WHERE openid = :openid";
 
     private $getOne = "SELECT * FROM `user` WHERE openid = :openid";
     private $listUsers = "SELECT * FROM USER LIMIT :be ,:en ";
@@ -126,7 +126,6 @@ class user_dao
         if (!$this->autOpenIdExist($openid)) {
             return false;
         }
-
         try {
             $stmt = $this->conn->pdo->prepare($this->modifyWxUserInfo);
             $stmt->bindParam(':wx_nickname', $wx_nickname);
@@ -138,6 +137,7 @@ class user_dao
             $stmt->bindParam(':openid', $openid);
             $stmt->execute();
         } catch (Exception  $e) {
+            echo $e->getMessage();
             return false;
         }
         return true;
