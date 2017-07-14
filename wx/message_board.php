@@ -63,21 +63,42 @@ while ($row = $result->fetch()) {
 
             <?php
             while ($row = $replyResult->fetch()) {
-                $message_reply = new message_reply($row);
-                ?>
-                <!-- 嵌套的媒体对象 -->
-                <div class="media reply">
-                    <a class="media-left wx_header_small">
-                        <img class="media-object" src="./images/default_header.png" alt="用户头像">
-                    </a>
+            $message_reply = new message_reply($row);
+            ?>
+            <!-- 嵌套的媒体对象 -->
+            <div class="media reply">
+                <a class="media-left wx_header_small">
+                    <img class="media-object" src="<?php
+                    if (!empty($message_reply->user_headimgurl)) {
+                        echo $message_reply->user_headimgurl;
+                    } else if (!empty($message_reply->wx_headimgurl)) {
+                        echo $message_reply->wx_headimgurl;
+                    }
+                    ?>" alt="用户头像">
+                </a>
 
-                    <div class="media-body">
-                        <span class="nickname_small">用户昵称</span>
-                        <span>回复</span>
-                        <span class="nickname_small">用户昵称</span>
-                        <br />
+                <div class="media-body">
+                        <span class="nickname_small"><?php
+                            if (!empty($message_reply->name)) {
+                                echo $message_reply->name;
+                            } else if (!empty($message_reply->wx_nickname)) {
+                                echo $message_reply->wx_nickname;
+                            }
+                            ?></span>
+
+                    <?php
+                    if ($message_reply->reply_id) {?>
+                    <span>回复</span>
+                    <span class="nickname_small"><?php
+                        if (!empty($message_reply->reply_name)) {
+                            echo $message_reply->reply_name;
+                        } else if (!empty($message_reply->reply_wx_nickname)) {
+                            echo $message_reply->reply_wx_nickname;
+                        }
+                        ?></span>
+                    <?php }?>
                         <?php echo $message_reply->reply; ?>
-                        <div class="date">2017-01-05 11:39<span class="reply">回复</span></div>
+                        <div class="date"><?php echo $message_reply->create_date?><span class="reply">回复</span></div>
                     </div>
                 </div>
 
