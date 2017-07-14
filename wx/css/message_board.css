@@ -21,10 +21,11 @@ body {
 .white_content {
     height: 50px;
     width: 100%;
+    float: left;
 }
 
 .content {
-    margin: 37px 15px 50px 5px;
+    margin: 37px 20px 50px 5px;
     padding: 10px 5px 20px 5px;
     overflow: hidden;
     box-shadow: 5px 5px 5px #ccc;
@@ -34,6 +35,9 @@ body {
     -webkit-box-shadow: 5px 5px 5px #ccc;
     border: dashed 2px #b5b5b5;
     background-color: white;
+    float: left;
+    z-index: 15;
+    position: relative;
 }
 
 .content .wx_header {
@@ -97,15 +101,25 @@ body {
 .content .date .reply {
     color: #498B31;
     font-size: 12px;
-    margin-left: 24px;
+    margin-left: 9px;
+    cursor: pointer;
 }
 
-.content .footer {
+.content .date .delete {
+    color: #498B31;
+    font-size: 12px;
+    margin-left: 2px;
+    cursor: pointer;
+}
+
+.flower_footer {
     display: block;
-    position: absolute;
     width: 100px;
-    margin: -23px 0px 0 0;
+    margin: -90px 0px 0 0;
     right: 0px;
+    z-index: 10;
+    position: relative;
+    float: right;
 }
 
 .footer_input_margin_top {

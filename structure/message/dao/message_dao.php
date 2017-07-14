@@ -12,7 +12,7 @@ class message_dao
     private $getOne = "select * from message where id = :id";
     private $count = "select count(*) AS COUNT from message WHERE delete_ = 0";
     private $listAll = "SELECT m.*,u.name AS `name`,u.sex AS sex,u.wx_headimgurl AS user_wx_headimgurl FROM message m LEFT JOIN `user` u ON u.openid = m.openid WHERE m.delete_ = 0 ORDER BY m.id DESC LIMIT :be ,:en";
-    private $addMessage = "INSERT INTO message(openid,message,create_date) VALUES (:openId,:message,:createDate)";
+    private $addMessage = "INSERT INTO message(openid,message,create_date,wx_nickname,wx_headimgurl) VALUES (:openId,:message,:createDate,:wx_nickname,:wx_headimgurl)";
 
     //构造函数
     function __construct()
@@ -47,20 +47,23 @@ class message_dao
         return $stmt;
     }
 
-    function addMessage($message,$openId)
+    function addMessage($message, $openId, $wx_nickname, $wx_headimgurl)
     {
-        $datetime = date('Y-m-d H:i:s',time());
+        $datetime = date('Y-m-d H:i:s', time());
         $stmt = $this->conn->pdo->prepare($this->addMessage);
         $stmt->bindParam(':openId', $openId);
         $stmt->bindParam(':message', $message);
         $stmt->bindParam(':createDate', $datetime);
+        $stmt->bindParam(':wx_nickname', $wx_nickname);
+        $stmt->bindParam(':wx_headimgurl', $wx_headimgurl);
         $stmt->execute();
 
         $recentId = $stmt = $this->conn->pdo->lastInsertId();
         return $recentId;
     }
 
-    function count(){
+    function count()
+    {
         $stmt = $this->conn->pdo->prepare($this->count);
         $stmt->execute();
         return $stmt;
