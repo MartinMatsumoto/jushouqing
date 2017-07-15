@@ -28,6 +28,9 @@ class message
     public $wx_headimgurl;
     //微信头像路径 来自用户
     public $user_wx_headimgurl;
+    //回复
+    public $replies;
+
     //构造函数
     function __construct($row)
     {

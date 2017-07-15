@@ -16,9 +16,9 @@ require_once './include/user_secret_save.php';
 $message_dao = new message_dao();
 $message_reply_dao = new message_reply_dao();
 
-/*$openid = "oC00gxAxQ8KdPWbyEoOCOEGmbQiw";
+$openid = "oC00gxAxQ8KdPWbyEoOCOEGmbQiw";
 $nickname = "小强";
-$headimgurl = "http://wx.qlogo.cn/mmhead/PiajxSqBRaEJnR6TvRzhjgI1Flx9Jaqns4C3mzRiaLrh6lHLMmGKPHHw/0";*/
+$headimgurl = "http://wx.qlogo.cn/mmhead/PiajxSqBRaEJnR6TvRzhjgI1Flx9Jaqns4C3mzRiaLrh6lHLMmGKPHHw/0";
 
 ?>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -40,7 +40,7 @@ $headimgurl = "http://wx.qlogo.cn/mmhead/PiajxSqBRaEJnR6TvRzhjgI1Flx9Jaqns4C3mzR
             <img class="media-object" src="" alt="用户头像" id="message_header"/>
         </a>
 
-        <div class="media-body">
+        <div class="media-body" id="media_body">
             <h4 class="media-heading nickname" id="message_name"></h4>
 
             <div class="message" id="message">
@@ -56,14 +56,19 @@ $headimgurl = "http://wx.qlogo.cn/mmhead/PiajxSqBRaEJnR6TvRzhjgI1Flx9Jaqns4C3mzR
     <img class="flower_footer" src="./images/message_content_bottom.png">
 </div>
 
-<div class="media reply" id="reply_template" reply_id="36" style="display: none">
+<div class="media reply" id="reply_template" style="display: none">
     <a class="media-left wx_header_small">
-        <img class="media-object" src="http://wx.qlogo.cn/mmopen/nH7Nc17icVAibT6HUAwj26HMW1S6icwdpVTmyb0NI9UGgP5gyPI2rX2YXY5PfSibibQfMN2o9i" alt="用户头像">
+        <img class="media-object" id="reply_header" src="" alt="用户头像">
     </a>
     <div class="media-body">
-        <span class="nickname_small">钟娜</span>
-        说这话的人，强哥也
-        <div class="date">2017-07-05 23:53:17 <span class="reply">回复</span>
+        <span class="nickname_small" id="reply_name"></span>
+        <span id="reply_text">回复</span>
+        <span id="reply_nickname" class="nickname_small"></span>
+        <span id="reply_message"></span>
+        <div class="date">
+            <span id="reply_date"></span>
+            <span class="reply" id="reply_reply">回复</span>
+            <span class="delete" id="delete_reply">删除</span>
         </div>
     </div>
 </div>
@@ -88,7 +93,7 @@ while ($row = $result->fetch()) {
                 ?>" alt="用户头像">
             </a>
 
-            <div class="media-body">
+            <div class="media-body" id="media_body">
                 <h4 class="media-heading nickname" id="message_name"><?php
                     if (!empty($message->name)) {
                         echo $message->name;
@@ -131,7 +136,7 @@ while ($row = $result->fetch()) {
                         </a>
 
                         <div class="media-body">
-                        <span class="nickname_small"><?php
+                        <span class="nickname_small" id="reply_name"><?php
                             if (!empty($message_reply->name)) {
                                 echo $message_reply->name;
                             } else if (!empty($message_reply->wx_nickname)) {
@@ -152,11 +157,11 @@ while ($row = $result->fetch()) {
                             <?php } ?>
                             <?php echo $message_reply->reply; ?>
                             <div class="date"><?php echo $message_reply->create_date ?>
-                                <span class="reply">回复</span>
+                                <span class="reply" id="reply_reply">回复</span>
                                 <?php
                                 if ($message_reply->openid == $openid) {
                                     ?>
-                                    <span class="delete">删除</span>
+                                    <span class="delete" id="delete_reply">删除</span>
                                     <?php
                                 }
                                 ?>
@@ -194,7 +199,7 @@ while ($row = $result->fetch()) {
     </div>
 </nav>
 
-<!-- 模态框（Modal） -->
+<!-- 加载框 -->
 <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModal" aria-hidden="true"
      data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
@@ -202,8 +207,25 @@ while ($row = $result->fetch()) {
             <div class="modal-body">
                 加载中请稍等
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
+        </div>
+    </div>
+</div>
+
+<!-- 确认框 -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">请确认</h4>
+            </div>
+            <div class="modal-body">是否确认删除?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="confirm_modal_confirm">确定</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <img class="bg_img" src="./images/bg.jpg">
@@ -218,17 +240,31 @@ while ($row = $result->fetch()) {
 
         var messageInput = $("#message_input");
         var contentTemplate = $("#content_template");
+        var replyTemplate = $("#reply_template");
         var templateBefore = $("#white_content_before");
         var templateAfter = $("#white_content_after");
+        var mediaContent;
 
         var init = function () {
             var contents = $("div[id=content]");
-            for (var i = 0; i < contents.length; i++) {
-                bindContentClick($(contents[i]));
+            if(contents && contents.length){
+                for (var i = 0; i < contents.length; i++) {
+                    bindContentClick($(contents[i]));
+                }
+            }
+        }
+
+        var initReply = function() {
+            var replies = $("div[id=reply]");
+            if (replies && replies.length) {
+                for (var i = 0; i < replies.length; i++) {
+                    bindReplyClick($(replies[i]));
+                }
             }
         }
 
         init();
+        initReply();
 
         messageInput.blur(function () {
             if (!messageInput.val()) {
@@ -265,6 +301,11 @@ while ($row = $result->fetch()) {
             if (messageId && !replyId) {
                 reply(message, messageId);
             }
+
+            //回复回复
+            if (messageId && replyId) {
+                reply(message, messageId, replyId);
+            }
         });
 
         var sendMessage = function (message) {
@@ -280,17 +321,8 @@ while ($row = $result->fetch()) {
                 },
                 success: function (data) {
                     $('#loadingModal').modal('hide');
-
                     if (data && data.errorCode && data.content) {
-                        var object = {
-                            createDate :"",
-                            id : data.content,
-                            message : message,
-                            openId: "<?php echo $openid?>",
-                            name : "<?php echo $nickname?>",
-                            user_wx_headimgurl: "<?php echo $headimgurl?>"
-                        }
-                        cloneContent(object,true);
+                        cloneContent(data.content,true);
                     }
 
                     clearMessageInput();
@@ -298,7 +330,6 @@ while ($row = $result->fetch()) {
                 error: function () {
                     $('#loadingModal').modal('hide');
                     clearMessageInput();
-                    //changeloading(errortext);
                 }
             });
         }
@@ -313,6 +344,7 @@ while ($row = $result->fetch()) {
             contentClone.find("#message_header").attr("src",data.user_wx_headimgurl ? data.user_wx_headimgurl : data.wx_headimgurl);
             contentClone.find("#message").html(data.message);
             contentClone.find("#message_createdate").html(data.create_date);
+            mediaContent = contentClone.find("#media_body");
             if(data.openid == "<?php echo $openid?>") {
                 contentClone.find("#delete_message").show();
             }else{
@@ -323,10 +355,18 @@ while ($row = $result->fetch()) {
             } else {
                 templateBefore.before(contentClone);
             }
+
+            var replies = data.replies;
+            if (replies && replies.length) {
+                for (var i = 0; i < replies.length; i++) {
+                    cloneReply(replies[i]);
+                }
+            }
+
             bindContentClick(contentClone);
         }
 
-        var reply = function (message, messageId) {
+        var reply = function (message, messageId, replyId) {
             $.ajax({
                 type: "post",
                 dataType: "json",
@@ -334,6 +374,7 @@ while ($row = $result->fetch()) {
                 data: {
                     messageId: messageId,
                     reply: message,
+                    replyId : replyId,
                     openId: "<?php echo $openid?>",
                     wx_nickname: "<?php echo $nickname?>",
                     wx_headimgurl: "<?php echo $headimgurl?>"
@@ -341,6 +382,7 @@ while ($row = $result->fetch()) {
                 success: function (data) {
                     $('#loadingModal').modal('hide');
                     clearMessageInput();
+                    cloneReply(data.content);
                 },
                 error: function () {
                     $('#loadingModal').modal('hide');
@@ -349,16 +391,117 @@ while ($row = $result->fetch()) {
             });
         }
 
-        function bindContentClick(content) {
-            var replyMessage = content.find("#reply_message");
-            var messageId = content.attr("message_id");
-            var messageName = content.find("#message_name").html();
-            replyMessage.bind("click", function () {
-                focusMessageInput(messageName, messageId);
+        var cloneReply = function(data){
+            var replyClone = replyTemplate.clone(true);
+            replyClone.attr("id","reply");
+            replyClone.attr("reply_id",data.id);
+            replyClone.show();
+            replyClone.find("#reply_name").html(data.name ? data.name : data.wx_nickname);
+            replyClone.find("#reply_header").attr("src",data.user_wx_headimgurl ? data.user_wx_headimgurl : data.user_headimgurl);
+            replyClone.find("#reply_message").html(data.reply);
+            replyClone.find("#reply_date").html(data.create_date);
+
+            if (data.reply_id && data.reply_id != 0) {
+                replyClone.find("#reply_text").show();
+                replyClone.find("#reply_nickname").show();
+                replyClone.find("#reply_nickname").html(data.reply_name ? data.reply_name : data.reply_wx_nickname);
+            } else {
+                replyClone.find("#reply_text").hide();
+                replyClone.find("#reply_nickname").hide();
+            }
+
+            if(data.openid == "<?php echo $openid?>") {
+                replyClone.find("#delete_reply").show();
+            }else{
+                replyClone.find("#delete_reply").hide();
+            }
+
+            mediaContent.append(replyClone);
+            bindReplyClick(replyClone);
+        }
+
+        function bindReplyClick(content){
+            var replyId = content.attr("reply_id");
+            var replyReply = content.find("#reply_reply");
+            var deleteReply = content.find("#delete_reply");
+            var replyName = content.find("#reply_name").html();
+            var parentContent = content.parents("#content");
+
+            var messageId = parentContent.attr("message_id");
+
+            replyReply.bind("click", function () {
+                mediaContent = content.parents("#media_body");
+                focusMessageInput(replyName, messageId, replyId);
+            });
+
+            deleteReply.bind("click", function () {
+                $("#confirm_modal_confirm").unbind('click').bind("click",function(){
+                    deleteMessageReplyFunc(content,replyId);
+                });
+                $('#confirmModal').modal('show');
             });
         }
 
-        function refresh() {
+        function bindContentClick(content) {
+            var replyMessage = content.find("#reply_message");
+            var deleteMessage = content.find("#delete_message");
+
+            var messageId = content.attr("message_id");
+            var messageName = content.find("#message_name").html();
+            replyMessage.bind("click", function () {
+                mediaContent = content.find("#media_body");
+                focusMessageInput(messageName, messageId);
+            });
+
+            deleteMessage.bind("click", function () {
+                $("#confirm_modal_confirm").unbind('click').bind("click",function(){
+                    deleteMessageFunc(content);
+                });
+                $('#confirmModal').modal('show');
+            });
+        }
+
+        function deleteMessageFunc(content){
+            content.remove();
+            $('#confirmModal').modal('hide');
+
+            var messageId = content.attr("message_id");
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url: "/structure/message/controller/delete_message.php",
+                data: {
+                    messageId: messageId,
+                    openId: "<?php echo $openid?>"
+                },
+                success: function (data) {
+
+                },
+                error: function () {
+                    clearMessageInput();
+                }
+            });
+        }
+
+        function deleteMessageReplyFunc(content,replyId){
+            content.remove();
+            $('#confirmModal').modal('hide');
+
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url: "/structure/message/controller/delete_message_reply.php",
+                data: {
+                    replyId: replyId,
+                    openId: "<?php echo $openid?>"
+                },
+                success: function (data) {
+
+                },
+                error: function () {
+                    clearMessageInput();
+                }
+            });
         }
 
         /**
@@ -385,7 +528,6 @@ while ($row = $result->fetch()) {
                                 if (data.content && data.content.length > 0) {
                                     for (var i = 0; i < data.content.length; i++) {
                                         var content = data.content[i];
-                                        console.log(content);
                                         cloneContent(content);
                                     }
                                 }

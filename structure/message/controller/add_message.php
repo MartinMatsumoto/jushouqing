@@ -15,7 +15,11 @@ $wx_headimgurl = $_POST["wx_headimgurl"];
 $dao = new message_dao();
 $recentId = $dao->addMessage($message, $openId, $wx_nickname, $wx_headimgurl);
 
-$content = new result($recentId, errorCode::$success);
+$result = $dao->getOne($recentId);
+$row = $result->fetch();
+
+
+$content = new result(new message($row), errorCode::$success);
 
 $json_string = json_encode($content, JSON_UNESCAPED_UNICODE);
 echo $json_string;
