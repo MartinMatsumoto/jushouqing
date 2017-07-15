@@ -374,7 +374,7 @@ while ($row = $result->fetch()) {
                 data: {
                     messageId: messageId,
                     reply: message,
-                    replyId : replyId,
+                    replyId : replyId ? replyId : 0,
                     openId: "<?php echo $openid?>",
                     wx_nickname: "<?php echo $nickname?>",
                     wx_headimgurl: "<?php echo $headimgurl?>"
