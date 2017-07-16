@@ -15,9 +15,30 @@ var sexRender = function (val) {
     return val;
 }
 
+var userStore = Ext.create('Ext.data.Store', {
+    fields: ['id', 'name', 'sex', 'contact', 'school_date', 'open_id', 'area', 'department', 'major', 'career', 'career_type', 'company', 'descript'],
+    autoLoad: false,
+    pageSize: 20,
+    proxy: {
+        extraParams: {},
+        type: 'rest',
+        url: '/structure/user/controller/manager_listuser.php',// get_order_list.htm',
+        reader: {
+            type: 'json',
+            root: 'content',// JSON数组对象名
+            totalProperty: 'count'// 数据集记录总数
+        },
+        actionMethods: {
+            read: 'POST'
+        },
+        limitParam: 'pageSize',
+        //pageParam : 'currentPage',
+        startParam: 'begin'
+    }
+});
+
 Ext.define('MyDesktop.UsersWindow', {
     extend: 'Ext.ux.desktop.Module',
-
     requires: [
         'Ext.data.ArrayStore',
         'Ext.util.Format',
@@ -33,27 +54,7 @@ Ext.define('MyDesktop.UsersWindow', {
         };
     },
 
-    store: Ext.create('Ext.data.Store', {
-        fields: ['id', 'name', 'sex', 'contact', 'school_date', 'open_id', 'area', 'department', 'major', 'career', 'career_type', 'company', 'descript'],
-        autoLoad: false,
-        pageSize: 20,
-        proxy: {
-            extraParams: {},
-            type: 'rest',
-            url: '/structure/user/controller/manager_listuser.php',// get_order_list.htm',
-            reader: {
-                type: 'json',
-                root: 'content',// JSON数组对象名
-                totalProperty: 'count'// 数据集记录总数
-            },
-            actionMethods: {
-                read: 'POST'
-            },
-            limitParam: 'pageSize',
-            //pageParam : 'currentPage',
-            startParam: 'begin'
-        }
-    }),
+    store: userStore,
 
     createWindow: function () {
         var this_ = this;
@@ -156,7 +157,6 @@ Ext.define('MyDesktop.UsersWindow', {
                     id: 'user_modify_button',
                     text: '修改信息',
                     disabled: true,
-                    hidden: true,
                     tooltip: '修改某个校友填报的信息',
                     handler: function () {
                         Ext.getCmp('userModifyForm').form.loadRecord(currentSel);
@@ -214,31 +214,33 @@ Ext.define('MyDesktop.UsersWindow', {
     }),
 
     userModifyForm: Ext.create('Ext.window.Window', {
+        id : 'userModifyWindow',
         layout: 'fit',
         title: '修改用户信息',
         closeAction: 'hide',
-        width: 450,
-        height: 600,
+        width: 740,
+        height: 480,
         border: false,
         modal: true,
         items: [{
             id: 'userModifyForm',
             xtype: 'form',
             bodyPadding: 5,
-            width: 440,
             frame: true,
-            height: 320,
-            url: '/managers/letter/modify.htm',
+            url: '/structure/user/controller/manager_user_modify.php',
             layout: 'anchor',
             defaultType: 'textfield',
             fieldDefaults: {
                 labelAlign: 'left',
-                labelWidth: 60,
+                labelWidth: 80,
                 anchor: '80%'
             },
             items: [{
                 xtype: 'hidden',
                 name: 'id'
+            }, {
+                xtype: 'hidden',
+                name: 'open_id'
             }, {
                 fieldLabel: '用户姓名',
                 name: 'name',
@@ -275,31 +277,38 @@ Ext.define('MyDesktop.UsersWindow', {
                 name: 'contact',
                 allowBlank: false
             }, {
-                fieldLabel: '选择省',
+                fieldLabel: '所在城市',
                 name: 'area',
-                allowBlank: false,
-                xtype: 'combo',
-                mode: 'local',
-                value: '0',
-                forceSelection: true,
-                editable: false,
-                typeAhead: true,
-                displayField: 'name',
-                valueField: 'value',
-                queryMode: 'local',
-                store: Ext.create('Ext.data.Store', {
-                    fields: ['name', 'value'],
-                    data: [{
-                        name: '未知',
-                        value: '0'
-                    }, {
-                        name: '男',
-                        value: '1'
-                    }, {
-                        name: '女',
-                        value: '2'
-                    }]
-                })
+                allowBlank: false
+            }, {
+                fieldLabel: '院系',
+                name: 'department',
+                allowBlank: true
+            }, {
+                fieldLabel: '专业和班级',
+                name: 'major',
+                allowBlank: false
+            }, {
+                fieldLabel: '职业/职位',
+                name: 'career',
+                allowBlank: false
+            }, {
+                fieldLabel: '行业类别',
+                name: 'career_type',
+                allowBlank: true
+            }, {
+                fieldLabel: '公司名称',
+                name: 'company',
+                allowBlank: true
+            }, {
+                fieldLabel: 'openid',
+                name: 'open_id',
+                xtype : 'displayfield'
+            }, {
+                fieldLabel: '您认为校友会能为您做些什么',
+                name: 'descript',
+                xtype : 'textfield',
+                allowBlank: true
             }],
             buttons: [
                 {
@@ -317,12 +326,13 @@ Ext.define('MyDesktop.UsersWindow', {
                         if (form.isValid()) {
                             form.submit({
                                 success: function (form1, action) {
-                                    //userModifyForm.hide();
-                                    //loadletterStore();
+                                    Ext.Msg.alert('成功', '修改成功。');
+                                    Ext.getCmp('userModifyWindow').close();
+                                    console.log(userStore);
+                                    userStore.reload();
                                 },
                                 failure: function (form, action) {
-                                    Ext.Msg.alert('Failed',
-                                        action.result.header.errorDesc);
+                                    Ext.Msg.alert('失败', '请刷新后重试。');
                                 }
                             });
                         }

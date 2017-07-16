@@ -17,8 +17,13 @@ class result
 
     public $count;
 
+    public $success;
+
     function __construct($content,$errorCode)
     {
+        if($errorCode == errorCode::$success){
+            $this->success = true;
+        }
         $this->errorCode = $errorCode;
         $this->content = $content;
     }
