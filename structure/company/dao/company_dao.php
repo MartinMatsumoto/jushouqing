@@ -92,7 +92,7 @@ class company_dao
         return true;
     }
 
-    function listUsers($begin, $size)
+    function listCompanys($begin, $size)
     {
         $stmt = $this->conn->pdo->prepare($this->listCompanys);
         $stmt->bindParam(':be', $begin, PDO::PARAM_INT);

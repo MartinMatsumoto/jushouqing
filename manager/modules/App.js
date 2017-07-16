@@ -16,6 +16,7 @@ Ext.define('MyDesktop.App', {
         'MyDesktop.GridWindow',
         'MyDesktop.TabWindow',
         'MyDesktop.UsersWindow',
+        'MyDesktop.CompanyWindow',
         'MyDesktop.Notepad',
         'MyDesktop.BogusMenuModule',
         'MyDesktop.BogusModule',
@@ -39,6 +40,7 @@ Ext.define('MyDesktop.App', {
             new MyDesktop.GridWindow(),
             new MyDesktop.TabWindow(),
             new MyDesktop.UsersWindow(),
+            new MyDesktop.CompanyWindow(),
             new MyDesktop.Notepad(),
             new MyDesktop.BogusMenuModule(),
             new MyDesktop.BogusModule()
@@ -59,6 +61,7 @@ Ext.define('MyDesktop.App', {
                 model: 'Ext.ux.desktop.ShortcutModel',
                 data: [
                     { name: '校友信息', iconCls: 'accordion-shortcut', module: 'user-win' },
+                    { name: '企业信息', iconCls: 'accordion-shortcut', module: 'company-win' },
                     { name: '系别/专业管理', iconCls: 'grid-shortcut', module: 'grid-win' },
                     { name: '留言板管理', iconCls: 'notepad-shortcut', module: 'notepad' }
                 ]
