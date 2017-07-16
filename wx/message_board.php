@@ -16,9 +16,9 @@ require_once './include/user_secret_save.php';
 $message_dao = new message_dao();
 $message_reply_dao = new message_reply_dao();
 
-$openid = "oC00gxAxQ8KdPWbyEoOCOEGmbQiw";
+/*$openid = "oC00gxAxQ8KdPWbyEoOCOEGmbQiw";
 $nickname = "小强";
-$headimgurl = "http://wx.qlogo.cn/mmhead/PiajxSqBRaEJnR6TvRzhjgI1Flx9Jaqns4C3mzRiaLrh6lHLMmGKPHHw/0";
+$headimgurl = "http://wx.qlogo.cn/mmhead/PiajxSqBRaEJnR6TvRzhjgI1Flx9Jaqns4C3mzRiaLrh6lHLMmGKPHHw/0";*/
 
 ?>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -179,8 +179,10 @@ while ($row = $result->fetch()) {
 <?php } ?>
 
 <div class="white_content" id="white_content_before"></div>
+</div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom footer_input_margin_top" role="navigation">
+<div style="clear:both;"></div>
+<nav class="navbar navbar-default navbar-fixed-bottom footer_input_margin_top" role="navigation" id="input_nav">
     <div class="container-fluid">
         <div class="navbar-header footer_input_width">
             <form class="bs-example bs-example-form" role="form">
@@ -243,6 +245,7 @@ while ($row = $result->fetch()) {
         var replyTemplate = $("#reply_template");
         var templateBefore = $("#white_content_before");
         var templateAfter = $("#white_content_after");
+        var inputNav = $("#input_nav");
         var mediaContent;
 
         var init = function () {
@@ -252,6 +255,18 @@ while ($row = $result->fetch()) {
                     bindContentClick($(contents[i]));
                 }
             }
+
+            /*messageInput.bind("focus",function(){
+                if(isIphone()){
+
+                }
+            });
+
+            messageInput.bind("blur",function(){
+                if(isIphone()){
+                    inputNav.css("bottom","0px");
+                }
+            });*/
         }
 
         var initReply = function() {
@@ -512,6 +527,7 @@ while ($row = $result->fetch()) {
             var nScrollHight = $(this).scrollHeight;
             var windowHeight = $(this).height();
             var totalHeight = $("body").height();
+
             if ((scrollTop + windowHeight) >= totalHeight - 100) {
                 if (!loadingmore) {
                     loadingmore = true;
@@ -550,6 +566,16 @@ while ($row = $result->fetch()) {
             var contents = $("div[id=content]");
             return contents.length;
         }
+
+
+        function isIphone() { //判断微信系统
+            var u = navigator.userAgent;
+            if (u.indexOf('iPhone') > -1) {
+                return true;
+            }
+            return false;
+        }
+
 
     });
 </script>
