@@ -212,70 +212,35 @@ Ext.define('MyDesktop.CompanyWindow', {
                 xtype: 'hidden',
                 name: 'open_id'
             }, {
-                fieldLabel: '用户姓名',
+                fieldLabel: '企业全称',
                 name: 'name',
-                allowBlank: false
-            }, {
-                fieldLabel: '性别',
-                name: 'sex',
-                size: 5,
-                allowBlank: false,
-                xtype: 'combo',
-                mode: 'local',
-                value: '0',
-                forceSelection: true,
-                editable: false,
-                typeAhead: true,
-                displayField: 'name',
-                valueField: 'value',
-                queryMode: 'local',
-                store: Ext.create('Ext.data.Store', {
-                    fields: ['name', 'value'],
-                    data: [{
-                        name: '未知',
-                        value: '0'
-                    }, {
-                        name: '男',
-                        value: '1'
-                    }, {
-                        name: '女',
-                        value: '2'
-                    }]
-                })
-            }, {
-                fieldLabel: '联系方式',
-                name: 'contact',
-                allowBlank: false
-            }, {
-                fieldLabel: '所在城市',
-                name: 'area',
-                allowBlank: false
-            }, {
-                fieldLabel: '院系',
-                name: 'department',
-                allowBlank: true
-            }, {
-                fieldLabel: '专业和班级',
-                name: 'major',
-                allowBlank: false
-            }, {
-                fieldLabel: '职业/职位',
-                name: 'career',
                 allowBlank: false
             }, {
                 fieldLabel: '行业类别',
                 name: 'career_type',
-                allowBlank: true
+                allowBlank: false
             }, {
-                fieldLabel: '公司名称',
-                name: 'company',
-                allowBlank: true
+                fieldLabel: '企业性质',
+                name: 'company_nature',
+                allowBlank: false
             }, {
-                fieldLabel: 'openid',
-                name: 'open_id',
-                xtype : 'displayfield'
+                fieldLabel: '办公地址',
+                name: 'location',
+                allowBlank: false
             }, {
-                fieldLabel: '您认为校友会能为您做些什么',
+                fieldLabel: '联系人',
+                name: 'contactor',
+                allowBlank: false
+            }, {
+                fieldLabel: '联系电话',
+                name: 'tel',
+                allowBlank: false
+            }, {
+                fieldLabel: '邮箱',
+                name: 'email',
+                allowBlank: false
+            }, {
+                fieldLabel: '您认为校友会能为贵单位做些什么',
                 name: 'descript',
                 xtype : 'textfield',
                 allowBlank: true
