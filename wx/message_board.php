@@ -4,8 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>绵职院成都校友会-留言板</title>
-    <link href="./css/message_board.css?201701" rel="stylesheet" type="text/css"/>
+    <link href="./css/message_board.css?201703" rel="stylesheet" type="text/css"/>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .virtual_box{
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 <?php
@@ -183,22 +188,18 @@ while ($row = $result->fetch()) {
 
 <div style="clear:both;"></div>
 <nav class="navbar navbar-default navbar-fixed-bottom footer_input_margin_top" role="navigation" id="input_nav">
-    <div class="container-fluid">
-        <div class="navbar-header footer_input_width">
-            <form class="bs-example bs-example-form" role="form">
-                <div class="row">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="说点什么吧" id="message_input">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default btn-success" type="button" id="send">
-                                发送
-                            </button>
-                        </span>
-                    </div>
-                </div>
-            </form>
-        </div>
+    <div class="input-group" id="android_message_input">
+        <input type="text" class="form-control" placeholder="说点什么吧" id="message_input">
+        <span class="input-group-btn">
+            <button class="btn btn-default btn-success" type="button" id="send">
+                发送
+            </button>
+        </span>
     </div>
+
+    <button class="btn btn-default virtual_box" type="button" id="virtual_input_box" style="display:none">
+        说点什么
+    </button>
 </nav>
 
 <!-- 加载框 -->
@@ -230,6 +231,25 @@ while ($row = $result->fetch()) {
     </div>
 </div>
 
+<!-- 回复框 -->
+<div class="modal fade" id="messageInputModal" tabindex="-1" role="dialog" aria-labelledby="messageInputModal"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="input-group" id="android_message_input">
+                    <input type="text" class="form-control" placeholder="说点什么吧" id="message_input_ios">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-success" type="button" id="send_ios">
+                            发送
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <img class="bg_img" src="./images/bg.jpg">
 <script src="/libs/jquery.min.js"></script>
 <script src="/libs/bootstrap.min.js"></script>
@@ -256,17 +276,48 @@ while ($row = $result->fetch()) {
                 }
             }
 
-            /*messageInput.bind("focus",function(){
-                if(isIphone()){
+            if (isIphone()) {
+                $("#android_message_input").remove();
+                $("#virtual_input_box").show();
+                $("#virtual_input_box").bind("click",function(){
+                    clearMessageInput();
+                    $('#messageInputModal').modal('show');
+                });
+                $("#message_input_ios").attr("id","message_input");
+                $("#send_ios").attr("id","send");
+                messageInput = $("#message_input");
 
+                /*messageInput.bind("focus",function(){
+                    $(document.body).css({
+                        "overflow-y":"hidden",
+                        "position":"fixed",
+                        "height":"100px"
+                    });
+                });*/
+            }
+
+            $("#send").click(function () {
+                var message = messageInput.val();
+                if (!message) {
+                    return;
+                }
+                $('#loadingModal').modal('show');
+                //发送信息
+                if (!messageId && !replyId) {
+                    sendMessage(message);
+                }
+
+                //回复消息
+                if (messageId && !replyId) {
+                    reply(message, messageId);
+                }
+
+                //回复回复
+                if (messageId && replyId) {
+                    reply(message, messageId, replyId);
                 }
             });
 
-            messageInput.bind("blur",function(){
-                if(isIphone()){
-                    inputNav.css("bottom","0px");
-                }
-            });*/
         }
 
         var initReply = function() {
@@ -285,6 +336,10 @@ while ($row = $result->fetch()) {
             if (!messageInput.val()) {
                 clearMessageInput();
             }
+            /*$(document.body).css({
+                "overflow-y":"auto",
+                "position":"relative"
+            });*/
         });
 
         function clearMessageInput() {
@@ -292,6 +347,9 @@ while ($row = $result->fetch()) {
             messageInput.val("");
             messageId = 0;
             replyId = 0;
+            if(isIphone()){
+                $('#messageInputModal').modal('hide');
+            }
         }
 
         function focusMessageInput(name, messageIdRe, replyIdRe) {
@@ -299,29 +357,8 @@ while ($row = $result->fetch()) {
             messageInput.focus();
             messageId = messageIdRe;
             replyId = replyIdRe;
+
         }
-
-        $("#send").click(function () {
-            var message = messageInput.val();
-            if (!message) {
-                return;
-            }
-            $('#loadingModal').modal('show');
-            //发送信息
-            if (!messageId && !replyId) {
-                sendMessage(message);
-            }
-
-            //回复消息
-            if (messageId && !replyId) {
-                reply(message, messageId);
-            }
-
-            //回复回复
-            if (messageId && replyId) {
-                reply(message, messageId, replyId);
-            }
-        });
 
         var sendMessage = function (message) {
             $.ajax({
@@ -445,6 +482,9 @@ while ($row = $result->fetch()) {
             var messageId = parentContent.attr("message_id");
 
             replyReply.bind("click", function () {
+                if(isIphone()){
+                    $('#messageInputModal').modal('show');
+                }
                 mediaContent = content.parents("#media_body");
                 focusMessageInput(replyName, messageId, replyId);
             });
@@ -464,6 +504,9 @@ while ($row = $result->fetch()) {
             var messageId = content.attr("message_id");
             var messageName = content.find("#message_name").html();
             replyMessage.bind("click", function () {
+                if(isIphone()){
+                    $('#messageInputModal').modal('show');
+                }
                 mediaContent = content.find("#media_body");
                 focusMessageInput(messageName, messageId);
             });
@@ -567,13 +610,12 @@ while ($row = $result->fetch()) {
             return contents.length;
         }
 
-
         function isIphone() { //判断微信系统
             var u = navigator.userAgent;
             if (u.indexOf('iPhone') > -1) {
                 return true;
             }
-            return false;
+            return true;
         }
 
 

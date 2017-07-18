@@ -9,7 +9,7 @@ require_once '../../../entrance.php';
 
 $id = intval($_POST["id"]);
 
-$dao = new user_dao();
+$dao = new company_dao();
 
 $result = $dao->delete($id);
 $content = new result(errorCode::$success, errorCode::$success);
