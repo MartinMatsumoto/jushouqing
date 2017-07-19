@@ -62,8 +62,7 @@ Ext.define('MyDesktop.App', {
                 data: [
                     { name: '校友信息', iconCls: 'accordion-shortcut', module: 'user-win' },
                     { name: '企业信息', iconCls: 'accordion-shortcut', module: 'company-win' },
-                    { name: '系别/专业管理', iconCls: 'grid-shortcut', module: 'grid-win' },
-                    { name: '留言板管理', iconCls: 'notepad-shortcut', module: 'notepad' }
+                    { name: '留言板管理', iconCls: 'notepad-shortcut', module: 'notepad-win' }
                 ]
             }),
 

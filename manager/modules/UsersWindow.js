@@ -334,11 +334,15 @@ Ext.define('MyDesktop.UsersWindow', {
                                 success: function (form1, action) {
                                     Ext.Msg.alert('成功', '修改成功。');
                                     Ext.getCmp('userModifyWindow').close();
+                                    Ext.getCmp("user_modify_button").setDisabled(true);
+                                    Ext.getCmp("user_delete_button").setDisabled(true);
                                     userSelModel.deselectAll();
                                     userStore.reload();
                                 },
                                 failure: function (form, action) {
                                     userSelModel.deselectAll();
+                                    Ext.getCmp("user_modify_button").setDisabled(true);
+                                    Ext.getCmp("user_delete_button").setDisabled(true);
                                     Ext.Msg.alert('失败', '请刷新后重试。');
                                 }
                             });

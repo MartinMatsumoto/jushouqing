@@ -13,6 +13,7 @@ class message_dao
     private $count = "select count(*) AS COUNT from message WHERE delete_ = 0";
     private $delete = "UPDATE message SET delete_ = 1 WHERE id = :id AND openid = :openId";
     private $listAll = "SELECT m.*,u.name AS `name`,u.sex AS sex,u.wx_headimgurl AS user_wx_headimgurl FROM message m LEFT JOIN `user` u ON u.openid = m.openid WHERE m.delete_ = 0 ORDER BY m.id DESC LIMIT :be ,:en";
+    private $listManager = "SELECT m.*,u.name AS `name` FROM message m LEFT JOIN `user` u ON u.openid = m.openid ORDER BY m.id DESC LIMIT :be ,:en";
     private $addMessage = "INSERT INTO message(openid,message,create_date,wx_nickname,wx_headimgurl) VALUES (:openId,:message,now(),:wx_nickname,:wx_headimgurl)";
 
     //构造函数
@@ -42,6 +43,14 @@ class message_dao
     function listMore($begin, $size)
     {
         $stmt = $this->conn->pdo->prepare($this->listAll);
+        $stmt->bindParam(':be', $begin, PDO::PARAM_INT);
+        $stmt->bindParam(':en', $size, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    function listManager($begin, $size){
+        $stmt = $this->conn->pdo->prepare($this->listManager);
         $stmt->bindParam(':be', $begin, PDO::PARAM_INT);
         $stmt->bindParam(':en', $size, PDO::PARAM_INT);
         $stmt->execute();

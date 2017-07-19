@@ -265,12 +265,16 @@ Ext.define('MyDesktop.CompanyWindow', {
                         if (form.isValid()) {
                             form.submit({
                                 success: function (form1, action) {
+                                    Ext.getCmp("company_modify_button").setDisabled(true);
+                                    Ext.getCmp("company_delete_button").setDisabled(true);
                                     Ext.Msg.alert('成功', '修改成功。');
                                     Ext.getCmp('companyModifyWindow').close();
                                     companySelModel.deselectAll();
                                     companyStore.reload();
                                 },
                                 failure: function (form, action) {
+                                    Ext.getCmp("company_modify_button").setDisabled(true);
+                                    Ext.getCmp("company_delete_button").setDisabled(true);
                                     companySelModel.deselectAll();
                                     Ext.Msg.alert('失败', '请刷新后重试。');
                                 }
