@@ -19,6 +19,10 @@ while ($row = $result->fetch()) {
 }
 
 $content = new result($arr, errorCode::$success);
+$countResult = $dao->count();
+$countRow = $countResult->fetch();
+$content->count = $countRow["COUNT"];
+
 
 $json_string = json_encode($content, JSON_UNESCAPED_UNICODE);
 echo $json_string;

@@ -49,11 +49,106 @@ function getMessageSelModel(){
                 Ext.getCmp("message_modify_button").setDisabled(false);
                 Ext.getCmp("message_delete_button").setDisabled(false);
                 Ext.getCmp("message_show_reply_button").setDisabled(false);
+                Ext.getCmp("message_enable_button").setDisabled(false);
             }
         }
     });
     return messageSelModel;
 }
+
+/*---------------------------------------------回复内容------------------------------------------------*/
+var messageReplyStore = Ext.create('Ext.data.Store', {
+    fields: ['id', 'reply', 'openid', 'delete_', 'message_id', 'reply_id', 'wx_headimgurl', 'wx_nickname', 'create_date', 'name', 'user_headimgurl', 'reply_name', 'reply_user_headimgurl'],
+    autoLoad: false,
+    proxy: {
+        extraParams: {},
+        type: 'rest',
+        url: '/structure/message/controller/manager_list_message_reply.php',
+        reader: {
+            type: 'json',
+            root: 'content'// JSON数组对象名
+        },
+        actionMethods: {
+            read: 'POST'
+        }
+    }
+});
+
+var selMessageReplyModel = Ext.create('Ext.selection.CheckboxModel',
+{
+    listeners:
+    {
+        beforeselect : function(catgegory, record, index, obj)
+        {
+        },
+        selectionchange: function(sm, selections)
+        {
+        },
+        select: function(user,record,index,obj)
+        {
+        }
+    }
+});
+
+var messageReplyGrid =  Ext.create('Ext.grid.Panel',
+    {
+        title: '回复内容',
+        store: messageReplyStore,
+        columns:
+            [
+                { header: 'id',  dataIndex: 'id',width: 20},
+                { header: '回复人', dataIndex: 'name',width: 120},
+                { header: '回复人昵称', dataIndex: 'wx_nickname',width: 120},
+                { header: '被回复人', dataIndex: 'reply_name',width: 100},
+                { header: '是否删除', dataIndex: 'delete_', width: 60,renderer: deleteRender},
+                { header: '回复时间', dataIndex: 'create_date',width: 120},
+                { header: '回复内容', dataIndex: 'reply',width: 200}
+            ],
+        columnLines: true,
+        selModel: selMessageReplyModel,
+        bbar: Ext.create('Ext.PagingToolbar',
+            {
+                store: messageReplyStore,
+                displayInfo: true,
+                emptyMsg: "没有数据"
+            })
+    });
+
+var messageReplyWin = Ext.create('Ext.window.Window',
+    {
+        layout: 'fit',
+        title: '查看回复',
+        closeAction: 'hide',
+        width:740,
+        height:480,
+        border: false,
+        items:[messageReplyGrid],
+        listeners :
+        {
+            show :
+            {
+                fn : function()
+                {
+                    // 解决IE的htmleditor在winhide的时候不隐藏的问题
+                    var editor = this.down('htmleditor');
+                    if (editor)
+                    {
+                        editor.show();
+                    }
+                }
+            },
+            // 解决IE的htmleditor在winhide的时候不隐藏的问题
+            hide : function()
+            {
+                var editor = this.down('htmleditor');
+                if (editor)
+                {
+                    editor.hide();
+                }
+            }
+        }
+    });
+/*---------------------------------------------结束  回复内容------------------------------------------------*/
 
 Ext.define('MyDesktop.Notepad', {
     extend: 'Ext.ux.desktop.Module',
@@ -68,7 +163,7 @@ Ext.define('MyDesktop.Notepad', {
 
     init: function () {
         this.launcher = {
-            text: '校友管理'
+            text: '留言管理'
         };
     },
 
@@ -108,7 +203,7 @@ Ext.define('MyDesktop.Notepad', {
                                 dataIndex: 'create_date'
                             },
                             {
-                                text: "是否已删除",
+                                text: "是否删除",
                                 width: 70,
                                 sortable: true,
                                 dataIndex: 'delete_',
@@ -141,33 +236,37 @@ Ext.define('MyDesktop.Notepad', {
                     disabled: true,
                     tooltip: '查看该留言下的回复',
                     handler: function () {
-                        return;
-                        Ext.getCmp('messageModifyForm').form.loadRecord(currentSel);
-                        this_.messageModifyForm.show();
+                        messageReplyStore.loadPage
+                        (1, {
+                            params: {
+                                id: currentSel.data.id
+                            }
+                        });
+                        messageReplyWin.show();
+                        messageReplyWin.center();
                     }
                 }, '-',{
                     id: 'message_modify_button',
-                    text: '修改信息',
+                    text: '修改留言',
                     disabled: true,
-                    tooltip: '修改某个校友填报的信息',
+                    tooltip: '修改留言信息',
                     handler: function () {
-                        return;
                         Ext.getCmp('messageModifyForm').form.loadRecord(currentSel);
                         this_.messageModifyForm.show();
                     }
                 }, '-', {
                     id: 'message_delete_button',
-                    text: '删除信息',
+                    text: '删除留言',
                     disabled: true,
-                    tooltip: '删除某个校友填报的信息',
+                    tooltip: '删除留言',
                     handler: function () {
-                        return;
-                        Ext.MessageBox.confirm('确定', '是否要删除 ' + currentSel.data.name + ' ?', function (btn, text) {
+                        Ext.MessageBox.confirm('确定', '是否要删除这条留言？', function (btn, text) {
                             if (btn == "yes") {
                                 Ext.Ajax.request({
-                                    url: '/structure/message/controller/manager_delmessage.php',
+                                    url: '/structure/message/controller/delete_message.php',
                                     params: {
-                                        id: currentSel.data.id
+                                        messageId: currentSel.data.id,
+                                        openId : currentSel.data.openid
                                     },
                                     success: function (response) {
                                         this_.store.reload();
@@ -175,6 +274,33 @@ Ext.define('MyDesktop.Notepad', {
                                         Ext.getCmp("message_modify_button").setDisabled(true);
                                         Ext.getCmp("message_show_reply_button").setDisabled(true);
                                         Ext.getCmp("message_delete_button").setDisabled(true);
+                                        Ext.getCmp("message_enable_button").setDisabled(true);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }, '-', {
+                    id: 'message_enable_button',
+                    text: '启用留言',
+                    disabled: true,
+                    tooltip: '启用留言',
+                    handler: function () {
+                        Ext.MessageBox.confirm('确定', '是否要启用这条留言？', function (btn, text) {
+                            if (btn == "yes") {
+                                Ext.Ajax.request({
+                                    url: '/structure/message/controller/enable_message.php',
+                                    params: {
+                                        messageId: currentSel.data.id,
+                                        openId : currentSel.data.openid
+                                    },
+                                    success: function (response) {
+                                        this_.store.reload();
+                                        messageSelModel.deselectAll();
+                                        Ext.getCmp("message_modify_button").setDisabled(true);
+                                        Ext.getCmp("message_show_reply_button").setDisabled(true);
+                                        Ext.getCmp("message_delete_button").setDisabled(true);
+                                        Ext.getCmp("message_enable_button").setDisabled(true);
                                     }
                                 });
                             }
@@ -196,10 +322,10 @@ Ext.define('MyDesktop.Notepad', {
     messageModifyForm: Ext.create('Ext.window.Window', {
         id : 'messageModifyWindow',
         layout: 'fit',
-        title: '修改用户信息',
+        title: '修改留言',
         closeAction: 'hide',
-        width: 740,
-        height: 480,
+        width: 700,
+        height: 180,
         border: false,
         modal: true,
         items: [{
@@ -207,7 +333,7 @@ Ext.define('MyDesktop.Notepad', {
             xtype: 'form',
             bodyPadding: 5,
             frame: true,
-            url: '/structure/message/controller/manager_message_modify.php',
+            url: '/structure/message/controller/message_modify.php',
             layout: 'anchor',
             defaultType: 'textfield',
             fieldDefaults: {
@@ -220,40 +346,11 @@ Ext.define('MyDesktop.Notepad', {
                 name: 'id'
             }, {
                 xtype: 'hidden',
-                name: 'open_id'
+                name: 'openid'
             }, {
-                fieldLabel: '企业全称',
-                name: 'name',
-                allowBlank: false
-            }, {
-                fieldLabel: '行业类别',
-                name: 'career_type',
-                allowBlank: false
-            }, {
-                fieldLabel: '企业性质',
-                name: 'message_nature',
-                allowBlank: false
-            }, {
-                fieldLabel: '办公地址',
-                name: 'location',
-                allowBlank: false
-            }, {
-                fieldLabel: '联系人',
-                name: 'contactor',
-                allowBlank: false
-            }, {
-                fieldLabel: '联系电话',
-                name: 'tel',
-                allowBlank: false
-            }, {
-                fieldLabel: '邮箱',
-                name: 'email',
-                allowBlank: false
-            }, {
-                fieldLabel: '您认为校友会能为贵单位做些什么',
-                name: 'descript',
-                xtype : 'textfield',
-                allowBlank: true
+                fieldLabel: '留言信息',
+                name: 'message',
+                xtype : 'textareafield'
             }],
             buttons: [
                 {
