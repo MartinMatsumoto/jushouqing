@@ -7,7 +7,6 @@
  */
 require_once '../../../entrance.php';
 
-
 $openid = $_POST["open_id"];
 $name = $_POST["name"];
 $career_type = $_POST["career_type"];
@@ -17,7 +16,6 @@ $contactor = $_POST["contactor"];
 $tel = $_POST["tel"];
 $email = $_POST["email"];
 $descript = $_POST["descript"];
-$update = $_POST["update"];
 
 $dao = new company_dao();
 $result = $dao->modify($openid, $name, $career_type, $company_nature, $location, $contactor, $tel, $email, $descript);

@@ -37,6 +37,28 @@ var userStore = Ext.create('Ext.data.Store', {
     }
 });
 
+var currentSel = null;
+var userSelModel = null;
+
+function getUserSelModel(){
+   userSelModel = Ext.create('Ext.selection.CheckboxModel', {
+        mode: 'SINGLE',
+        listeners: {
+            beforeselect: function (catgegory, record, index, obj) {
+            },
+            selectionchange: function (sm, selections) {
+            },
+            select: function (user, record, index, obj) {
+                currentSel = record;
+                Ext.getCmp("user_modify_button").setDisabled(false);
+                Ext.getCmp("user_delete_button").setDisabled(false);
+            }
+        }
+    });
+    return userSelModel;
+}
+
+
 Ext.define('MyDesktop.UsersWindow', {
     extend: 'Ext.ux.desktop.Module',
     requires: [
@@ -75,7 +97,7 @@ Ext.define('MyDesktop.UsersWindow', {
                         border: false,
                         xtype: 'grid',
                         store: this.store,
-                        selModel: this.selModel,
+                        selModel: getUserSelModel(),
                         columns: [
                             {
                                 text: "id",
@@ -177,7 +199,7 @@ Ext.define('MyDesktop.UsersWindow', {
                                     },
                                     success: function (response) {
                                         this_.store.reload();
-                                        this_.selModel.deselectAll();
+                                        userSelModel.deselectAll();
                                         Ext.getCmp("user_modify_button").setDisabled(true);
                                         Ext.getCmp("user_delete_button").setDisabled(true);
                                     }
@@ -197,22 +219,6 @@ Ext.define('MyDesktop.UsersWindow', {
         }
         return win;
     },
-    currentSel: null,
-    selModel: Ext.create('Ext.selection.CheckboxModel', {
-        mode: 'SINGLE',
-        listeners: {
-            beforeselect: function (catgegory, record, index, obj) {
-            },
-            selectionchange: function (sm, selections) {
-            },
-            select: function (user, record, index, obj) {
-                currentSel = record;
-                Ext.getCmp("user_modify_button").setDisabled(false);
-                Ext.getCmp("user_delete_button").setDisabled(false);
-            }
-        }
-    }),
-
     userModifyForm: Ext.create('Ext.window.Window', {
         id : 'userModifyWindow',
         layout: 'fit',
@@ -328,10 +334,11 @@ Ext.define('MyDesktop.UsersWindow', {
                                 success: function (form1, action) {
                                     Ext.Msg.alert('成功', '修改成功。');
                                     Ext.getCmp('userModifyWindow').close();
-                                    console.log(userStore);
+                                    userSelModel.deselectAll();
                                     userStore.reload();
                                 },
                                 failure: function (form, action) {
+                                    userSelModel.deselectAll();
                                     Ext.Msg.alert('失败', '请刷新后重试。');
                                 }
                             });

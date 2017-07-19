@@ -26,6 +26,25 @@ var companyStore = Ext.create('Ext.data.Store', {
     }
 });
 
+var companySelModel = null;
+function getCompanySelModel(){
+    companySelModel = Ext.create('Ext.selection.CheckboxModel', {
+        mode: 'SINGLE',
+        listeners: {
+            beforeselect: function (catgegory, record, index, obj) {
+            },
+            selectionchange: function (sm, selections) {
+            },
+            select: function (company, record, index, obj) {
+                currentSel = record;
+                Ext.getCmp("company_modify_button").setDisabled(false);
+                Ext.getCmp("company_delete_button").setDisabled(false);
+            }
+        }
+    });
+    return companySelModel;
+}
+
 Ext.define('MyDesktop.CompanyWindow', {
     extend: 'Ext.ux.desktop.Module',
     requires: [
@@ -64,7 +83,7 @@ Ext.define('MyDesktop.CompanyWindow', {
                         border: false,
                         xtype: 'grid',
                         store: this.store,
-                        selModel: this.companySelModel,
+                        selModel: getCompanySelModel(),
                         columns: [
                             {
                                 text: "id",
@@ -147,7 +166,7 @@ Ext.define('MyDesktop.CompanyWindow', {
                                     },
                                     success: function (response) {
                                         this_.store.reload();
-                                        this_.companySelModel.deselectAll();
+                                        companySelModel.deselectAll();
                                         Ext.getCmp("company_modify_button").setDisabled(true);
                                         Ext.getCmp("company_delete_button").setDisabled(true);
                                     }
@@ -168,21 +187,6 @@ Ext.define('MyDesktop.CompanyWindow', {
         return win;
     },
     currentSel: null,
-    companySelModel: Ext.create('Ext.selection.CheckboxModel', {
-        mode: 'SINGLE',
-        listeners: {
-            beforeselect: function (catgegory, record, index, obj) {
-            },
-            selectionchange: function (sm, selections) {
-            },
-            select: function (company, record, index, obj) {
-                currentSel = record;
-                Ext.getCmp("company_modify_button").setDisabled(false);
-                Ext.getCmp("company_delete_button").setDisabled(false);
-            }
-        }
-    }),
-
     companyModifyForm: Ext.create('Ext.window.Window', {
         id : 'companyModifyWindow',
         layout: 'fit',
@@ -263,10 +267,11 @@ Ext.define('MyDesktop.CompanyWindow', {
                                 success: function (form1, action) {
                                     Ext.Msg.alert('成功', '修改成功。');
                                     Ext.getCmp('companyModifyWindow').close();
-                                    console.log(companyStore);
+                                    companySelModel.deselectAll();
                                     companyStore.reload();
                                 },
                                 failure: function (form, action) {
+                                    companySelModel.deselectAll();
                                     Ext.Msg.alert('失败', '请刷新后重试。');
                                 }
                             });

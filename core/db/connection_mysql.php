@@ -13,7 +13,7 @@ class connection_mysql
     //数据库的username
     private $name = "root";
     //数据库的password
-    private $pass = "123456";
+    private $pass = "";
     //数据库名称
     private $table = "jushouqing";
     //编码形式
