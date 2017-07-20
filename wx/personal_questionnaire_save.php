@@ -19,7 +19,7 @@ $company = $_POST["company"];
 $descript = $_POST["descript"];
 $openid = $_POST["openid"];
 $update = $_POST["update"];
-
+echo $update;
 $dao = new user_dao();
 if ($update) {
     $result = $dao->modify($name, $sex, $contact, $city, $department, $major, $career, $career_type, $company, $descript, $openid);
@@ -28,7 +28,6 @@ if ($update) {
 }
 $content = new result($result, errorCode::$success);
 $json_string = json_encode($content, JSON_UNESCAPED_UNICODE);
-
 ?>
 <?php
 include("./include/save_complete.php");

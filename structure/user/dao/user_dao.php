@@ -56,7 +56,7 @@ class user_dao
             $stmt->bindParam(':name', $name);
             $stmt->bindParam(':sex', $sex);
             $stmt->bindParam(':contact', $contact);
-            $stmt->bindParam(':city', $city);
+            $stmt->bindParam(':area', $city);
             $stmt->bindParam(':department', $department);
             $stmt->bindParam(':major', $major);
             $stmt->bindParam(':career', $career);

@@ -13,6 +13,7 @@ var deleteRender = function (val) {
     return val;
 }
 
+var currentReply = null;
 var messageStore = Ext.create('Ext.data.Store', {
     fields: ['id', 'openid', 'message', 'create_date', 'delete_', 'name', 'sex', 'wx_nickname', 'wx_headimgurl', 'user_wx_headimgurl'],
     autoLoad: false,
@@ -86,6 +87,10 @@ var selMessageReplyModel = Ext.create('Ext.selection.CheckboxModel',
         },
         select: function(user,record,index,obj)
         {
+            currentReply = record;
+            Ext.getCmp("message_reply_delete_button").setDisabled(false);
+            Ext.getCmp("message_reply_modify_button").setDisabled(false);
+            Ext.getCmp("message_reply_enable_button").setDisabled(false);
         }
     }
 });
@@ -104,14 +109,68 @@ var messageReplyGrid =  Ext.create('Ext.grid.Panel',
                 { header: '回复时间', dataIndex: 'create_date',width: 120},
                 { header: '回复内容', dataIndex: 'reply',width: 200}
             ],
+        tbar: [
+        {
+            text: '修改回复',
+            id: 'message_reply_modify_button',
+            handler: function () {
+                Ext.getCmp('messageReplyModifyForm').form.loadRecord(currentReply);
+                messageReplyModifyForm.show();
+            }
+        },
+        {
+            text: '删除回复',
+            id: 'message_reply_delete_button',
+            formBind: true, // only enabled once the form is valid
+            disabled: false,
+            handler: function () {
+                Ext.MessageBox.confirm('确定', '是否要删除这条回复？', function (btn, text) {
+                    if (btn == "yes") {
+                        Ext.Ajax.request({
+                            url: '/structure/message/controller/delete_message_reply.php',
+                            params: {
+                                replyId: currentReply.data.id,
+                                openId : currentReply.data.openid
+                            },
+                            success: function (response) {
+                                messageReplyStore.reload();
+                                messageSelModel.deselectAll();
+                                Ext.getCmp("message_reply_modify_button").setDisabled(true);
+                                Ext.getCmp("message_reply_delete_button").setDisabled(true);
+                                Ext.getCmp("message_reply_enable_button").setDisabled(true);
+                            }
+                        });
+                    }
+                });
+            }
+        }, {
+                text: '启用回复',
+                id: 'message_reply_enable_button',
+                formBind: true,
+                disabled: false,
+                handler: function () {
+                    Ext.MessageBox.confirm('确定', '是否要启用这条回复？', function (btn, text) {
+                        if (btn == "yes") {
+                            Ext.Ajax.request({
+                                url: '/structure/message/controller/enable_message_reply.php',
+                                params: {
+                                    replyId: currentReply.data.id,
+                                    openId : currentReply.data.openid
+                                },
+                                success: function (response) {
+                                    messageReplyStore.reload();
+                                    messageSelModel.deselectAll();
+                                    Ext.getCmp("message_reply_modify_button").setDisabled(true);
+                                    Ext.getCmp("message_reply_delete_button").setDisabled(true);
+                                    Ext.getCmp("message_reply_enable_button").setDisabled(true);
+                                }
+                            });
+                        }
+                    });
+                }
+            }],
         columnLines: true,
-        selModel: selMessageReplyModel,
-        bbar: Ext.create('Ext.PagingToolbar',
-            {
-                store: messageReplyStore,
-                displayInfo: true,
-                emptyMsg: "没有数据"
-            })
+        selModel: selMessageReplyModel
     });
 
 var messageReplyWin = Ext.create('Ext.window.Window',
@@ -148,6 +207,75 @@ var messageReplyWin = Ext.create('Ext.window.Window',
             }
         }
     });
+
+var messageReplyModifyForm = Ext.create('Ext.window.Window', {
+    id : 'messageReplyModifyWindow',
+    layout: 'fit',
+    title: '修改留言回复',
+    closeAction: 'hide',
+    width: 700,
+    height: 180,
+    border: false,
+    modal: true,
+    items: [{
+        id: 'messageReplyModifyForm',
+        xtype: 'form',
+        bodyPadding: 5,
+        frame: true,
+        url: '/structure/message/controller/message_reply_modify.php',
+        layout: 'anchor',
+        defaultType: 'textfield',
+        fieldDefaults: {
+            labelAlign: 'left',
+            labelWidth: 80,
+            anchor: '80%'
+        },
+        items: [{
+            xtype: 'hidden',
+            name: 'id'
+        }, {
+            xtype: 'hidden',
+            name: 'openid'
+        }, {
+            fieldLabel: '留言回复信息',
+            name: 'reply',
+            allowBlank : false,
+            xtype : 'textareafield'
+        }],
+        buttons: [
+            {
+                text: '重置',
+                handler: function () {
+                    Ext.getCmp('messageReplyModifyForm').getForm().reset();
+                }
+            },
+            {
+                text: '提交',
+                formBind: true, // only enabled once the form is valid
+                disabled: false,
+                handler: function () {
+                    var form = Ext.getCmp('messageReplyModifyForm').getForm();
+                    if (form.isValid()) {
+                        form.submit({
+                            success: function (form1, action) {
+                                Ext.Msg.alert('成功', '修改成功。');
+                                messageReplyModifyForm.close();
+                                selMessageReplyModel.deselectAll();
+                                messageReplyStore.reload();
+                                Ext.getCmp("message_reply_modify_button").setDisabled(true);
+                                Ext.getCmp("message_reply_delete_button").setDisabled(true);
+                                Ext.getCmp("message_reply_enable_button").setDisabled(true);
+                            },
+                            failure: function (form, action) {
+                                messageReplyStore.deselectAll();
+                                Ext.Msg.alert('失败', '请刷新后重试。');
+                            }
+                        });
+                    }
+                }
+            }]
+    }]
+})
 /*---------------------------------------------结束  回复内容------------------------------------------------*/
 
 Ext.define('MyDesktop.Notepad', {
@@ -350,6 +478,7 @@ Ext.define('MyDesktop.Notepad', {
             }, {
                 fieldLabel: '留言信息',
                 name: 'message',
+                allowBlank : false,
                 xtype : 'textareafield'
             }],
             buttons: [

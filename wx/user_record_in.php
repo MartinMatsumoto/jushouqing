@@ -31,6 +31,10 @@
     require_once './include/get_open_id.php';
     require_once './include/get_user_info.php';
     require_once './include/user_secret_save.php';
+
+/*$openid = "oC00gxAxQ8KdPWbyEoOCOEGmbQiw";
+$nickname = "小强";
+$headimgurl = "http://wx.qlogo.cn/mmhead/PiajxSqBRaEJnR6TvRzhjgI1Flx9Jaqns4C3mzRiaLrh6lHLMmGKPHHw/0";*/
 ?>
 <div class="wrapper wrapper-content animated fadeInRight" align="center">
 

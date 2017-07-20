@@ -14,6 +14,8 @@ class message_reply_dao
     private $listManager = "SELECT reply.*,u.`name` AS reply_name,u.wx_headimgurl AS reply_user_headimgurl FROM (SELECT reply.*,u.`name`,u.wx_headimgurl AS user_headimgurl FROM (SELECT mr1.*,mr2.openid AS reply_openid,mr2.wx_headimgurl AS reply_wx_headimgurl,mr2.wx_nickname AS reply_wx_nickname from message_reply mr1 LEFT JOIN message_reply mr2 ON mr1.reply_id = mr2.id WHERE mr1.message_id = :messageId) AS reply LEFT JOIN `user` u ON reply.openid = u.openid) AS reply LEFT JOIN `user` u ON reply.reply_openid = u.openid ORDER BY reply.id ASC";
     private $replyMessage = "INSERT INTO message_reply(reply,openid,message_id,reply_id,create_date,wx_nickname,wx_headimgurl) VALUES (:reply,:openId,:messageId,:replyId,now(),:wx_nickname,:wx_headimgurl)";
     private $delete = "UPDATE message_reply SET delete_ = 1 WHERE id = :id AND openid = :openId";
+    private $enable = "UPDATE message_reply SET delete_ = 0 WHERE id = :id AND openid = :openId";
+    private $updateMessage = "UPDATE message_reply SET reply = :reply WHERE id = :id AND openid = :openId";
 
     //构造函数
     function __construct()
@@ -69,4 +71,22 @@ class message_reply_dao
         return $stmt;
     }
 
+    function enable($replyId, $openId)
+    {
+        $stmt = $this->conn->pdo->prepare($this->enable);
+        $stmt->bindParam(':openId', $openId);
+        $stmt->bindParam(':id', $replyId);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    function updateReply($replyId, $openId, $reply)
+    {
+        $stmt = $this->conn->pdo->prepare($this->updateMessage);
+        $stmt->bindParam(':openId', $openId);
+        $stmt->bindParam(':id', $replyId);
+        $stmt->bindParam(':reply', $reply);
+        $stmt->execute();
+        return $stmt;
+    }
 }
