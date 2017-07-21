@@ -12,6 +12,10 @@ li {
     display: block;
 }
 
+.clear {
+    clear: both;
+}
+
 .nav {
     width: 100%;
     height: 60px;
@@ -88,4 +92,201 @@ li {
     float: left;
     font-weight: bold;
     font-style: italic;
+}
+
+.focus_box .swiper-pagination-bullet {
+    height: 12px;
+    width: 12px;
+}
+
+.focus_box .swiper-now {
+    background-color: white;
+}
+
+.about_us_container {
+    width: 100%;
+    height: 650px;
+    background-color: #F5F5F5;
+}
+
+.about_us_container .about_us {
+    padding-top: 90px;
+    margin: 0 auto;
+}
+
+.title {
+    text-align: center;
+}
+
+.title .text {
+    text-align: center;
+    font-family: "Microsoft yahei";
+    font-size: 34px;
+    color: rgb(33, 33, 33);
+}
+
+.decoration_line {
+    width: 70px;
+    height: 3px;
+    margin: 10px auto;
+    top: -100px;
+}
+
+.decoration_line .decoration_line_left {
+    width: 33px;
+    height: 3px;
+    background-color: #1696C5;
+    float: left;
+}
+
+.decoration_line .decoration_line_right {
+    width: 33px;
+    height: 3px;
+    background-color: #1696C5;
+    float: right
+}
+
+.about_us_container .content {
+    margin: 50px auto;
+    width: 1200px;
+}
+
+.about_us_container .content .right_content {
+    width: 630px;
+    float: right;
+}
+
+.about_us_container .content .right_content .text {
+    overflow-wrap: break-word;
+    padding: 0;
+    height: 294px;
+    display: block;
+    overflow: hidden;
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    color: rgb(136, 136, 136);
+    line-height: 250%;
+}
+
+.read_more {
+    width: 168px;
+    height: 38px;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    line-height: 38px;
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+.read_more .left_readmore {
+    width: 129px;
+    height: 38px;
+    background-color: black;;
+    float: left;
+}
+
+.read_more .right_readmore {
+    width: 38px;
+    height: 38px;
+    margin-left: 1px;
+    float: left;
+    background-color: black;
+}
+
+.company_action_container {
+    padding-top: 90px;
+    width: 100%;
+}
+
+.company_action {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.company_action .title {
+    padding-bottom: 50px;
+}
+
+.company_action .show1{
+    width: 540px;
+    height: 260px;
+    float: left;
+}
+
+.company_action .show2 {
+    width: 300px;
+    height: 260px;
+    float: left;
+    margin-left: 30px;
+}
+
+.company_action .show3 {
+    width: 300px;
+    height: 260px;
+    float: left;
+    margin-left: 30px;
+}
+
+.company_action .show4 {
+    width: 300px;
+    height: 260px;
+    float: left;
+    margin-top: 30px;
+}
+
+.company_action .show5 {
+    width: 300px;
+    height: 260px;
+    float: left;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.company_action .show6 {
+    width: 540px;
+    height: 260px;
+    float: left;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.footer {
+    margin-top: 100px;
+    background-color: #080808;
+    width: 100%;
+    height: 180px;
+}
+
+.footer .content {
+    font-size: 14px;
+    color: rgb(102, 102, 102);
+    font-family: "Microsoft YaHei";
+    line-height: 240%;
+    margin: 0 auto;
+    width: 1200px;
+    height: 180px;
+}
+
+.footer .text_container {
+    padding-top: 45px;
+    float: left;
+}
+
+.footer .wx_container {
+    width: 88px;
+    height: 88px;
+    float: right;
+    margin-top: 45px;
+}
+
+.footer .wx_container img {
+    width: 88px;
+    height: 88px;
+}
+
+.footer .wx_container div {
+    width: 88px;
+    text-align: center;
+    font-size: 12px;
 }
