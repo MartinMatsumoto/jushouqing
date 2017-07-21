@@ -28,11 +28,11 @@ li {
     margin: 0 auto
 }
 
-.nav .content ul {
+.nav .content .nav_ul {
     margin-top: 12px;
 }
 
-.nav .content li {
+.nav .content .nav_li {
     float: left;
     width: 130px;
     height: 36px;
@@ -44,7 +44,16 @@ li {
     cursor: pointer;
 }
 
-.nav .content li:hover {
+.nav .content .menu {
+    margin:40px 0 0 -40px;position: absolute;z-index: 1000;
+}
+
+.nav .content .menu .float {
+    float: none;
+    margin-bottom: 4px;
+}
+
+.nav .content .nav_li:hover {
     background-color: #1696C5;
 }
 
@@ -92,6 +101,22 @@ li {
     float: left;
     font-weight: bold;
     font-style: italic;
+}
+
+.swiper_box {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.slider_box {
+    width: 1900px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.focus_box {
+    width: 100%;
+    margin-top: -50px;
 }
 
 .focus_box .swiper-pagination-bullet {
@@ -214,6 +239,56 @@ li {
     float: left;
 }
 
+.company_action .opacity {
+    -webkit-opacity: 0.5;
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+    opacity: .5;
+    filter:alpha(opacity=50);
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+}
+
+.company_action .small {
+    width: 100%;
+    height: 100%;
+    border: 1px solid white;
+}
+
+.company_action .bg {
+    width: 100%;
+    height: 100%;
+    background-color: #1696c5;
+    padding: 25px;
+}
+
+.company_action .content1 {
+    width: 540px;
+    height: 260px;
+    position: absolute;
+    margin-top: -260px;
+    cursor: pointer;
+}
+
+.company_action .content2 {
+    width: 300px;
+    height: 260px;
+    position: absolute;
+    margin-top: -260px;
+    cursor: pointer;
+}
+
+.company_action .text_show {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-top: -260px;
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    line-height: 260px;
+}
+
 .company_action .show2 {
     width: 300px;
     height: 260px;
@@ -289,4 +364,27 @@ li {
     width: 88px;
     text-align: center;
     font-size: 12px;
+}
+
+.banner_text_container {
+    width: 750px;
+    position: absolute;
+    top: 190px;
+    left: 125px;
+    color: white;
+    font-family: "Microsoft YaHei";
+}
+
+.banner_text_container .big {
+    width: 750px;
+    font-size: 34px;
+    line-height: 170%;
+    display: block;
+}
+
+.banner_text_container .small {
+    font-size: 16px;
+    line-height: 180%;
+    color: rgb(221, 221, 221);
+    display: block;
 }

@@ -33,27 +33,47 @@
 <!-- 导航 开始 -->
 <div class="nav">
     <div class="content">
-        <ul>
-            <li class="choose">网站首页</li>
-            <li>网站首页</li>
-            <li>网站首页</li>
-            <li>网站首页</li>
+        <ul class="nav_ul">
+            <li class="nav_li">网站首页</li>
+            <ul class="menu">
+                <li class="nav_li choose float">测试</li>
+                <li class="nav_li choose float">测试</li>
+                <li class="nav_li choose float">测试</li>
+            </ul>
+            <li class="nav_li">网站首页</li>
+            <li class="nav_li">网站首页</li>
+            <li class="nav_li">网站首页</li>
         </ul>
     </div>
 </div>
 <!-- 导航 结束 -->
 <!-- banner 开始 -->
-<div class="swiper-container">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide">
-            <img src="images/banner1.jpg" alt=""/>
+<div class="swiper-container swiper_box">
+    <div class="slider_box">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="images/banner1.jpg" alt=""/>
+                <div class="banner_text_container">
+                    <span class="big">大字大字大字大字大字大字大字大字大字</span>
+                    <span class="big">大字大字大字大字大字大字大字大字大字</span>
+                    <span class="small">The pursuit of excellence, casting assured brand</span>
+                    <span class="small">China is famous, renowned in the world, the same principle, not the same benefit</span>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img src="images/banner2.jpg" alt=""/>
+                <div class="banner_text_container">
+                    <span class="big">大字大字大字大字大字大字大字大字大字</span>
+                    <span class="big">大字大字大字大字大字大字大字大字大字</span>
+                    <span class="small">The pursuit of excellence, casting assured brand</span>
+                    <span class="small">China is famous, renowned in the world, the same principle, not the same benefit</span>
+                </div>
+            </div>
         </div>
-        <div class="swiper-slide">
-            <img src="images/banner2.jpg" alt=""/>
-        </div>
-    </div>
-    <!-- 如果需要分页器 -->
-    <div class="focus_box swiper-pagination">
+
+        <!-- 如果需要导航按钮 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
     </div>
 </div>
 <!-- banner 结束 -->
@@ -92,21 +112,57 @@
         </div>
         <div class="show1">
             <img src="/images/pic01.jpg" alt=""/>
+            <div class="content1">
+                <div class="bg opacity">
+                    <div class="small"></div>
+                </div>
+                <div class="text_show">工业机械</div>
+            </div>
         </div>
         <div class="show2">
             <img src="/images/pic02.jpg" alt=""/>
+            <div class="content2">
+                <div class="bg opacity">
+                    <div class="small"></div>
+                </div>
+                <div class="text_show">工业机械</div>
+            </div>
         </div>
         <div class="show3">
             <img src="/images/pic03.jpg" alt=""/>
+            <div class="content2">
+                <div class="bg opacity">
+                    <div class="small"></div>
+                </div>
+                <div class="text_show">工业机械</div>
+            </div>
         </div>
         <div class="show4">
             <img src="/images/pic04.jpg" alt=""/>
+            <div class="content2">
+                <div class="bg opacity">
+                    <div class="small"></div>
+                </div>
+                <div class="text_show">工业机械</div>
+            </div>
         </div>
         <div class="show5">
             <img src="/images/pic05.jpg" alt=""/>
+            <div class="content2">
+                <div class="bg opacity">
+                    <div class="small"></div>
+                </div>
+                <div class="text_show">工业机械</div>
+            </div>
         </div>
         <div class="show6">
             <img src="/images/pic06.jpg" alt=""/>
+            <div class="content1">
+                <div class="bg opacity">
+                    <div class="small"></div>
+                </div>
+                <div class="text_show">工业机械</div>
+            </div>
         </div>
         <div class="clear"></div>
     </div>
@@ -135,12 +191,13 @@
 <script type="text/javascript" src="/libs/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/swiper-3.3.1.min.js"></script>
 <script type="text/javascript">
-    var mySwiper = new Swiper ('.swiper-container', {
+    var mySwiper = new Swiper ('.slider_box', {
         direction : 'horizontal',
         loop : true,
         paginationClickable: true,
-        // 如果需要分页器
-        pagination : '.swiper-pagination',
+        // 如果需要前进后退按钮
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
         bulletActiveClass : 'swiper-now',
         autoplayDisableOnInteraction : false,
         autoplay : 5000
