@@ -16,7 +16,10 @@
     <meta name="Description" content="绵阳职业技术学院-成都校友会">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/swiper-3.3.1.min.css?20160324">
+    <link href="/css/header.css" rel="stylesheet">
+    <link href="/css/navigator.css" rel="stylesheet">
+    <link href="/css/footer.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/swiper-3.3.1.min.css">
 </head>
 <body>
 <?php
@@ -73,7 +76,7 @@ $banner_dao = new index_banner_dao();
                         <span class="big"><?php echo $banner->text1?></span>
                         <span class="big"><?php echo $banner->text2?></span>
                         <span class="small"><?php echo $banner->text3?></span>
-                        <span class="small"><?php echo $banner->text4?></span>
+                        <span class="small"><?php echo $banner->text2?></span>
                     </div>
                 </div>
                 <?php
@@ -97,12 +100,7 @@ $banner_dao = new index_banner_dao();
                     <span class="small">China is famous, renowned in the world, the same principle, not the same benefit</span>
                 </div>
             </div>-->
-
-
-
-
         </div>
-
         <!-- 如果需要导航按钮 -->
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
