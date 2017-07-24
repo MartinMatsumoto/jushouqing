@@ -212,6 +212,10 @@ div.ux-taskbar div.x-toolbar {
     background-image: url(../images/message.png);
 }
 
+.banner-shortcut {
+    background-image: url(../images/banner.png);
+}
+
 .x-ie6 .accordion-shortcut {
     background-image: none;
     filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/im48x48.png', sizingMethod='scale');

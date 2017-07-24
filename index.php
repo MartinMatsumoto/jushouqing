@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="/css/swiper-3.3.1.min.css?20160324">
 </head>
 <body>
+<?php
+require_once 'entrance.php';
+$banner_dao = new index_banner_dao();
+?>
 <!-- 顶部 开始 -->
 <div class="header">
     <div class="header_content">
@@ -58,7 +62,24 @@
 <div class="swiper-container swiper_box">
     <div class="slider_box">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">
+        <?php
+            $result = $banner_dao->listBanners();
+            while ($row = $result->fetch()) {
+                $banner = new index_banner($row);
+                ?>
+                <div class="swiper-slide">
+                    <img src="<?php echo $banner->image_url?>" alt=""/>
+                    <div class="banner_text_container">
+                        <span class="big"><?php echo $banner->text1?></span>
+                        <span class="big"><?php echo $banner->text2?></span>
+                        <span class="small"><?php echo $banner->text3?></span>
+                        <span class="small"><?php echo $banner->text4?></span>
+                    </div>
+                </div>
+                <?php
+            }
+        ?>
+            <!--<div class="swiper-slide">
                 <img src="images/banner1.jpg" alt=""/>
                 <div class="banner_text_container">
                     <span class="big">大字大字大字大字大字大字大字大字大字</span>
@@ -75,7 +96,11 @@
                     <span class="small">The pursuit of excellence, casting assured brand</span>
                     <span class="small">China is famous, renowned in the world, the same principle, not the same benefit</span>
                 </div>
-            </div>
+            </div>-->
+
+
+
+
         </div>
 
         <!-- 如果需要导航按钮 -->
