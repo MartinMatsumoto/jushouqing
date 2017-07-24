@@ -193,7 +193,11 @@ div.ux-taskbar div.x-toolbar {
 */
 
 .accordion-shortcut {
-    background-image: url(../images/im48x48.png);
+    background-image: url(../images/person.png);
+}
+
+.company-shortcut {
+    background-image: url(../images/company.png);
 }
 
 .cpu-shortcut {
@@ -205,9 +209,7 @@ div.ux-taskbar div.x-toolbar {
 }
 
 .notepad-shortcut {
-    background-image: url(../images/notepadLarge.png);
-    width: 46px;
-    height: 46px;
+    background-image: url(../images/message.png);
 }
 
 .x-ie6 .accordion-shortcut {

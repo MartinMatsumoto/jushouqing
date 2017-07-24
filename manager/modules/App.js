@@ -61,7 +61,7 @@ Ext.define('MyDesktop.App', {
                 model: 'Ext.ux.desktop.ShortcutModel',
                 data: [
                     { name: '校友信息', iconCls: 'accordion-shortcut', module: 'user-win' },
-                    { name: '企业信息', iconCls: 'accordion-shortcut', module: 'company-win' },
+                    { name: '企业信息', iconCls: 'company-shortcut', module: 'company-win' },
                     { name: '留言板管理', iconCls: 'notepad-shortcut', module: 'notepad-win' }
                 ]
             }),
