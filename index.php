@@ -25,7 +25,7 @@
         <div class="contact_us">
             <img src="/images/tel.png"/>
             <em class="tel_text">咨询热线</em>
-            <em class="tel_tel">400-000-00xxxx</em>
+            <em class="tel_tel">65773655转833</em>
         </div>
     </div>
 </div>
@@ -34,15 +34,22 @@
 <div class="nav">
     <div class="content">
         <ul class="nav_ul">
-            <li class="nav_li">网站首页</li>
-            <ul class="menu">
-                <li class="nav_li choose float">测试</li>
-                <li class="nav_li choose float">测试</li>
-                <li class="nav_li choose float">测试</li>
+            <li class="nav_li" id="index_li_hover">网站首页</li>
+            <ul class="menu child1 hide" id="index_ul">
+                <li class="nav_li choose float"><a href="http://baidu.com" target="_blank">校友会</a></li>
+                <li class="nav_li choose float"><a href="http://baidu.com" target="_blank">涪城汇</a></li>
             </ul>
-            <li class="nav_li">网站首页</li>
-            <li class="nav_li">网站首页</li>
-            <li class="nav_li">网站首页</li>
+            <li class="nav_li" id="index_li_hover">公司动态</li>
+            <ul class="menu child2 hide" id="index_ul">
+                <li class="nav_li choose float"><a href="http://baidu.com" target="_blank">文章</a></li>
+                <li class="nav_li choose float"><a href="http://baidu.com" target="_blank">视频</a></li>
+            </ul>
+            <li class="nav_li" id="index_li_hover">公司产品</li>
+            <ul class="menu child3 hide" id="index_ul">
+                <li class="nav_li choose float"><a href="http://baidu.com" target="_blank">聚首情酒</a></li>
+                <li class="nav_li choose float"><a href="http://baidu.com" target="_blank">溯源</a></li>
+            </ul>
+            <li class="nav_li"><a href="http://baidu.com" target="_blank">联系我们</a></li>
         </ul>
     </div>
 </div>
@@ -172,11 +179,11 @@
 <div class="footer">
     <div class="content">
         <div class="text_container">
-            <span>咨询热线：400-000-000000</span>
-            <span>客服QQ：1234XX987</span>
-            <span>联系人：陈先生</span>
+            <span>咨询热线：65773655转833</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>客服QQ：472742770</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>联系人：刘亚兰</span>
             <br/>
-            <span>公司地址：中国上海市XXX区XXX路12号MOUMOU大厦5层5xx室</span>
+            <span>公司地址：四川省成都市武侯区火炬时代B区102室</span>
             <br/>
             <span>Copyright © 2009-2011,www.jushouqing.top,All rights reserved  蜀ICP备17000647号</span>
         </div>
@@ -189,7 +196,7 @@
 <!-- footer 结束 -->
 <script type="text/javascript" src="/libs/jquery.min.js"></script>
 <script type="text/javascript" src="/libs/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/swiper-3.3.1.min.js"></script>
+<script type="text/javascript" src="/libs/swiper-3.3.1.min.js"></script>
 <script type="text/javascript">
     var mySwiper = new Swiper ('.slider_box', {
         direction : 'horizontal',
@@ -203,5 +210,6 @@
         autoplay : 5000
     });
 </script>
+<script type="text/javascript" src="/js/index.js"></script>
 </body>
 </html>

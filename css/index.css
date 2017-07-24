@@ -12,6 +12,10 @@ li {
     display: block;
 }
 
+.hide {
+    display: none;
+}
+
 .clear {
     clear: both;
 }
@@ -44,17 +48,36 @@ li {
     cursor: pointer;
 }
 
+.nav .content .nav_li a {
+    text-decoration: none;
+    color: white;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
 .nav .content .menu {
     margin:40px 0 0 -40px;position: absolute;z-index: 1000;
+}
+
+.nav .content .child1 {
+    margin:36px 0 0 -40px;
+    padding-top: 4px;
+}
+
+.nav .content .child2 {
+    margin:36px 0 0 90px;
+    padding-top: 4px;
+}
+
+.nav .content .child3 {
+    margin:36px 0 0 220px;
+    padding-top: 4px;
 }
 
 .nav .content .menu .float {
     float: none;
     margin-bottom: 4px;
-}
-
-.nav .content .nav_li:hover {
-    background-color: #1696C5;
 }
 
 .nav .content .choose {
