@@ -117,59 +117,71 @@
                 <div class="decoration_line_right"></div>
             </div>
         </div>
-        <div class="show1">
-            <img src="/images/pic01.jpg" alt=""/>
-            <div class="content1">
-                <div class="bg opacity">
-                    <div class="small"></div>
+        <div class="show1" id="index_show">
+            <a href="http://www.baidu.com" target="_blank">
+                <img src="/images/pic01.jpg" alt=""/>
+                <div class="content1" id="index_show_content">
+                    <div class="bg opacity">
+                        <div class="small"></div>
+                    </div>
+                    <div class="text_show">工业机械</div>
                 </div>
-                <div class="text_show">工业机械</div>
-            </div>
+            </a>
         </div>
-        <div class="show2">
-            <img src="/images/pic02.jpg" alt=""/>
-            <div class="content2">
-                <div class="bg opacity">
-                    <div class="small"></div>
+        <div class="show2" id="index_show">
+            <a href="http://www.baidu.com" target="_blank">
+                <img src="/images/pic02.jpg" alt=""/>
+                <div class="content2" id="index_show_content">
+                    <div class="bg opacity">
+                        <div class="small"></div>
+                    </div>
+                    <div class="text_show">工业机械</div>
                 </div>
-                <div class="text_show">工业机械</div>
-            </div>
+            </a>
         </div>
-        <div class="show3">
-            <img src="/images/pic03.jpg" alt=""/>
-            <div class="content2">
-                <div class="bg opacity">
-                    <div class="small"></div>
+        <div class="show3" id="index_show">
+            <a href="http://www.baidu.com" target="_blank">
+                <img src="/images/pic03.jpg" alt=""/>
+                <div class="content2" id="index_show_content">
+                    <div class="bg opacity">
+                        <div class="small"></div>
+                    </div>
+                    <div class="text_show">工业机械</div>
                 </div>
-                <div class="text_show">工业机械</div>
-            </div>
+            </a>
         </div>
-        <div class="show4">
-            <img src="/images/pic04.jpg" alt=""/>
-            <div class="content2">
-                <div class="bg opacity">
-                    <div class="small"></div>
+        <div class="show4" id="index_show">
+            <a href="http://www.baidu.com" target="_blank">
+                <img src="/images/pic04.jpg" alt=""/>
+                <div class="content2" id="index_show_content">
+                    <div class="bg opacity">
+                        <div class="small"></div>
+                    </div>
+                    <div class="text_show">工业机械</div>
                 </div>
-                <div class="text_show">工业机械</div>
-            </div>
+            </a>
         </div>
-        <div class="show5">
-            <img src="/images/pic05.jpg" alt=""/>
-            <div class="content2">
-                <div class="bg opacity">
-                    <div class="small"></div>
+        <div class="show5" id="index_show">
+            <a href="http://www.baidu.com" target="_blank">
+                <img src="/images/pic05.jpg" alt=""/>
+                <div class="content2" id="index_show_content">
+                    <div class="bg opacity">
+                        <div class="small"></div>
+                    </div>
+                    <div class="text_show">工业机械</div>
                 </div>
-                <div class="text_show">工业机械</div>
-            </div>
+            </a>
         </div>
-        <div class="show6">
-            <img src="/images/pic06.jpg" alt=""/>
-            <div class="content1">
-                <div class="bg opacity">
-                    <div class="small"></div>
+        <div class="show6" id="index_show">
+            <a href="http://www.baidu.com" target="_blank">
+                <img src="/images/pic06.jpg" alt=""/>
+                <div class="content1" id="index_show_content">
+                    <div class="bg opacity">
+                        <div class="small"></div>
+                    </div>
+                    <div class="text_show">工业机械</div>
                 </div>
-                <div class="text_show">工业机械</div>
-            </div>
+            </a>
         </div>
         <div class="clear"></div>
     </div>
@@ -185,7 +197,7 @@
             <br/>
             <span>公司地址：四川省成都市武侯区火炬时代B区102室</span>
             <br/>
-            <span>Copyright © 2009-2011,www.jushouqing.top,All rights reserved  蜀ICP备17000647号</span>
+            <span>Copyright © 2009-2017,www.jushouqing.top,All rights reserved  蜀ICP备17000647号</span>
         </div>
         <div class="wx_container">
             <img src="/images/er.jpg" alt=""/>
