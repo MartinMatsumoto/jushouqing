@@ -7,6 +7,7 @@
  */
 require_once '../../../entrance.php';
 
+$image_url = $_POST["image_url"];
 $text1 = $_POST["text1"];
 $text2 = $_POST["text2"];
 $text3 = $_POST["text3"];
@@ -17,8 +18,18 @@ $user_id = $_COOKIE['jushouqing_manager_id'];
 $file = $_FILES['image'];//得到传输的数据
 //得到文件名称
 $name = $file['name'];
-$type = strtolower(substr($name, strrpos($name, '.') + 1)); //得到文件类型，并且都转化成小写
+$dao = new index_banner_dao();
 
+//没有上传
+if(empty($name)){
+    $result = $dao->modify($image_url, $text1, $text2, $text3, $text4, $id);
+    $content = new result(null, errorCode::$success);
+    $json_string = json_encode($content, JSON_UNESCAPED_UNICODE);
+    echo $json_string;
+    return;
+}
+
+$type = strtolower(substr($name, strrpos($name, '.') + 1)); //得到文件类型，并且都转化成小写
 $allow_type = array('jpg', 'jpeg', 'png'); //定义允许上传的类型
 //判断文件类型是否被允许上传
 if (!in_array($type, $allow_type)) {
@@ -36,7 +47,6 @@ $upload_name = $ROOT_DIR . $file_name;
 
 //开始移动文件到相应的文件夹
 if (move_uploaded_file($file['tmp_name'], $upload_name)) {
-    $dao = new index_banner_dao();
 
     $result = $dao->modify($file_name, $text1, $text2, $text3, $text4, $id);
     $content = new result(null, errorCode::$success);

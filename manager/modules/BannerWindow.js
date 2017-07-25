@@ -12,6 +12,19 @@ Ext.apply(Ext.form.VTypes, {
     imageUploadText: '图片文件必须是 png,jpg,jpeg 后缀的文件'
 });
 
+//设置图片路径
+function getpicPathBannerModify()
+{
+    var PICTURE_URL = Ext.getCmp("image_url_modify").getValue();
+    if (!Ext.isEmpty(PICTURE_URL))
+    {
+        Ext.getCmp("imagePathshow").src=PICTURE_URL;
+    }else
+    {
+        Ext.getCmp("imagePathshow").getEl().dom.src = "";
+    }
+}
+
 var bannerStore = Ext.create('Ext.data.Store', {
     fields: ['id', 'image_url', 'text1', 'text2', 'text3', 'text4'],
     autoLoad: false,
@@ -146,6 +159,7 @@ Ext.define('MyDesktop.BannerWindow', {
                     tooltip: '修改某个banner填报的信息',
                     handler: function () {
                         Ext.getCmp('bannerModifyForm').form.loadRecord(currentSel);
+                        getpicPathBannerModify();
                         this_.bannerModifyForm.show();
                     }
                 }, '-', {
@@ -210,11 +224,22 @@ Ext.define('MyDesktop.BannerWindow', {
                 xtype: 'hidden',
                 name: 'id'
             }, {
+                name : 'image_url',
+                id : 'image_url_modify',
+                xtype : 'hidden'
+            }, {
+                xtype : 'image',
+                fieldLabel : '原始图片',
+                width : 180,
+                height : 90,
+                id : 'imagePathshow',
+                src : ''
+            }, {
                 fieldLabel : '重新上传图片',
                 name : 'image',
                 xtype : 'filefield',
                 vtype:'imageUpload',
-                allowBlank : false
+                allowBlank : true
             }, {
                 fieldLabel: '第一行字',
                 name: 'text1',
