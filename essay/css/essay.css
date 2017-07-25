@@ -1,0 +1,139 @@
+.essay_container {
+    width: 100%;
+}
+
+.essay_container .essay_content {
+    margin: 30px auto;
+    width: 1200px;
+}
+
+.essay_container .content_title {
+    width: 240px;
+    height: 110px;
+    color: white;
+    background-image: url("/images/01.jpg");
+    float: left;
+}
+
+.essay_container .content_title .content_title_container{
+    width: 240px;
+    height: 110px;
+    padding-top: 20px;
+}
+
+.essay_container .sub_choose {
+    width: 240px;
+    height: 53px;
+    background-color: #F5F5F5;
+    margin-top: 3px;
+    color: #666666;
+    text-align: center;
+    line-height: 53px;
+    cursor: pointer;
+}
+
+.essay_container .sub_choose:hover {
+    background-color: #1696c5;
+    color: white;
+}
+
+.essay_container .choose {
+    background-color: #1696c5;
+    color: white;
+}
+
+.essay_container .content_content {
+    width: 930px;
+    float: right;
+}
+
+.essay_container .content_content ul {
+    padding: 0;
+    margin-top: 30px;
+}
+
+.essay_container .content_content li {
+    border-bottom: 1px dotted #e2e2e2;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.essay_container .content_content p {
+    margin: 0 0 5px 0;
+}
+
+.essay_container .content_content .title_container {
+    width: 930px;
+    height: 40px;
+    background-color: rgb(245, 245, 245);
+
+    color: rgb(136, 136, 136);
+    font-size: 14px;
+    font-family: Microsoft YaHei;
+    line-height: 40px;
+    padding-left: 11px;
+}
+
+.essay_container .content_content a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.essay_container .content_content .title {
+    display: inline-block;
+    font-family: Microsoft YaHei;
+    font-size: 16px;
+    padding-top: 2px;
+    color: #666666;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 140%;
+}
+
+.essay_container .content_content .title:hover {
+    color: #1696c5;
+}
+
+.essay_container .content_content .time {
+    display: block;
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    padding-top: 2px;
+    color: #999999;
+    font-weight: normal;
+    text-decoration: none;
+    line-height: 140%;
+}
+
+.essay_container .content_content .subtitle {
+    display: inline-block;
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    padding-top: 2px;
+    color: #888888;
+    font-weight: normal;
+    text-decoration: none;
+    line-height: 140%;
+}
+
+.essay_container .big_text {
+    font-family: "Microsoft Yahei";
+    font-size: 28px;
+    color: rgb(255, 255, 255);
+    line-height: 150%;
+    letter-spacing: 1px;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+.essay_container .small_text {
+    font-family: "Microsoft Yahei";
+    color: rgb(255, 255, 255);
+    line-height: 150%;
+    letter-spacing: 1px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-size: 18px;
+}

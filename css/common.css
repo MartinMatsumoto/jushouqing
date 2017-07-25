@@ -1,0 +1,21 @@
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+ul {
+    margin: 0;
+}
+
+li {
+    list-style-type: none;
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.clear {
+    clear: both;
+}

@@ -7,10 +7,11 @@
     <meta name="Keywords" content="成都校友会,聚首情">
     <meta name="Description" content="绵阳职业技术学院-成都校友会">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/index.css" rel="stylesheet">
+    <link href="/css/common.css" rel="stylesheet">
     <link href="/css/header.css" rel="stylesheet">
     <link href="/css/footer.css" rel="stylesheet">
     <link href="/css/navigator.css" rel="stylesheet">
+    <link href="./css/essay.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/swiper-3.3.1.min.css?20160324">
 </head>
 <body>
@@ -27,6 +28,60 @@ include '../include/header.php'
 include '../include/navigator.php'
 ?>
 <!-- 导航 结束 -->
+
+<div class="essay_container">
+    <div class="essay_content">
+        <div class="content_title">
+            <div class="content_title_container">
+                <span class="big_text">搜搜老本</span>
+                <span class="small_text">search</span>
+            </div>
+            <div class="sub_choose choose">绵职院News</div>
+            <div class="sub_choose">校友会News</div>
+        </div>
+
+        <div class="content_content">
+            <div class="title_container">
+                公司动态&nbsp;&nbsp;&gt;&nbsp;&nbsp;文章
+            </div>
+            <ul>
+                <li>
+                    <a href="#" target="_blank">
+                        <p class="title">题目</p>
+                        <p class="time">2017-01-01</p>
+                        <p class="subtitle">X月XX日，晴空万里，和风徐徐。XX千吨级履带起重机身披大红花，在数百名技术精英、生产骨干的注视下，威风凛凛地驶出车间大门。千吨级履带起重机的成功推出，标志着徐工成功达到超大吨位履带起重机的研发高度。</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <p class="title">题目</p>
+                        <p class="time">2017-01-01</p>
+                        <p class="subtitle">X月XX日，晴空万里，和风徐徐。XX千吨级履带起重机身披大红花，在数百名技术精英、生产骨干的注视下，威风凛凛地驶出车间大门。千吨级履带起重机的成功推出，标志着徐工成功达到超大吨位履带起重机的研发高度。</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <p class="title">题目</p>
+                        <p class="time">2017-01-01</p>
+                        <p class="subtitle">X月XX日，晴空万里，和风徐徐。XX千吨级履带起重机身披大红花，在数百名技术精英、生产骨干的注视下，威风凛凛地驶出车间大门。千吨级履带起重机的成功推出，标志着徐工成功达到超大吨位履带起重机的研发高度。</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <p class="title">题目</p>
+                        <p class="time">2017-01-01</p>
+                        <p class="subtitle">X月XX日，晴空万里，和风徐徐。XX千吨级履带起重机身披大红花，在数百名技术精英、生产骨干的注视下，威风凛凛地驶出车间大门。千吨级履带起重机的成功推出，标志着徐工成功达到超大吨位履带起重机的研发高度。</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+</div>
+
+
 <!-- footer 开始 -->
 <?php
 include '../include/footer.php'
@@ -35,5 +90,6 @@ include '../include/footer.php'
 <script type="text/javascript" src="/libs/jquery.min.js"></script>
 <script type="text/javascript" src="/libs/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
 </body>
 </html>

@@ -19,6 +19,7 @@
     <link href="/css/header.css" rel="stylesheet">
     <link href="/css/navigator.css" rel="stylesheet">
     <link href="/css/footer.css" rel="stylesheet">
+    <link href="/css/common.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/swiper-3.3.1.min.css">
 </head>
 <body>
@@ -27,39 +28,14 @@ require_once 'entrance.php';
 $banner_dao = new index_banner_dao();
 ?>
 <!-- 顶部 开始 -->
-<div class="header">
-    <div class="header_content">
-        <div class="contact_us">
-            <img src="/images/tel.png"/>
-            <em class="tel_text">咨询热线</em>
-            <em class="tel_tel">65773655转833</em>
-        </div>
-    </div>
-</div>
+<?php
+include './include/header.php'
+?>
 <!-- 顶部 结束 -->
 <!-- 导航 开始 -->
-<div class="nav">
-    <div class="content">
-        <ul class="nav_ul">
-            <li class="nav_li" id="index_li_hover">网站首页</li>
-            <ul class="menu child1 hide" id="index_ul">
-                <li class="nav_li choose float"><a href="http://baidu.com" target="_blank">校友会</a></li>
-                <li class="nav_li choose float"><a href="http://baidu.com" target="_blank">涪城汇</a></li>
-            </ul>
-            <li class="nav_li" id="index_li_hover">公司动态</li>
-            <ul class="menu child2 hide" id="index_ul">
-                <li class="nav_li choose float"><a href="http://baidu.com" target="_blank">文章</a></li>
-                <li class="nav_li choose float"><a href="http://baidu.com" target="_blank">视频</a></li>
-            </ul>
-            <li class="nav_li" id="index_li_hover">公司产品</li>
-            <ul class="menu child3 hide" id="index_ul">
-                <li class="nav_li choose float"><a href="http://baidu.com" target="_blank">聚首情酒</a></li>
-                <li class="nav_li choose float"><a href="http://baidu.com" target="_blank">溯源</a></li>
-            </ul>
-            <li class="nav_li"><a href="http://baidu.com" target="_blank">联系我们</a></li>
-        </ul>
-    </div>
-</div>
+<?php
+include './include/navigator.php'
+?>
 <!-- 导航 结束 -->
 <!-- banner 开始 -->
 <div class="swiper-container swiper_box">
@@ -211,23 +187,9 @@ $banner_dao = new index_banner_dao();
 </div>
 <!-- 公司动态 结束 -->
 <!-- footer 开始 -->
-<div class="footer">
-    <div class="content">
-        <div class="text_container">
-            <span>咨询热线：65773655转833</span>&nbsp;&nbsp;&nbsp;&nbsp;
-            <span>客服QQ：472742770</span>&nbsp;&nbsp;&nbsp;&nbsp;
-            <span>联系人：刘亚兰</span>
-            <br/>
-            <span>公司地址：四川省成都市武侯区火炬时代B区102室</span>
-            <br/>
-            <span>Copyright © 2009-2017,www.jushouqing.top,All rights reserved  蜀ICP备17000647号</span>
-        </div>
-        <div class="wx_container">
-            <img src="/images/er.jpg" alt=""/>
-            <div>微信公众号</div>
-        </div>
-    </div>
-</div>
+<?php
+include './include/footer.php'
+?>
 <!-- footer 结束 -->
 <script type="text/javascript" src="/libs/jquery.min.js"></script>
 <script type="text/javascript" src="/libs/bootstrap.min.js"></script>
@@ -246,5 +208,6 @@ $banner_dao = new index_banner_dao();
     });
 </script>
 <script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
 </body>
 </html>
