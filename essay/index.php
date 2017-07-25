@@ -36,31 +36,31 @@ include '../include/navigator.php'
                 <span class="big_text">搜搜老本</span>
                 <span class="small_text">search</span>
             </div>
-            <div class="sub_choose choose">绵职院News</div>
-            <div class="sub_choose">校友会News</div>
+            <div class="sub_choose choose">醉聚绵职</div>
+            <div class="sub_choose">首善蓉城</div>
         </div>
 
         <div class="content_content">
             <div class="title_container">
-                公司动态&nbsp;&nbsp;&gt;&nbsp;&nbsp;文章
+                公司动态&nbsp;&nbsp;&gt;&nbsp;&nbsp;发现
             </div>
             <ul>
                 <li>
-                    <a href="#" target="_blank">
+                    <a href="/essay/content.php" target="_blank">
                         <p class="title">题目</p>
                         <p class="time">2017-01-01</p>
                         <p class="subtitle">X月XX日，晴空万里，和风徐徐。XX千吨级履带起重机身披大红花，在数百名技术精英、生产骨干的注视下，威风凛凛地驶出车间大门。千吨级履带起重机的成功推出，标志着徐工成功达到超大吨位履带起重机的研发高度。</p>
                     </a>
                 </li>
                 <li>
-                    <a href="#" target="_blank">
+                    <a href="/essay/content.php" target="_blank">
                         <p class="title">题目</p>
                         <p class="time">2017-01-01</p>
                         <p class="subtitle">X月XX日，晴空万里，和风徐徐。XX千吨级履带起重机身披大红花，在数百名技术精英、生产骨干的注视下，威风凛凛地驶出车间大门。千吨级履带起重机的成功推出，标志着徐工成功达到超大吨位履带起重机的研发高度。</p>
                     </a>
                 </li>
                 <li>
-                    <a href="#" target="_blank">
+                    <a href="/essay/content.php" target="_blank">
                         <p class="title">题目</p>
                         <p class="time">2017-01-01</p>
                         <p class="subtitle">X月XX日，晴空万里，和风徐徐。XX千吨级履带起重机身披大红花，在数百名技术精英、生产骨干的注视下，威风凛凛地驶出车间大门。千吨级履带起重机的成功推出，标志着徐工成功达到超大吨位履带起重机的研发高度。</p>

@@ -15,7 +15,7 @@
     float: left;
 }
 
-.essay_container .content_title .content_title_container{
+.essay_container .content_title .content_title_container {
     width: 240px;
     height: 110px;
     padding-top: 20px;
@@ -72,6 +72,78 @@
     font-family: Microsoft YaHei;
     line-height: 40px;
     padding-left: 11px;
+}
+
+.essay_container .content_content .essay_title {
+    display: block;
+    font-family: Microsoft YaHei;
+    font-size: 18px;
+    color: #5a5a5a;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.essay_container .content_content .essay_subtitle {
+    display: block;
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    color: #999999;
+    font-weight: normal;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.essay_container .content_content .essay_intro {
+    display: block;
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    color: #888888;
+    font-weight: normal;
+    text-decoration: none;
+    line-height: 28px;
+    background: #f6f6f6;
+    border-style: solid solid solid solid;
+    border-color: #eaeaea #eaeaea #eaeaea #eaeaea;
+    border-width: 1px 1px 1px 1px;
+    padding: 5px;
+    margin-top: 25px;
+}
+
+.essay_container .content_content .essay {
+    color: #444444;
+    line-height: 28px;
+    font-family: Arial, Helvetica, sans-serif, Verdana;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+    background-color: #FFFFFF;
+    margin-top: 25px;
+}
+
+.essay_container .content_content .next_prev{
+    margin-top: 20px;
+    width: 100%;
+}
+
+.essay_container .content_content .next_prev a{
+    display: block;
+    width: 100%;
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    color: #5a5a5a;
+    font-weight: normal;
+    line-height: 25px;
+}
+
+.essay_container .content_content .next{
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    color: #888888;
+    font-weight: normal;
+    line-height: 25px;
 }
 
 .essay_container .content_content a {

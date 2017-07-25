@@ -8,7 +8,7 @@
             </ul>
             <li class="nav_li" id="index_li_hover">公司动态</li>
             <ul class="menu child2 hide" id="index_ul">
-                <li class="nav_li choose float"><a href="/essay/" target="_blank">文章</a></li>
+                <li class="nav_li choose float"><a href="/essay/" target="_blank">发现</a></li>
                 <li class="nav_li choose float"><a href="http://baidu.com" target="_blank">视频</a></li>
             </ul>
             <li class="nav_li" id="index_li_hover">公司产品</li>

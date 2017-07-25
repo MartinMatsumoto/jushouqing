@@ -204,7 +204,7 @@ Ext.define('MyDesktop.BannerWindow', {
         title: '修改Banner信息',
         closeAction: 'hide',
         width: 650,
-        height: 300,
+        height: 400,
         border: false,
         modal: true,
         items: [{
