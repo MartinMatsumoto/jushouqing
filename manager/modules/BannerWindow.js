@@ -234,7 +234,7 @@ Ext.define('MyDesktop.BannerWindow', {
             }, {
                 fieldLabel: '温馨提示',
                 xtype : 'displayfield',
-                value : '图片推荐大小为1920x580像素，所有图片高度请保持一致，请用photoshop转换为web所用格式，大小请压缩至500kb以内。'
+                value : '图片推荐大小为1350x580像素，所有图片高度请保持一致，请用photoshop转换为web所用格式，大小请压缩至500kb以内。'
             }],
             buttons: [
                 {
@@ -318,7 +318,7 @@ Ext.define('MyDesktop.BannerWindow', {
             }, {
                 fieldLabel: '温馨提示',
                 xtype : 'displayfield',
-                value : '图片推荐大小为1920x580像素，所有图片高度请保持一致，请用photoshop转换为web所用格式，大小请压缩至500kb以内。'
+                value : '图片推荐大小为1350x580像素，所有图片高度请保持一致，请用photoshop转换为web所用格式，大小请压缩至500kb以内。'
             }],
             buttons: [
                 {

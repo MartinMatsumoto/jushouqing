@@ -71,7 +71,7 @@ $banner_dao = new index_banner_dao();
                 $banner = new index_banner($row);
                 ?>
                 <div class="swiper-slide">
-                    <img src="<?php echo $banner->image_url?>" alt=""/>
+                    <img src="<?php echo $banner->image_url?>" alt="" class="swiper-slide"/>
                     <div class="banner_text_container">
                         <span class="big"><?php echo $banner->text1?></span>
                         <span class="big"><?php echo $banner->text2?></span>
@@ -242,7 +242,7 @@ $banner_dao = new index_banner_dao();
         prevButton: '.swiper-button-prev',
         bulletActiveClass : 'swiper-now',
         autoplayDisableOnInteraction : false,
-        autoplay : 5000
+        autoplay : 500000
     });
 </script>
 <script type="text/javascript" src="/js/index.js"></script>
