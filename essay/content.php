@@ -28,12 +28,27 @@ include '../include/header.php'
 include '../include/navigator.php'
 ?>
 <!-- 导航 结束 -->
+<?php
+$type = empty($_GET["type"]) ? 1 : $_GET["type"];
+$id = empty($_GET["id"]) ? 0 : $_GET["id"];
+$dao = new essay_dao();
+$essay_content_dao = new essay_content_dao();
+if($id != 0){
+    $result = $dao->getOne($id);
+    $row = $result->fetch();
+    $essay = new essay($row);
 
+    $content_result = $essay_content_dao->listEssayContents($id);
+}else{
+    $essay = new essay();
+}
+
+?>
 <div class="essay_container">
     <div class="essay_content">
         <div class="content_title">
             <div class="content_title_container">
-                <span class="big_text">搜搜老本</span>
+                <span class="big_text">发现</span>
                 <span class="small_text">search</span>
             </div>
             <div class="sub_choose choose">醉聚绵职</div>
@@ -45,47 +60,54 @@ include '../include/navigator.php'
                 公司动态&nbsp;&nbsp;&gt;&nbsp;&nbsp;发现
             </div>
 
-            <div class="essay_title">
-                走进“中国科技第一展”
+            <div class="essay_title" >
+                <?php echo $essay->title?>
             </div>
 
             <div class="essay_subtitle">
-                作者:<span>industrial-106</span>
+                作者:<span><?php echo $essay->author?></span>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                发布时间: <span>2014-09-05</span>
+                发布时间: <span><?php echo $essay->create_date?></span>
             </div>
 
             <div class="essay_intro">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                XX月XX日至XX日，中国国际高新技术成果交易会在深圳会展中心隆重举行。XX集团作为装备制造产业中创新业绩突出、对产业技术进步具有重要作用的代表性企业
+                <?php echo $essay->sub_title?>
             </div>
 
             <div class="essay">
-                <div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    XX月XX日至XX日，中国国际高新技术成果交易会在深圳会展中心隆重举行。XX集团作为装备制造产业中创新业绩突出、对产业技术进步具有重要作用的代表性企业，应国家发改委等主办方邀参加了“加强自主创新，推动产业振兴”主题展览，参展收到了显著效果。
-                    中国国际高新技术成果交易会有“中国科技第一展”的美誉，已经连续举办了十一届。高交会的展览面积超10万平方米，参观者超过50万人次，产品与技术交易额超过130亿美元。它主要以成果交易为核心，通过国际化、市场化、专业化的发展，已成为代表中国顶尖科技　　研发水平的展会载体、高新技术领域对外开放的重要窗口和高新技术成果交易的重要平台。
-                </div>
-                <div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    XX月XX日至XX日，中国国际高新技术成果交易会在深圳会展中心隆重举行。XX集团作为装备制造产业中创新业绩突出、对产业技术进步具有重要作用的代表性企业，应国家发改委等主办方邀参加了“加强自主创新，推动产业振兴”主题展览，参展收到了显著效果。
-                    中国国际高新技术成果交易会有“中国科技第一展”的美誉，已经连续举办了十一届。高交会的展览面积超10万平方米，参观者超过50万人次，产品与技术交易额超过130亿美元。它主要以成果交易为核心，通过国际化、市场化、专业化的发展，已成为代表中国顶尖科技　　研发水平的展会载体、高新技术领域对外开放的重要窗口和高新技术成果交易的重要平台。
-                </div>
-                <div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    XX月XX日至XX日，中国国际高新技术成果交易会在深圳会展中心隆重举行。XX集团作为装备制造产业中创新业绩突出、对产业技术进步具有重要作用的代表性企业，应国家发改委等主办方邀参加了“加强自主创新，推动产业振兴”主题展览，参展收到了显著效果。
-                    中国国际高新技术成果交易会有“中国科技第一展”的美誉，已经连续举办了十一届。高交会的展览面积超10万平方米，参观者超过50万人次，产品与技术交易额超过130亿美元。它主要以成果交易为核心，通过国际化、市场化、专业化的发展，已成为代表中国顶尖科技　　研发水平的展会载体、高新技术领域对外开放的重要窗口和高新技术成果交易的重要平台。
-                </div>
-                <div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    XX月XX日至XX日，中国国际高新技术成果交易会在深圳会展中心隆重举行。XX集团作为装备制造产业中创新业绩突出、对产业技术进步具有重要作用的代表性企业，应国家发改委等主办方邀参加了“加强自主创新，推动产业振兴”主题展览，参展收到了显著效果。
-                    中国国际高新技术成果交易会有“中国科技第一展”的美誉，已经连续举办了十一届。高交会的展览面积超10万平方米，参观者超过50万人次，产品与技术交易额超过130亿美元。它主要以成果交易为核心，通过国际化、市场化、专业化的发展，已成为代表中国顶尖科技　　研发水平的展会载体、高新技术领域对外开放的重要窗口和高新技术成果交易的重要平台。
-                </div>
+                <?php
+                while ($row = $content_result->fetch()) {
+                    $essay_content = new essay_content($row);
+                    ?>
+                    <?php
+                    if($essay_content -> type == 1){
+                        ?>
+                        <div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <?php echo $essay_content->content?>
+                        </div>
+                        <?php
+                    }
+                    ?>
+
+                    <?php
+                    if($essay_content -> type == 2){
+                        ?>
+                        <div class="essay_image">
+                            <img src="<?php echo $essay_content->content?>"/>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    <?php
+                }
+                ?>
             </div>
 
             <div class="next_prev">
-                <a><span class="next">上一篇</span>： 关于我们</a>
-                <a><span class="next">下一篇</span>： 千吨级履带起重机成功推出</a>
+                <a><span class="next">上一篇</span>： </a>
+                <a><span class="next">下一篇</span>： </a>
             </div>
         </div>
 

@@ -33,7 +33,7 @@ include '../include/navigator.php'
     <div class="essay_content">
         <div class="content_title">
             <div class="content_title_container">
-                <span class="big_text">搜搜老本</span>
+                <span class="big_text">发现</span>
                 <span class="small_text">search</span>
             </div>
             <div class="sub_choose choose">醉聚绵职</div>
@@ -45,34 +45,23 @@ include '../include/navigator.php'
                 公司动态&nbsp;&nbsp;&gt;&nbsp;&nbsp;发现
             </div>
             <ul>
-                <li>
-                    <a href="/essay/content.php" target="_blank">
-                        <p class="title">题目</p>
-                        <p class="time">2017-01-01</p>
-                        <p class="subtitle">X月XX日，晴空万里，和风徐徐。XX千吨级履带起重机身披大红花，在数百名技术精英、生产骨干的注视下，威风凛凛地驶出车间大门。千吨级履带起重机的成功推出，标志着徐工成功达到超大吨位履带起重机的研发高度。</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/essay/content.php" target="_blank">
-                        <p class="title">题目</p>
-                        <p class="time">2017-01-01</p>
-                        <p class="subtitle">X月XX日，晴空万里，和风徐徐。XX千吨级履带起重机身披大红花，在数百名技术精英、生产骨干的注视下，威风凛凛地驶出车间大门。千吨级履带起重机的成功推出，标志着徐工成功达到超大吨位履带起重机的研发高度。</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/essay/content.php" target="_blank">
-                        <p class="title">题目</p>
-                        <p class="time">2017-01-01</p>
-                        <p class="subtitle">X月XX日，晴空万里，和风徐徐。XX千吨级履带起重机身披大红花，在数百名技术精英、生产骨干的注视下，威风凛凛地驶出车间大门。千吨级履带起重机的成功推出，标志着徐工成功达到超大吨位履带起重机的研发高度。</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" target="_blank">
-                        <p class="title">题目</p>
-                        <p class="time">2017-01-01</p>
-                        <p class="subtitle">X月XX日，晴空万里，和风徐徐。XX千吨级履带起重机身披大红花，在数百名技术精英、生产骨干的注视下，威风凛凛地驶出车间大门。千吨级履带起重机的成功推出，标志着徐工成功达到超大吨位履带起重机的研发高度。</p>
-                    </a>
-                </li>
+                <?php
+                $type = empty($_GET["type"]) ? 1 : $_GET["type"];
+                $dao = new essay_dao();
+                $result = $dao->listEssays(0, 100, $type);
+                while ($row = $result->fetch()) {
+                    $essay = new essay($row);
+                    ?>
+                    <li>
+                        <a href="/essay/content.php?id=<?php echo $essay->id?>&type=<?php echo $essay->type?>">
+                            <p class="title"><?php echo $essay->title?></p>
+                            <p class="time"><?php echo $essay->create_date?></p>
+                            <p class="subtitle"><?php echo $essay->sub_title?></p>
+                        </a>
+                    </li>
+                <?php
+                }
+                ?>
             </ul>
         </div>
 

@@ -123,12 +123,17 @@
     margin-top: 25px;
 }
 
-.essay_container .content_content .next_prev{
+.essay_container .content_content .essay_image {
+    width: 930px;
+    text-align: center
+}
+
+.essay_container .content_content .next_prev {
     margin-top: 20px;
     width: 100%;
 }
 
-.essay_container .content_content .next_prev a{
+.essay_container .content_content .next_prev a {
     display: block;
     width: 100%;
     font-family: Microsoft YaHei;
@@ -138,7 +143,7 @@
     line-height: 25px;
 }
 
-.essay_container .content_content .next{
+.essay_container .content_content .next {
     font-family: Microsoft YaHei;
     font-size: 14px;
     color: #888888;

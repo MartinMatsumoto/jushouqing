@@ -117,7 +117,7 @@ include './include/navigator.php'
             </div>
         </div>
         <div class="show1" id="index_show">
-            <a href="http://www.baidu.com" target="_blank">
+            <a href="http://www.baidu.com">
                 <img src="/images/pic01.jpg" alt=""/>
                 <div class="content1" id="index_show_content">
                     <div class="bg opacity">
@@ -128,7 +128,7 @@ include './include/navigator.php'
             </a>
         </div>
         <div class="show2" id="index_show">
-            <a href="http://www.baidu.com" target="_blank">
+            <a href="http://www.baidu.com">
                 <img src="/images/pic02.jpg" alt=""/>
                 <div class="content2" id="index_show_content">
                     <div class="bg opacity">
@@ -139,7 +139,7 @@ include './include/navigator.php'
             </a>
         </div>
         <div class="show3" id="index_show">
-            <a href="http://www.baidu.com" target="_blank">
+            <a href="http://www.baidu.com">
                 <img src="/images/pic03.jpg" alt=""/>
                 <div class="content2" id="index_show_content">
                     <div class="bg opacity">
@@ -150,7 +150,7 @@ include './include/navigator.php'
             </a>
         </div>
         <div class="show4" id="index_show">
-            <a href="http://www.baidu.com" target="_blank">
+            <a href="http://www.baidu.com">
                 <img src="/images/pic04.jpg" alt=""/>
                 <div class="content2" id="index_show_content">
                     <div class="bg opacity">
@@ -161,7 +161,7 @@ include './include/navigator.php'
             </a>
         </div>
         <div class="show5" id="index_show">
-            <a href="http://www.baidu.com" target="_blank">
+            <a href="http://www.baidu.com">
                 <img src="/images/pic05.jpg" alt=""/>
                 <div class="content2" id="index_show_content">
                     <div class="bg opacity">
@@ -172,7 +172,7 @@ include './include/navigator.php'
             </a>
         </div>
         <div class="show6" id="index_show">
-            <a href="http://www.baidu.com" target="_blank">
+            <a href="http://www.baidu.com">
                 <img src="/images/pic06.jpg" alt=""/>
                 <div class="content1" id="index_show_content">
                     <div class="bg opacity">
@@ -204,7 +204,7 @@ include './include/footer.php'
         prevButton: '.swiper-button-prev',
         bulletActiveClass : 'swiper-now',
         autoplayDisableOnInteraction : false,
-        autoplay : 500000
+        autoplay : 5000
     });
 </script>
 <script type="text/javascript" src="/js/index.js"></script>
