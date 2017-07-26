@@ -128,6 +128,10 @@
     text-align: center
 }
 
+.essay_container .content_content .essay_image img {
+    max-width: 930px;
+}
+
 .essay_container .content_content .next_prev {
     margin-top: 20px;
     width: 100%;

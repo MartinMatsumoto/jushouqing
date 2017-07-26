@@ -525,8 +525,8 @@ Ext.define('MyDesktop.EssayWindow', {
                 {
                     text: '重置',
                     handler: function () {
-                        //Ext.getCmp('essayModifyForm').getForm().reset();
-                        console.log(Ext.getCmp('essayAddForm').getForm().getValues());
+                        Ext.getCmp('essayAddForm').getForm().reset();
+                        Ext.getCmp('essay_content_container').removeAll();
                     }
                 },
                 {
@@ -540,6 +540,8 @@ Ext.define('MyDesktop.EssayWindow', {
                                 success: function (form1, action) {
                                     Ext.getCmp("essay_modify_button").setDisabled(true);
                                     Ext.getCmp("essay_delete_button").setDisabled(true);
+                                    Ext.getCmp('essayAddForm').getForm().reset();
+                                    Ext.getCmp('essay_content_container').removeAll();
                                     Ext.Msg.alert('成功', '文章添加成功。');
                                     Ext.getCmp('essayAddWindow').close();
                                     essaySelModel.deselectAll();
