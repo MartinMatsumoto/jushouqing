@@ -12,7 +12,7 @@ $pageSize = intval($_POST["pageSize"]);
 
 $dao = new essay_dao();
 
-$result = $dao->listEssays($begin, $pageSize, null);
+$result = $dao->listEssays($begin, $pageSize, null, null);
 $arr = array();
 while ($row = $result->fetch()) {
     $essay = new essay($row);

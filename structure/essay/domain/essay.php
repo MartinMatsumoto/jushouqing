@@ -20,6 +20,8 @@ class essay
     public $sub_title;
     // 文章类型
     public $type;
+    //删除
+    public $delete_;
     // 文章内容
     public $essay_content;
 
@@ -49,6 +51,10 @@ class essay
 
             if (array_key_exists("type", $row)) {
                 $this->type = $row["type"];
+            }
+
+            if (array_key_exists("delete_", $row)) {
+                $this->delete_ = $row["delete_"];
             }
 
             if (array_key_exists("essay_content", $row)) {

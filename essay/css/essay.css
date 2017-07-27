@@ -32,6 +32,14 @@
     cursor: pointer;
 }
 
+.essay_container .sub_choose a {
+    width: 100%;
+    height: 100%;
+    color: #666666;
+    text-decoration: none;
+    display: block;
+}
+
 .essay_container .sub_choose:hover {
     background-color: #1696c5;
     color: white;
@@ -39,6 +47,10 @@
 
 .essay_container .choose {
     background-color: #1696c5;
+    color: white;
+}
+
+.essay_container .choose a{
     color: white;
 }
 

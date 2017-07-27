@@ -39,6 +39,11 @@ if($id != 0){
     $essay = new essay($row);
 
     $content_result = $essay_content_dao->listEssayContents($id);
+
+    $prevResult = $dao->getPrev($id);
+    $nextResult = $dao->getNext($id);
+    $prevEssay = new essay($prevResult->fetch());
+    $nextEssay = new essay($nextResult->fetch());
 }else{
     $essay = new essay();
 }
@@ -46,14 +51,9 @@ if($id != 0){
 ?>
 <div class="essay_container">
     <div class="essay_content">
-        <div class="content_title">
-            <div class="content_title_container">
-                <span class="big_text">发现</span>
-                <span class="small_text">search</span>
-            </div>
-            <div class="sub_choose choose">醉聚绵职</div>
-            <div class="sub_choose">首善蓉城</div>
-        </div>
+        <?php
+        include './include/content_title.php'
+        ?>
 
         <div class="content_content">
             <div class="title_container">
@@ -106,8 +106,28 @@ if($id != 0){
             </div>
 
             <div class="next_prev">
-                <a><span class="next">上一篇</span>： </a>
-                <a><span class="next">下一篇</span>： </a>
+                <a href="<?php
+                if(!empty($prevEssay->id)){
+                    echo "/essay/content.php?id=".$prevEssay->id."&type=".$type;
+                }
+                ?>"><span class="next">上一篇</span>：<?php
+                    if(empty($prevEssay->title)){
+                        echo "没有了";
+                    }else{
+                        echo $prevEssay->title;
+                    }
+                    ?></a>
+                <a href="<?php
+                if(!empty($nextEssay->id)){
+                    echo "/essay/content.php?id=".$nextEssay->id."&type=".$type;
+                }
+                ?>"><span class="next">下一篇</span>：<?php
+                    if(empty($nextEssay->title)){
+                        echo "没有了";
+                    }else{
+                        echo $nextEssay->title;
+                    }
+                    ?></a>
             </div>
         </div>
 

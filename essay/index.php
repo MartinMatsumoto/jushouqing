@@ -25,20 +25,16 @@ include '../include/header.php'
 <!-- 顶部 结束 -->
 <!-- 导航 开始 -->
 <?php
-include '../include/navigator.php'
+include '../include/navigator.php';
+$type = empty($_GET["type"]) ? 1 : $_GET["type"];
 ?>
 <!-- 导航 结束 -->
 
 <div class="essay_container">
     <div class="essay_content">
-        <div class="content_title">
-            <div class="content_title_container">
-                <span class="big_text">发现</span>
-                <span class="small_text">search</span>
-            </div>
-            <div class="sub_choose choose">醉聚绵职</div>
-            <div class="sub_choose">首善蓉城</div>
-        </div>
+        <?php
+        include './include/content_title.php'
+        ?>
 
         <div class="content_content">
             <div class="title_container">
@@ -46,9 +42,8 @@ include '../include/navigator.php'
             </div>
             <ul>
                 <?php
-                $type = empty($_GET["type"]) ? 1 : $_GET["type"];
                 $dao = new essay_dao();
-                $result = $dao->listEssays(0, 100, $type);
+                $result = $dao->listEssays(0, 100, $type, 0);
                 while ($row = $result->fetch()) {
                     $essay = new essay($row);
                     ?>

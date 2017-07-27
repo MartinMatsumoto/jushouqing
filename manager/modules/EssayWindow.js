@@ -13,8 +13,10 @@ var essayRender = function (val) {
     return val;
 }
 
+var essayContentContainerId = "";
+
 var essayStore = Ext.create('Ext.data.Store', {
-    fields: ['id', 'title', 'author', 'create_date', 'sub_title', 'type', 'essay_content'],
+    fields: ['id', 'title', 'author', 'create_date', 'sub_title', 'type', 'delete_', 'essay_content'],
     autoLoad: false,
     pageSize: 20,
     proxy: {
@@ -78,31 +80,7 @@ var essayAddContentForm = Ext.create('Ext.window.Window', {
                     var form = Ext.getCmp('essayAddContentForm').getForm();
                     var content = Ext.getCmp('essayAddContentContent').getValue();
                     if (form.isValid()) {
-                        var essayContentContainer = Ext.getCmp("essay_content_container");
-                        var _checkField = new Ext.form.FieldSet(
-                        {
-                            items :
-                                [{
-                                    xtype : 'displayfield',
-                                    value : content
-                                }, {
-                                    xtype : 'hidden',
-                                    name : 'content[]',
-                                    value : content
-                                }, {
-                                    xtype : 'hidden',
-                                    name : 'content_type[]',
-                                    value : 1
-                                }, {
-                                    xtype : 'button',
-                                    text : '删除',
-                                    handler : function()
-                                    {
-                                        _checkField.destroy();
-                                    }
-                                }]
-                        });
-                        essayContentContainer.add(_checkField);
+                        essayAddContent(content,1);
                         Ext.getCmp('essayAddContentForm').getForm().reset();
                         Ext.getCmp('essayAddContentWindow').close();
                     }
@@ -110,6 +88,61 @@ var essayAddContentForm = Ext.create('Ext.window.Window', {
             }]
     }]
 });
+
+var essayAddContent = function (content, type) {
+    var essayContentContainer = Ext.getCmp(essayContentContainerId);
+    var _checkField;
+    if(type == 1){
+        _checkField = new Ext.form.FieldSet(
+            {
+                items :
+                    [{
+                        xtype : 'displayfield',
+                        value : content
+                    }, {
+                        xtype : 'hidden',
+                        name : 'content[]',
+                        value : content
+                    }, {
+                        xtype : 'hidden',
+                        name : 'content_type[]',
+                        value : type
+                    }, {
+                        xtype : 'button',
+                        text : '删除',
+                        handler : function()
+                        {
+                            _checkField.destroy();
+                        }
+                    }]
+            });
+    } else {
+        _checkField = new Ext.form.FieldSet(
+            {
+                items : [{
+                    xtype: 'hidden',
+                    name : 'content[]',
+                    value: content
+                }, {
+                    xtype : 'image',
+                    fieldLabel : '图片',
+                    height : 90,
+                    src : content
+                }, {
+                    xtype : 'hidden',
+                    name : 'content_type[]',
+                    value : type
+                }, {
+                    xtype: 'button',
+                    text: '删除',
+                    handler: function () {
+                        _checkField.destroy();
+                    }
+                }]
+            });
+    }
+    essayContentContainer.add(_checkField);
+}
 
 var essayAddImageForm = Ext.create('Ext.window.Window', {
     id : 'essayAddImageWindow',
@@ -148,31 +181,7 @@ var essayAddImageForm = Ext.create('Ext.window.Window', {
                     if (form.isValid()) {
                         form.submit({
                             success: function (form1, action ,c, d) {
-                                var essayContentContainer = Ext.getCmp("essay_content_container");
-                                var _checkField = new Ext.form.FieldSet(
-                                    {
-                                        items : [{
-                                            xtype: 'hidden',
-                                            name : 'content[]',
-                                            value: action.result.content
-                                        }, {
-                                            xtype : 'image',
-                                            fieldLabel : '图片',
-                                            height : 90,
-                                            src : action.result.content
-                                        }, {
-                                            xtype : 'hidden',
-                                            name : 'content_type[]',
-                                            value : 2
-                                        }, {
-                                            xtype: 'button',
-                                            text: '删除',
-                                            handler: function () {
-                                                _checkField.destroy();
-                                            }
-                                        }]
-                                    });
-                                essayContentContainer.add(_checkField);
+                                essayAddContent(action.result.content,2);
                                 Ext.getCmp('essayAddImageForm').getForm().reset();
                                 Ext.getCmp('essayAddImageWindow').close();
                             },
@@ -200,10 +209,33 @@ function getEssaySelModel(){
                 currentSel = record;
                 Ext.getCmp("essay_modify_button").setDisabled(false);
                 Ext.getCmp("essay_delete_button").setDisabled(false);
+                Ext.getCmp("essay_enable_button").setDisabled(false);
             }
         }
     });
     return essaySelModel;
+}
+
+var initModifyEssay = function(id){
+    Ext.Ajax.request({
+        url: '/structure/essay/controller/manager_listessay_content.php',
+        params: {
+            id: id
+        },
+        method: 'POST',
+        success: function (response, options) {
+            var json = Ext.decode(response.responseText);
+            if(json.content){
+                var contents = json.content;
+                for (var i = 0; i < contents.length; i++) {
+                    essayAddContent(contents[i].content,contents[i].type);
+                }
+            }
+        },
+        failure: function (response, options) {
+            Ext.MessageBox.alert('失败', '请求超时或网络故障,错误编号：'+ response.status);
+        }
+    });
 }
 
 Ext.define('MyDesktop.EssayWindow', {
@@ -282,6 +314,13 @@ Ext.define('MyDesktop.EssayWindow', {
                                 sortable: true,
                                 dataIndex: 'type',
                                 renderer: essayRender
+                            },
+                            {
+                                text: "是否删除",
+                                width: 70,
+                                sortable: true,
+                                dataIndex: 'delete_',
+                                renderer: deleteRender
                             }
                         ]
                     }
@@ -299,16 +338,18 @@ Ext.define('MyDesktop.EssayWindow', {
                     disabled: true,
                     tooltip: '修改某个文章填报的信息',
                     handler: function () {
-                        /*Ext.getCmp('essayModifyForm').form.loadRecord(currentSel);
-                        this_.essayModifyForm.show();*/
+                        Ext.getCmp('essayModifyForm').form.loadRecord(currentSel);
+                        this_.essayModifyForm.show();
+                        initModifyEssay(currentSel.data.id);
+
                     }
                 }, '-', {
                     id: 'essay_delete_button',
-                    text: '删除信息',
+                    text: '删除文章',
                     disabled: true,
                     tooltip: '删除某个文章填报的信息',
                     handler: function () {
-                        /*Ext.MessageBox.confirm('确定', '是否要删除 ' + currentSel.data.name + ' ?', function (btn, text) {
+                        Ext.MessageBox.confirm('确定', '是否要删除文章?', function (btn, text) {
                             if (btn == "yes") {
                                 Ext.Ajax.request({
                                     url: '/structure/essay/controller/manager_delessay.php',
@@ -320,10 +361,35 @@ Ext.define('MyDesktop.EssayWindow', {
                                         essaySelModel.deselectAll();
                                         Ext.getCmp("essay_modify_button").setDisabled(true);
                                         Ext.getCmp("essay_delete_button").setDisabled(true);
+                                        Ext.getCmp("essay_enable_button").setDisabled(true);
                                     }
                                 });
                             }
-                        });*/
+                        });
+                    }
+                }, '-', {
+                    id: 'essay_enable_button',
+                    text: '恢复文章',
+                    disabled: true,
+                    tooltip: '恢复某个文章填报的信息',
+                    handler: function () {
+                        Ext.MessageBox.confirm('确定', '是否要恢复文章?', function (btn, text) {
+                            if (btn == "yes") {
+                                Ext.Ajax.request({
+                                    url: '/structure/essay/controller/manager_enableessay.php',
+                                    params: {
+                                        id: currentSel.data.id
+                                    },
+                                    success: function (response) {
+                                        this_.store.reload();
+                                        essaySelModel.deselectAll();
+                                        Ext.getCmp("essay_modify_button").setDisabled(true);
+                                        Ext.getCmp("essay_delete_button").setDisabled(true);
+                                        Ext.getCmp("essay_enable_button").setDisabled(true);
+                                    }
+                                });
+                            }
+                        });
                     }
                 }],
                 bbar: Ext.create('Ext.PagingToolbar', {
@@ -347,8 +413,24 @@ Ext.define('MyDesktop.EssayWindow', {
         height: 480,
         border: false,
         modal: true,
+        listeners :
+        {
+            show :
+            {
+                fn : function()
+                {
+                    essayContentContainerId = "essay_modify_content_container";
+                }
+            },
+            hide : {
+                fn : function(){
+                    Ext.getCmp('essay_modify_content_container').removeAll();
+                }
+            }
+        },
         items: [{
             id: 'essayModifyForm',
+            autoScroll : true,
             xtype: 'form',
             bodyPadding: 5,
             frame: true,
@@ -364,41 +446,67 @@ Ext.define('MyDesktop.EssayWindow', {
                 xtype: 'hidden',
                 name: 'id'
             }, {
-                xtype: 'hidden',
-                name: 'open_id'
+                fieldLabel: '类型',
+                name: 'type',
+                size: 5,
+                allowBlank: false,
+                xtype: 'combo',
+                mode: 'local',
+                value: '1',
+                forceSelection: true,
+                editable: false,
+                typeAhead: true,
+                displayField: 'name',
+                valueField: 'value',
+                queryMode: 'local',
+                store: Ext.create('Ext.data.Store', {
+                    fields: ['name', 'value'],
+                    data: [{
+                        name: '醉聚绵职',
+                        value: '1'
+                    }, {
+                        name: '首善蓉城',
+                        value: '2'
+                    }]
+                })
             }, {
-                fieldLabel: '企业全称',
-                name: 'name',
+                fieldLabel: '标题',
+                name: 'title',
                 allowBlank: false
             }, {
-                fieldLabel: '行业类别',
-                name: 'career_type',
+                fieldLabel: '作者',
+                name: 'author',
                 allowBlank: false
             }, {
-                fieldLabel: '企业性质',
-                name: 'essay_nature',
+                fieldLabel: '创建时间',
+                xtype : 'datefield',
+                format : 'Y-m-d',
+                editable : false,
+                name: 'create_date',
                 allowBlank: false
             }, {
-                fieldLabel: '办公地址',
-                name: 'location',
+                fieldLabel: '副标题',
+                name: 'sub_title',
                 allowBlank: false
             }, {
-                fieldLabel: '联系人',
-                name: 'contactor',
-                allowBlank: false
+                id : 'essay_modify_content_container',
+                title : '内容',
+                xtype : 'fieldset',
+                items : []
             }, {
-                fieldLabel: '联系电话',
-                name: 'tel',
-                allowBlank: false
+                xtype : 'button',
+                text : '插入段落',
+                allowBlank: false,
+                handler : function(){
+                    essayAddContentForm.show();
+                }
             }, {
-                fieldLabel: '邮箱',
-                name: 'email',
-                allowBlank: false
-            }, {
-                fieldLabel: '您认为文章会能为贵单位做些什么',
-                name: 'descript',
-                xtype : 'textfield',
-                allowBlank: true
+                xtype : 'button',
+                text : '插入图片',
+                allowBlank: false,
+                handler : function(){
+                    essayAddImageForm.show();
+                }
             }],
             buttons: [
                 {
@@ -418,7 +526,10 @@ Ext.define('MyDesktop.EssayWindow', {
                                 success: function (form1, action) {
                                     Ext.getCmp("essay_modify_button").setDisabled(true);
                                     Ext.getCmp("essay_delete_button").setDisabled(true);
-                                    Ext.Msg.alert('成功', '修改成功。');
+                                    Ext.getCmp("essay_enable_button").setDisabled(true);
+                                    Ext.getCmp('essayModifyForm').getForm().reset();
+                                    Ext.getCmp('essay_modify_content_container').removeAll();
+                                    Ext.Msg.alert('成功', '文章修改成功。');
                                     Ext.getCmp('essayModifyWindow').close();
                                     essaySelModel.deselectAll();
                                     essayStore.reload();
@@ -426,6 +537,7 @@ Ext.define('MyDesktop.EssayWindow', {
                                 failure: function (form, action) {
                                     Ext.getCmp("essay_modify_button").setDisabled(true);
                                     Ext.getCmp("essay_delete_button").setDisabled(true);
+                                    Ext.getCmp("essay_enable_button").setDisabled(true);
                                     essaySelModel.deselectAll();
                                     Ext.Msg.alert('失败', '请刷新后重试。');
                                 }
@@ -444,6 +556,16 @@ Ext.define('MyDesktop.EssayWindow', {
         height: 480,
         border: false,
         modal: true,
+        listeners :
+        {
+            show :
+            {
+                fn : function()
+                {
+                    essayContentContainerId = "essay_content_container";
+                }
+            }
+        },
         items: [{
             id: 'essayAddForm',
             xtype: 'form',
@@ -540,6 +662,7 @@ Ext.define('MyDesktop.EssayWindow', {
                                 success: function (form1, action) {
                                     Ext.getCmp("essay_modify_button").setDisabled(true);
                                     Ext.getCmp("essay_delete_button").setDisabled(true);
+                                    Ext.getCmp("essay_enable_button").setDisabled(true);
                                     Ext.getCmp('essayAddForm').getForm().reset();
                                     Ext.getCmp('essay_content_container').removeAll();
                                     Ext.Msg.alert('成功', '文章添加成功。');
@@ -550,6 +673,7 @@ Ext.define('MyDesktop.EssayWindow', {
                                 failure: function (form, action) {
                                     Ext.getCmp("essay_modify_button").setDisabled(true);
                                     Ext.getCmp("essay_delete_button").setDisabled(true);
+                                    Ext.getCmp("essay_enable_button").setDisabled(true);
                                     essaySelModel.deselectAll();
                                     Ext.Msg.alert('失败', '请刷新后重试。');
                                 }

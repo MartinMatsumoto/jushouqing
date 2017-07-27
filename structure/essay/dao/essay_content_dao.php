@@ -14,8 +14,7 @@ class essay_content_dao
     private $modifyCompany = "UPDATE COMPANY SET `name` = :name,`career_type` = :career_type,`company_nature` = :company_nature,`location` = :location,`contactor` = :contactor,`tel` = :tel,`email` = :email,`descript` = :descript WHERE openid = :openid";
     private $getOne = "SELECT * FROM `COMPANY` WHERE openid = :openid";
     private $listEssayContents = "SELECT * FROM ESSAY_CONTENT WHERE essay_id = :id ";
-    private $count = "SELECT COUNT(*) AS COUNT from `COMPANY`";
-    private $delete = "DELETE FROM `COMPANY` WHERE id = :id";
+    private $deleteAll = "DELETE FROM `ESSAY_CONTENT` WHERE essay_id = :essay_id";
 
     //构造函数
     function __construct()
@@ -97,10 +96,10 @@ class essay_content_dao
         return $stmt;
     }
 
-    function delete($id)
+    function deleteAll($essay_id)
     {
-        $stmt = $this->conn->pdo->prepare($this->delete);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt = $this->conn->pdo->prepare($this->deleteAll);
+        $stmt->bindParam(':essay_id', $essay_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt;
     }
