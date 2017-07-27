@@ -142,6 +142,7 @@
 
 .essay_container .content_content .essay_image img {
     max-width: 930px;
+    margin-top: 10px;
 }
 
 .essay_container .content_content .next_prev {

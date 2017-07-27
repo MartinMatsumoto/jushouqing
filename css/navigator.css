@@ -26,6 +26,10 @@
     cursor: pointer;
 }
 
+.nav .content .no_border {
+    border-right: 0;
+}
+
 .nav .content .nav_li a {
     text-decoration: none;
     color: white;
