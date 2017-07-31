@@ -48,14 +48,44 @@ $type = empty($_GET["type"]) ? 1 : $_GET["type"];
             <div class="title_container">
                 联系我们
             </div>
+
+            <div class="contact_us">
+                <div class="tel">
+                    <img src="/images/contact_tel.png" alt=""/>
+                    <span>咨询热线&nbsp;:&nbsp;65773655转833</span>
+                </div>
+
+                <div class="tel">
+                    <img src="/images/email.png" alt=""/>
+                    <span>公司邮箱&nbsp;:&nbsp;472742770@qq.com</span>
+                </div>
+
+                <div class="tel">
+                    <img src="/images/qq.png" alt=""/>
+                    <span>客服QQ&nbsp;:&nbsp;472742770</span>
+                </div>
+
+                <div class="tel">
+                    <img src="/images/qq.png" alt=""/>
+                    <span>联系人&nbsp;:&nbsp;刘亚兰</span>
+                </div>
+
+                <div class="tel">
+                    <img src="/images/position.png" alt=""/>
+                    <span>公司地址&nbsp;:&nbsp;四川省成都市武侯区火炬时代B区102室</span>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div id="map_container" class="map_container"></div>
         </div>
 
         <div class="clear"></div>
-        <div id="map_container" class="map_container"></div>
+
         <script type="text/javascript">
             var map = new BMap.Map("map_container");          // 创建地图实例
-            var point = new BMap.Point(104.0772390000,30.5551800000);  // 创建点坐标
-            map.centerAndZoom(point, 15);                 // 初始化地图，设置中心点坐标和地图级别
+            var point = new BMap.Point(104.044348,30.62614);  // 创建点坐标
+            map.centerAndZoom(point, 30);                 // 初始化地图，设置中心点坐标和地图级别
 
             map.addControl(new BMap.NavigationControl());
             map.addControl(new BMap.ScaleControl());
@@ -69,11 +99,11 @@ $type = empty($_GET["type"]) ? 1 : $_GET["type"];
                 height: 70,     // 信息窗口高度
                 enableMessage:true,//设置允许信息窗发送短息
             }
-            var infoWindow = new BMap.InfoWindow("地址：成都天府软件园A区15层", opts);  // 创建信息窗口对象
+            var infoWindow = new BMap.InfoWindow("四川省成都市武侯区火炬时代B区102室", opts);  // 创建信息窗口对象
             marker.addEventListener("click", function(){
                 map.openInfoWindow(infoWindow,point); //开启信息窗口
             });
-
+            map.openInfoWindow(infoWindow,point); //开启信息窗口
             map.addOverlay(marker);               // 将标注添加到地图中
             marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
         </script>

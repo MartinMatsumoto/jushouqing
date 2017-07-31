@@ -16,7 +16,7 @@
                 <li class="nav_li choose no_border float"><a href="http://baidu.com">聚首情酒</a></li>
                 <li class="nav_li choose no_border float"><a href="http://baidu.com">溯源</a></li>
             </ul>
-            <li class="nav_li"><a href="http://baidu.com">联系我们</a></li>
+            <li class="nav_li"><a href="/contact_us/">联系我们</a></li>
         </ul>
     </div>
 </div>

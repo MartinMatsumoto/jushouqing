@@ -78,12 +78,43 @@
     width: 930px;
     height: 40px;
     background-color: rgb(245, 245, 245);
-
     color: rgb(136, 136, 136);
     font-size: 14px;
     font-family: Microsoft YaHei;
     line-height: 40px;
     padding-left: 11px;
+}
+
+.essay_container .content_content .contact_us {
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Microsoft yahei";
+    color: rgb(136, 136, 136);
+    margin: 30px 0 30px 0;
+    padding: 0 10px 0 10px;
+}
+
+.essay_container .content_content .contact_us img {
+    margin-right: 10px;
+}
+
+.essay_container .content_content .contact_us .tel{
+    height: 60px;
+    line-height: 60px;
+    float: left;
+    width: 50%;
+}
+
+.essay_container .content_content .contact_us .position{
+    height: 60px;
+    line-height: 60px;
+    float: left;
+    width: 100%;
+}
+
+.essay_container .content_content .map_container {
+    height: 360px;
 }
 
 .essay_container .content_content .essay_title {
