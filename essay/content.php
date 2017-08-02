@@ -40,8 +40,8 @@ if($id != 0){
 
     $content_result = $essay_content_dao->listEssayContents($id);
 
-    $prevResult = $dao->getPrev($id);
-    $nextResult = $dao->getNext($id);
+    $prevResult = $dao->getPrev($id,$type);
+    $nextResult = $dao->getNext($id,$type);
     $prevEssay = new essay($prevResult->fetch());
     $nextEssay = new essay($nextResult->fetch());
 }else{

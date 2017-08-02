@@ -70,6 +70,11 @@
     width: 1200px;
 }
 
+.about_us_container .content img{
+    width: 500px;
+    height: 310px;
+}
+
 .about_us_container .content .right_content {
     width: 630px;
     float: right;
@@ -96,6 +101,11 @@
     line-height: 38px;
     font-size: 12px;
     margin-top: 20px;
+}
+
+.read_more a{
+    text-decoration: none;
+    color: white;
 }
 
 .read_more .left_readmore {

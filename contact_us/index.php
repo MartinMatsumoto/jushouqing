@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/css/swiper-3.3.1.min.css?20160324">
     <script type="text/javascript">
         //<![CDATA[
-        window.jQuery || document.write("<script src='http://api.map.baidu.com/api?v=2.0&ak=Ndcgn2ltp8kXkG2Ip599tREPa3lNrhic'>"+"<"+"/script>");
+        window.jQuery || document.write("<script src='http://api.map.baidu.com/api?v=2.0&ak=5gagLT3WmdiykkoQWGk6pRf63irBEo5l'>"+"<"+"/script>");
         //]]>
     </script>
 </head>

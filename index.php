@@ -26,6 +26,7 @@
 <?php
 require_once 'entrance.php';
 $banner_dao = new index_banner_dao();
+$index_content_dao = new index_content_dao();
 ?>
 <!-- 顶部 开始 -->
 <?php
@@ -58,24 +59,6 @@ include './include/navigator.php'
                 <?php
             }
         ?>
-            <!--<div class="swiper-slide">
-                <img src="images/banner1.jpg" alt=""/>
-                <div class="banner_text_container">
-                    <span class="big">大字大字大字大字大字大字大字大字大字</span>
-                    <span class="big">大字大字大字大字大字大字大字大字大字</span>
-                    <span class="small">The pursuit of excellence, casting assured brand</span>
-                    <span class="small">China is famous, renowned in the world, the same principle, not the same benefit</span>
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <img src="images/banner2.jpg" alt=""/>
-                <div class="banner_text_container">
-                    <span class="big">大字大字大字大字大字大字大字大字大字</span>
-                    <span class="big">大字大字大字大字大字大字大字大字大字</span>
-                    <span class="small">The pursuit of excellence, casting assured brand</span>
-                    <span class="small">China is famous, renowned in the world, the same principle, not the same benefit</span>
-                </div>
-            </div>-->
         </div>
         <!-- 如果需要导航按钮 -->
         <div class="swiper-button-prev"></div>
@@ -83,6 +66,10 @@ include './include/navigator.php'
     </div>
 </div>
 <!-- banner 结束 -->
+<?php
+    $result = $index_content_dao->getOne(1);
+    $aboutus_content = new index_content($row = $result->fetch());
+?>
 <!-- 关于我们 开始 -->
 <div class="about_us_container">
     <div class="about_us">
@@ -94,12 +81,14 @@ include './include/navigator.php'
             </div>
         </div>
         <div class="content">
-            <img src="/images/about.jpg" />
+            <img src="<?php echo $aboutus_content->image_url?>" />
             <div class="right_content">
-                <span class="text">公司技术力量雄厚，化验、检测设备优良，拥有较先进的生产设备。公司拥有员工21000人，其中专业技术人员4000余人。占地面积50万平方米，建筑面积23万平方米，是XX市“百强私营企业”“XX市重点发展十强私营企业”首批获得自营进口权的企业之一。1998年通过ISO9002国际质量体系认证2008年又通过转版获得ISO9001国际质量体系认证，2002年通过“CCC”国家产品强制认证，被中国农业银行XX市分行评为“AAA”级信用企业，XX省重合同，守信用企业。产品通过欧盟环保认证（ROHS REACH , PAHS）等。公司主要生产工业设备，车削机床，铣削机床，五金模具，工程机械，工业助剂等以及其它各种规格的橡胶制品、塑料制品、金属制品及轴承。产品远销100多个国家，高质量的产品赢得用户的好评。</span>
+                <span class="text"><?php echo $aboutus_content->content?></span>
                 <div class="read_more">
-                    <div class="left_readmore">READ MORE</div>
-                    <div class="right_readmore">+</div>
+                    <a href="<?php echo $aboutus_content->href_url?>">
+                        <div class="left_readmore">READ MORE</div>
+                        <div class="right_readmore">+</div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -107,6 +96,9 @@ include './include/navigator.php'
 </div>
 <!-- 关于我们 结束 -->
 <!-- 公司动态 开始 -->
+<?php
+$result = $index_content_dao->listCompanyActive();
+?>
 <div class="company_action_container">
     <div class="company_action">
         <div class="title">
@@ -116,18 +108,30 @@ include './include/navigator.php'
                 <div class="decoration_line_right"></div>
             </div>
         </div>
-        <div class="show1" id="index_show">
-            <a href="http://www.baidu.com">
-                <img src="/images/pic01.jpg" alt=""/>
-                <div class="content1" id="index_show_content">
-                    <div class="bg opacity">
-                        <div class="small"></div>
+
+        <?php
+            $index = 0;
+            while ($row = $result->fetch()) {
+                $index ++;
+                $index_content = new index_content($row);
+                ?>
+                    <div class="show<?php echo $index?>" id="index_show">
+                        <a href="<?php echo $index_content->href_url?>">
+                            <img src="<?php echo $index_content->image_url?>" alt=""/>
+                            <div class="content<?php echo ($index == 1 || $index == 6) ? 1 : 2?>" id="index_show_content">
+                                <div class="bg opacity">
+                                    <div class="small"></div>
+                                </div>
+                                <div class="text_show"><?php echo $index_content->content?></div>
+                            </div>
+                        </a>
                     </div>
-                    <div class="text_show">工业机械</div>
-                </div>
-            </a>
-        </div>
-        <div class="show2" id="index_show">
+                <?php
+            }
+        ?>
+
+
+        <!--<div class="show2" id="index_show">
             <a href="http://www.baidu.com">
                 <img src="/images/pic02.jpg" alt=""/>
                 <div class="content2" id="index_show_content">
@@ -181,7 +185,7 @@ include './include/navigator.php'
                     <div class="text_show">工业机械</div>
                 </div>
             </a>
-        </div>
+        </div>-->
         <div class="clear"></div>
     </div>
 </div>

@@ -13,8 +13,8 @@ class essay_dao
     private $saveEssay = "INSERT INTO ESSAY(title,author,create_date,sub_title,type) VALUES (:title,:author,:create_date,:sub_title,:type)";
     private $modifyEssay = "UPDATE ESSAY SET `title` = :title,`author` = :author,`create_date` = :create_date,`sub_title` = :sub_title,`type` = :type WHERE id = :id";
     private $getOne = "SELECT * FROM `ESSAY` WHERE id = :id";
-    private $getPrev = "SELECT * FROM `ESSAY` WHERE id < :id ORDER BY ID DESC LIMIT 1";
-    private $getNext = "SELECT * FROM `ESSAY` WHERE id > :id LIMIT 1";
+    private $getPrev = "SELECT * FROM `ESSAY` WHERE id < :id AND type = :type AND delete_ = 0 ORDER BY ID DESC LIMIT 1";
+    private $getNext = "SELECT * FROM `ESSAY` WHERE id > :id AND type = :type AND delete_ = 0 LIMIT 1";
     private $count = "SELECT COUNT(*) AS COUNT from `ESSAY`";
     private $delete = "UPDATE `ESSAY` SET delete_ = 1 WHERE id = :id";
     private $enable = "UPDATE `ESSAY` SET delete_ = 0 WHERE id = :id";
@@ -44,18 +44,20 @@ class essay_dao
         return $stmt;
     }
 
-    function getPrev($id)
+    function getPrev($id,$type)
     {
         $stmt = $this->conn->pdo->prepare($this->getPrev);
         $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':type', $type);
         $stmt->execute();
         return $stmt;
     }
 
-    function getNext($id)
+    function getNext($id,$type)
     {
         $stmt = $this->conn->pdo->prepare($this->getNext);
         $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':type', $type);
         $stmt->execute();
         return $stmt;
     }
