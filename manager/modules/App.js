@@ -73,6 +73,7 @@ Ext.define('MyDesktop.App', {
                     { name: '留言板管理', iconCls: 'notepad-shortcut', module: 'notepad-win' },
                     { name: 'banner管理', iconCls: 'banner-shortcut', module: 'banner-win' },
                     { name: '文章管理', iconCls: 'essay-shortcut', module: 'essay-win' },
+                    { name: '视频管理', iconCls: 'video-shortcut', module: 'video-win' },
                     { name: '首页关于我们管理', iconCls: 'direction-shortcut', module: 'aboutUs-win' },
                     { name: '首页公司动态管理', iconCls: 'companyactive-shortcut', module: 'companyActive-win' }
                 ]

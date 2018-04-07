@@ -15,6 +15,30 @@ var essayRender = function (val) {
 
 var essayContentContainerId = "";
 
+var essayInsertIndex = -1;
+/**
+ * 获得将要插入的段落的下标
+ * @param parent
+ * @param child
+ * @returns {number}
+ */
+var getContentIndex = function (parent, child) {
+    var items = parent.items.items;
+    var childId = child.getId();
+
+    if (items && items.length) {
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            var itemId = item.getId();
+            if(childId == itemId){
+                return i;
+            }
+        }
+    }
+
+    return 0;
+}
+
 var essayStore = Ext.create('Ext.data.Store', {
     fields: ['id', 'title', 'author', 'create_date', 'sub_title', 'type', 'delete_', 'essay_content'],
     autoLoad: false,
@@ -114,6 +138,22 @@ var essayAddContent = function (content, type) {
                         {
                             _checkField.destroy();
                         }
+                    }, {
+                        xtype : 'button',
+                        text : '向上插入段落',
+                        handler : function()
+                        {
+                            essayInsertIndex = getContentIndex(essayContentContainer, _checkField);
+                            essayAddContentForm.show();
+                        }
+                    }, {
+                        xtype : 'button',
+                        text : '向上插入图片',
+                        allowBlank: false,
+                        handler : function(){
+                            essayInsertIndex = getContentIndex(essayContentContainer, _checkField);
+                            essayAddImageForm.show();
+                        }
                     }]
             });
     } else {
@@ -138,10 +178,31 @@ var essayAddContent = function (content, type) {
                     handler: function () {
                         _checkField.destroy();
                     }
+                }, {
+                    xtype : 'button',
+                    text : '向上插入段落',
+                    handler : function()
+                    {
+                        essayInsertIndex = getContentIndex(essayContentContainer, _checkField);
+                        essayAddContentForm.show();
+                    }
+                }, {
+                    xtype : 'button',
+                    text : '向上插入图片',
+                    allowBlank: false,
+                    handler : function(){
+                        essayInsertIndex = getContentIndex(essayContentContainer, _checkField);
+                        essayAddImageForm.show();
+                    }
                 }]
             });
     }
-    essayContentContainer.add(_checkField);
+    if (essayInsertIndex != -1) {
+        essayContentContainer.insert(essayInsertIndex, _checkField);
+    } else {
+        essayContentContainer.add(_checkField);
+    }
+
 }
 
 var essayAddImageForm = Ext.create('Ext.window.Window', {
@@ -495,16 +556,18 @@ Ext.define('MyDesktop.EssayWindow', {
                 items : []
             }, {
                 xtype : 'button',
-                text : '插入段落',
+                text : '增加段落',
                 allowBlank: false,
                 handler : function(){
+                    essayInsertIndex = -1;
                     essayAddContentForm.show();
                 }
             }, {
                 xtype : 'button',
-                text : '插入图片',
+                text : '增加图片',
                 allowBlank: false,
                 handler : function(){
+                    essayInsertIndex = -1;
                     essayAddImageForm.show();
                 }
             }],
@@ -630,16 +693,18 @@ Ext.define('MyDesktop.EssayWindow', {
                 items : []
             }, {
                 xtype : 'button',
-                text : '插入段落',
+                text : '增加段落',
                 allowBlank: false,
                 handler : function(){
+                    essayInsertIndex = -1;
                     essayAddContentForm.show();
                 }
             }, {
                 xtype : 'button',
-                text : '插入图片',
+                text : '增加图片',
                 allowBlank: false,
                 handler : function(){
+                    essayInsertIndex = -1;
                     essayAddImageForm.show();
                 }
             }],
