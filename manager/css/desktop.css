@@ -220,6 +220,10 @@ div.ux-taskbar div.x-toolbar {
     background-image: url(../images/essay.png);
 }
 
+.video-shortcut {
+    background-image: url(../images/video.png);
+}
+
 .direction-shortcut{
     background-image: url(../images/direction.png);
 }

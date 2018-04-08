@@ -29,6 +29,8 @@ require_once dirname(__FILE__) . '/structure/essay/dao/essay_dao.php';
 require_once dirname(__FILE__) . '/structure/essay/dao/essay_content_dao.php';
 require_once dirname(__FILE__) . '/structure/essay/domain/essay.php';
 require_once dirname(__FILE__) . '/structure/essay/domain/essay_content.php';
+require_once dirname(__FILE__) . '/structure/video/dao/video_dao.php';
+require_once dirname(__FILE__) . '/structure/video/domain/video.php';
 require_once dirname(__FILE__) . '/structure/index_content/domain/index_content.php';
 require_once dirname(__FILE__) . '/structure/index_content/dao/index_content_dao.php';
 require_once dirname(__FILE__) . '/core/net/result.php';
