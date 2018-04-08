@@ -9,6 +9,10 @@
 	margin: 0 auto;
 }
 
+.header .banner_logo img{
+	height: 76px;
+}
+
 .header .contact_us {
 	width: 246px;
 	height: 62px;
