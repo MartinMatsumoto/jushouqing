@@ -10,7 +10,7 @@
             <span>Copyright © 2009-2017,www.jushouqing.top,All rights reserved  蜀ICP备17000647号</span>
         </div>
         <div class="wx_container">
-            <img src="/images/er.jpg" alt=""/>
+            <img src="/images/er_small.jpg" alt=""/>
             <div>微信公众号</div>
         </div>
     </div>

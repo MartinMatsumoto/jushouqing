@@ -88,7 +88,8 @@
     overflow: hidden;
     font-family: "Microsoft YaHei";
     font-size: 14px;
-    color: rgb(136, 136, 136);
+    color: rgb(90, 90, 90);
+    font-weight: bold;
     line-height: 250%;
 }
 
@@ -197,6 +198,8 @@
     font-size: 30px;
     text-align: center;
     line-height: 260px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .company_action .show2 {
